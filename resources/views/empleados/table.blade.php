@@ -12,6 +12,7 @@
     </thead>
     <tbody>
     @foreach($empleados as $empleado)
+
         <tr>
             <td>{!! $empleado->user ? $empleado->user->email : '' !!}</td>
             <td>{!! $empleado->nombres !!}</td>

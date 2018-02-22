@@ -32,7 +32,6 @@ class EmpleadoController extends AppBaseController
         $this->empleadoRepository->pushCriteria(new RequestCriteria($request));
         $empleados = $this->empleadoRepository->all();
 
-        dd($empleados);
         return view('empleados.index')
             ->with('empleados', $empleados);
     }
