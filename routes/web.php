@@ -79,3 +79,7 @@ Route::get('sucursales/{sucursal}/restore', 'SucursalController@restore')->name(
 Route::post('sucursales/search', 'SucursalController@search')->name('sucursales.search');
 Route::get('sucursales/deleted', 'SucursalController@deleted')->name('sucursales.deleted');
 Route::resource('sucursales', 'SucursalController');
+
+Route::post('empleados/{empleado}/store-user', 'EmpleadoController@storeUsuario')->name('empleados.store-user');
+Route::get('empleados/{empleado}/asignar-usuario', 'EmpleadoController@asignarUsuario')->name('empleados.asignar-usuario');
+Route::resource('empleados', 'EmpleadoController');

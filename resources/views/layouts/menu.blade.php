@@ -2,7 +2,7 @@
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>
 <li class="{{ Request::is('admin') ? 'active' : '' }}">
-    <a href="admin"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
+    <a href="/abogado/public/admin"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
 </li>
 
 <li class="{{ Request::is('profiles*') ? 'active' : '' }}">
@@ -30,5 +30,9 @@
 </li>
 <li class="{{ Request::is('sucursales*') ? 'active' : '' }}">
     <a href="{!! route('sucursales.index') !!}"><i class="fa fa-edit"></i><span>Sucursales</span></a>
+</li>
+
+<li class="{{ Request::is('empleados*') ? 'active' : '' }}">
+    <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
 </li>
 
