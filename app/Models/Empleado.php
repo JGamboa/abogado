@@ -95,8 +95,43 @@ class Empleado extends Model
     ];
 
 
+
     public function getNombreCompleto(){
         return $this->nombres . " " . $this->apellido_paterno . " " . $this->apellido_materno;
     }
-    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function empresa()
+    {
+        return $this->belongsTo(\App\Models\Empresa::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class);
+    }
+
+    /**
+    devuelve la lista de empresas en la cual labora el usuario que ha iniciado sesion
+     */
+    public static function misEmpresas(){
+        $booleanResult = \Auth::user()->hasRole('ADMINISTRADOR');
+        if($booleanResult){
+            $list = \App\Models\Empresa::pluck('razon_social','id')->all();
+            $result = $list;
+        }else{
+            $list = \App\Models\Empleado::all()->where('user_id', \Auth::user()->id);
+            $result = array();
+            if(isset($list))
+                foreach($list as $empleadoInst)
+                    $result[$empleadoInst->empresa->id] = $empleadoInst->empresa->razon_social;
+        }
+
+        return $result;
+    }
 }

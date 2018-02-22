@@ -32,6 +32,7 @@ class EmpleadoController extends AppBaseController
         $this->empleadoRepository->pushCriteria(new RequestCriteria($request));
         $empleados = $this->empleadoRepository->all();
 
+        dd($empleados);
         return view('empleados.index')
             ->with('empleados', $empleados);
     }
@@ -158,14 +159,20 @@ class EmpleadoController extends AppBaseController
 
         $empleado = $this->empleadoRepository->findWithoutFail($id);
 
-        if(empty($empleado)){
-            Flash::error('Empleado no encontrado');
+        if(empty($empleado->user_id)){
 
+            if(empty($empleado)){
+                Flash::error('Empleado no encontrado');
+
+                return redirect(route('empleados.index'));
+
+            }
+
+            return view('empleados.asignar_usuario')->with('empleado', $empleado);
+        }else{
+            Flash::error('Empleado ya posee usuario');
             return redirect(route('empleados.index'));
-
         }
-
-        return view('empleados.asignar_usuario')->with('empleado', $empleado);
     }
 
 
@@ -195,12 +202,9 @@ class EmpleadoController extends AppBaseController
             'password' => bcrypt($data['password']),
         ]);
 
-
+        $empleado = $this->empleadoRepository->update(['user_id'=> $user->id], $id);
         Flash::success('Usuario asignado exitosamente.');
 
-        $empleado = $this->empleadoRepository->update(['user_id'=> $user->id], $id);
-        redirect(route(config('backpack.base.route_prefix').'/user/'.$user->id.'/edit'));
-
-
+        return redirect(route('empleados.index'));
     }
 }

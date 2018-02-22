@@ -68,6 +68,7 @@ Route::resource('regiones', 'RegionController');
 
 
 Route::group(['middleware' => ['auth', 'has_permission']], function() {
+    Route::get('empresas/seleccionar', 'EmpresaController@seleccionar')->name('empresas.seleccionar');
     Route::get('empresas/sucursales/{empresa}', 'EmpresaController@showSucursales')->name('empresas.showSucursales');
     Route::get('empresas/{empresa}/restore', 'EmpresaController@restore')->name('empresas.restore');
     Route::post('empresas/search', 'EmpresaController@search')->name('empresas.search');

@@ -274,13 +274,9 @@ class EmpresaController extends AppBaseController
     }
 
     public function seleccionar(){
+        $empresas = \App\Models\Empleado::misEmpresas();
 
-        /*$empresas = \App\Models\Empresa::paginate(20);
-
-        return view('empresas.seleccionar', ['empresas' => $empresas,
-            'deletedData'=>'0',
-            'btn' => 'btn-danger',
-            'text_button'=> 'glyphicon-trash']);*/
+        return view('empresas.seleccionar', ['empresas' => $empresas]);
     }
 
 }

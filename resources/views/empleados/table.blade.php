@@ -1,8 +1,7 @@
 <table class="table table-responsive" id="empleados-table">
     <thead>
         <tr>
-        <th>Empresa Id</th>
-        <th>User Id</th>
+        <th>Usuario</th>
         <th>Nombres</th>
         <th>Apellido Paterno</th>
         <th>Apellido Materno</th>
@@ -14,8 +13,7 @@
     <tbody>
     @foreach($empleados as $empleado)
         <tr>
-            <td>{!! $empleado->empresa_id !!}</td>
-            <td>{!! $empleado->user_id !!}</td>
+            <td>{!! $empleado->user ? $empleado->user->email : '' !!}</td>
             <td>{!! $empleado->nombres !!}</td>
             <td>{!! $empleado->apellido_paterno !!}</td>
             <td>{!! $empleado->apellido_materno !!}</td>
