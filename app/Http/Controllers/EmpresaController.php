@@ -273,4 +273,14 @@ class EmpresaController extends AppBaseController
         return $query->paginate(10);
     }
 
+    public function seleccionar(){
+
+        /*$empresas = \App\Models\Empresa::paginate(20);
+
+        return view('empresas.seleccionar', ['empresas' => $empresas,
+            'deletedData'=>'0',
+            'btn' => 'btn-danger',
+            'text_button'=> 'glyphicon-trash']);*/
+    }
+
 }

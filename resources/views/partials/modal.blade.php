@@ -47,7 +47,7 @@
     }
 
     function loadSucursales(id) {
-        loadItems(id, '/REM/app/public/empresas/sucursales/', '.sucursales');
+        loadItems(id, '/abogado/public/empresas/sucursales/', '.sucursales');
     }
 
     function registerEvents() {
