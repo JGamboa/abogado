@@ -120,17 +120,28 @@ class Empleado extends Model
     /**
     devuelve la lista de empresas en la cual labora el usuario que ha iniciado sesion
      */
-    public static function misEmpresas(){
+    public static function misEmpresas($paginate = 0, $cantidad_paginacion = 10){
+
         $booleanResult = \Auth::user()->hasRole('ADMINISTRADOR');
+
         if($booleanResult){
-            $list = \App\Models\Empresa::pluck('razon_social','id')->all();
+            if($paginate == 1){
+                $list = \App\Models\Empresa::paginate($cantidad_paginacion);
+            }else{
+                $list = \App\Models\Empresa::all();
+            }
+
             $result = $list;
+
         }else{
-            $list = \App\Models\Empleado::all()->where('user_id', \Auth::user()->id);
-            $result = array();
-            if(isset($list))
-                foreach($list as $empleadoInst)
-                    $result[$empleadoInst->empresa->id] = $empleadoInst->empresa->razon_social;
+            if($paginate == 1){
+                $list = \Auth::user()->empresas()->paginate($cantidad_paginacion);
+            }else{
+                $list = \Auth::user()->empresas();
+            }
+
+            $result = $list;
+
         }
 
         return $result;

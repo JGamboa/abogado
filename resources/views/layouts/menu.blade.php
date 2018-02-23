@@ -1,3 +1,10 @@
+<li>
+    @if(Session::has('empresa_razon_social'))
+        <a href="{{route('empresas.seleccionar')}}"><span style="font-size:10px;">{{ session('empresa_razon_social') }}</span></a>
+    @else
+        <a href="{{route('empresas.seleccionar')}}"><span style="font-size:10px;">Seleccionar Empresa</span></a>
+    @endif
+</li>
 <li class="{{ Request::is('generator_builder') ? 'active' : '' }}">
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>

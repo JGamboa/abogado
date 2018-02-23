@@ -30,8 +30,8 @@ class SucursalController extends AppBaseController
      */
     public function index()
     {
-        $sucursales = \App\Models\Sucursal::paginate(10);
-
+        $sucursales = \App\Models\Sucursal::where('empresa_id', session('empresa_id'));
+        $sucursales = $sucursales->paginate(10);
         return view('sucursales.index', ['sucursales' => $sucursales,
             'deletedData'=>'0',
             'btn' => 'btn-danger',

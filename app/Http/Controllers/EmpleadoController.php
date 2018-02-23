@@ -30,7 +30,7 @@ class EmpleadoController extends AppBaseController
     public function index(Request $request)
     {
         $this->empleadoRepository->pushCriteria(new RequestCriteria($request));
-        $empleados = $this->empleadoRepository->all();
+        $empleados = $this->empleadoRepository->all()->where('empresa_id', session('empresa_id'));
 
         return view('empleados.index')
             ->with('empleados', $empleados);

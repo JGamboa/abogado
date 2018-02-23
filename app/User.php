@@ -29,4 +29,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function empresas(){
+        return $this->hasManyThrough('App\Models\Empresa',
+                                    'App\Models\Empleado',
+                                    'user_id',
+                                    'id',
+                                     'id','empresa_id');
+    }
 }

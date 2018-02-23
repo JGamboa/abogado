@@ -33,7 +33,7 @@ class EmpresaController extends AppBaseController
      */
     public function index()
     {
-        $empresas = \App\Models\Empresa::paginate(20);
+        $empresas = \App\Models\Empleado::misEmpresas(1);
 
         return view('empresas.index', ['empresas' => $empresas,
             'deletedData'=>'0',
@@ -274,9 +274,30 @@ class EmpresaController extends AppBaseController
     }
 
     public function seleccionar(){
+
         $empresas = \App\Models\Empleado::misEmpresas();
 
+        $booleanResult = \Auth::user()->hasRole('ADMINISTRADOR');
+
+        if($booleanResult){
+            $empresa_id = 'id';
+        }else{
+            $empresa_id = 'empresas.id';
+        }
+
+        $empresas = $empresas->pluck('razon_social',$empresa_id);
+
         return view('empresas.seleccionar', ['empresas' => $empresas]);
+    }
+
+    public function session(Request $request){
+
+        $empresa = \App\Models\Empresa::find($request->id);
+        session(['empresa_id' => $empresa->id]);
+        session(['empresa_razon_social' => $empresa->razon_social]);
+        session(['empresa_rut' => $empresa->rut]);
+        Flash::success('Empresa seleccionada. '. $empresa->razon_social);
+        return redirect(route('empresas.index'));
     }
 
 }
