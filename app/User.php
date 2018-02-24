@@ -12,6 +12,8 @@ class User extends Authenticatable
     use Notifiable;
     use CrudTrait; // <----- this
     use HasRoles; // <------ and this
+
+    protected $dateFormat = 'Y-m-d H:i:s';
     /**
      * The attributes that are mass assignable.
      *
@@ -32,9 +34,9 @@ class User extends Authenticatable
 
     public function empresas(){
         return $this->hasManyThrough('App\Models\Empresa',
-                                    'App\Models\Empleado',
-                                    'user_id',
-                                    'id',
-                                     'id','empresa_id');
+            'App\Models\Empleado',
+            'user_id',
+            'id',
+            'id','empresa_id');
     }
 }
