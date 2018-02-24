@@ -16,7 +16,7 @@ class CreateEmpleadosTable extends Migration
         Schema::create('empleados', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('empresa_id')->unsigned()->required();
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('nombres', 100)->required();
             $table->string('apellido_paterno', 70)->required();
             $table->string('apellido_materno', 70)->required();

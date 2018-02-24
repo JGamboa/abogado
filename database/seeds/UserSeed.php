@@ -17,7 +17,7 @@ class UserSeed extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('password')
         ]);
-        $user->assignRole('ADMINISTRADOR');
+        $user->assignRole('SUPER ADMINISTRADOR');
 
         $this->command->info('Here is your admin details to login:');
         $this->command->warn($user->email);
