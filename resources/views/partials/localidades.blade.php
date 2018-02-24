@@ -32,12 +32,12 @@
         function loadProvincias(element){
             $('.js-provincias').empty().append('<option value="">Seleccionar Provincia</option>');
             $('.js-comunas').empty().append('<option value="">Seleccionar Comuna</option>');
-            loadItems(element, '/REM/app/public/api/v1/provincias/', '.js-provincias');
+            loadItems(element, '/abogado/public/api/v1/provincias/', '.js-provincias');
         }
 
         function loadComunas(element) {
             $('.js-comunas').empty().append('<option value="">Seleccionar Comuna</option>');
-            loadItems(element, '/REM/app/public/api/v1/provincias/comunas/', '.js-comunas');
+            loadItems(element, '/abogado/public/api/v1/provincias/comunas/', '.js-comunas');
         }
 
         function registerEvents() {

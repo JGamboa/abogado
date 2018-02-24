@@ -277,7 +277,7 @@ class EmpresaController extends AppBaseController
 
         $empresas = \App\Models\Empleado::misEmpresas();
 
-        $booleanResult = \Auth::user()->hasRole('ADMINISTRADOR');
+        $booleanResult = \Auth::user()->hasRole('SUPER ADMINISTRADOR');
 
         if($booleanResult){
             $empresa_id = 'id';
