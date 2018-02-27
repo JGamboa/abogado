@@ -17,6 +17,7 @@ class PaisTableSeeder extends Seeder
         if($connection == "sqlsrv"){
             DB::statement('SET IDENTITY_INSERT pais ON');
         }
+
         DB::table('pais')->insert([
             'id'=> 1,
             'codigo_pais' => 'CL',
