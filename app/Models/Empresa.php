@@ -36,7 +36,6 @@ class Empresa extends Model
 
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
         'rut',
         'razon_social',

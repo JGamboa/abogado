@@ -14,7 +14,7 @@ class CreateRegionesTable extends Migration
     public function up()
     {
         Schema::create('regiones', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->integer('pais_id')->unsigned()->required();
             $table->string('nombre', 60)->unique()->required();
             $table->string('ISO_3166_2_CL', 6);

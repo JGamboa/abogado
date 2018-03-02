@@ -1,7 +1,7 @@
 <!-- Empresas Id Field -->
 <div class="form-group col-sm-6 hidden">
     {!! Form::hidden('empresa_id', 'Empresas Id:') !!}
-    {!! Form::hidden('empresa_id',json_decode(session('empresa'))->id, ['class' => 'form-control']) !!}
+    {!! Form::hidden('empresa_id', session('empresa_id'), ['class' => 'form-control']) !!}
 </div>
 
 <!-- Nombre Field -->
