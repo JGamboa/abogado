@@ -29,11 +29,10 @@ class IsapreController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->isapreRepository->pushCriteria(new RequestCriteria($request));
-        $isapres = $this->isapreRepository->all();
 
-        return view('isapres.index')
-            ->with('isapres', $isapres);
+
+        $isapres = \App\Models\Isapre::paginate(2);
+        return view('isapres.index')->with('isapres', $isapres);
     }
 
     /**
