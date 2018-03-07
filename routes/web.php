@@ -85,3 +85,5 @@ Route::resource('sucursales', 'SucursalController');
 Route::post('empleados/{empleado}/store-user', 'EmpleadoController@storeUsuario')->name('empleados.store-user');
 Route::get('empleados/{empleado}/asignar-usuario', 'EmpleadoController@asignarUsuario')->name('empleados.asignar-usuario');
 Route::resource('empleados', 'EmpleadoController');
+
+Route::resource('isapres', 'IsapreController');
