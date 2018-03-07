@@ -25,8 +25,8 @@ class PermissionMiddleware {
             }
         }
 
-        if ($request->is('empresas/{empresa}/edit')) {
-            if (!Auth::user()->can('index empresas')) {
+        if ($request->is('empresas/*/edit')) {
+            if (!Auth::user()->can('edit empresas')) {
                 abort('401');
             }
         }
