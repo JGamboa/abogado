@@ -9,7 +9,7 @@
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>
 <li class="{{ Request::is('admin') ? 'active' : '' }}">
-    <a href="/abogado/public/admin"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
+    <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
 </li>
 
 <li class="{{ Request::is('profiles*') ? 'active' : '' }}">
