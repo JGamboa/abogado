@@ -19,6 +19,9 @@
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                     <thead>
                     <tr role="row">
+                        @if ($deletedData == 0)
+                            <th>Seleccionar</th>
+                        @endif
                         <th>Rut</th>
                         <th>Razon Social</th>
                         <th>Nombre Fantasia</th>
@@ -32,6 +35,16 @@
                     {{$empresas}}
                     @foreach ($empresas as $empresa)
                         <tr role="row" class="odd">
+                            <td>
+                                @if ($deletedData == 0)
+                                {!! Form::open(['route' => 'empresas.session']) !!}
+                                    {!! Form::hidden('id', $empresa->id) !!}
+                                    <button type="submit" alt="seleccionar empresa" class="btn btn-success btn-margin btn-xs"><i class="glyphicon glyphicon-check"></i></button>
+
+                                {!! Form::close() !!}
+                                @endif
+
+                            </td>
                             <td>{{ $empresa->rut }}</td>
                             <td>{{ $empresa->razon_social }}</td>
                             <td>{{ $empresa->nombre_fantasia }}</td>
@@ -41,25 +54,29 @@
                             <td>
                                 @if ($deletedData == 0)
                                     <form method="POST" action="{{ route('empresas.destroy', ['id' => $empresa->id]) }}" onsubmit = "return confirm('Segurar de eliminar?')">
-                                        @elseif ($deletedData == 1)
-                                            <form method="GET" action="{{ route('empresas.restore', ['id' => $empresa->id]) }}" onsubmit = "return confirm('Seguro de restaurar?')">
-                                                @endif
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                @if ($deletedData == 0)
-                                                    <a href="{{ route('empresas.edit', ['id' => $empresa->id]) }}" class="btn btn-warning btn-xs btn-margin">
-                                                        <i class="glyphicon glyphicon-edit"></i>
-                                                    </a>
-                                                @endif
-                                                <button type="submit" class="btn {{$btn}} btn-margin btn-xs"> <i class="glyphicon {{$text_button}}"></i></button>
-                                                <button id="empresa-{{$empresa->id}}" type="button" alt="ver sucursales" class="btn btn-info btn-margin btn-xs ver-sucursales"><i class="glyphicon glyphicon-home"></i></button>
-                                            </form>
+                                @elseif ($deletedData == 1)
+                                    <form method="GET" action="{{ route('empresas.restore', ['id' => $empresa->id]) }}" onsubmit = "return confirm('Seguro de restaurar?')">
+                                @endif
+
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        @if ($deletedData == 0)
+                                            <a href="{{ route('empresas.edit', ['id' => $empresa->id]) }}" class="btn btn-warning btn-xs btn-margin">
+                                                <i class="glyphicon glyphicon-edit"></i>
+                                            </a>
+                                        @endif
+                                        <button type="submit" class="btn {{$btn}} btn-margin btn-xs"> <i class="glyphicon {{$text_button}}"></i></button>
+                                        <button id="empresa-{{$empresa->id}}" type="button" alt="ver sucursales" class="btn btn-info btn-margin btn-xs ver-sucursales"><i class="glyphicon glyphicon-home"></i></button>
+                                    </form>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
+                        @if ($deletedData == 0)
+                            <th>Seleccionar</th>
+                        @endif
                         <th>Rut</th>
                         <th>Razon Social</th>
                         <th>Nombre Fantasia</th>

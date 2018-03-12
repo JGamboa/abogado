@@ -24,7 +24,8 @@ return [
         |
         */
 
-        'permission' => Backpack\PermissionManager\app\Models\Permission::class,
+        //'permission' => Backpack\PermissionManager\app\Models\Permission::class,
+        'permission' => App\Models\Permission::class,
 
         /*
         |--------------------------------------------------------------------------
@@ -40,7 +41,8 @@ return [
         |
         */
 
-        'role' => Backpack\PermissionManager\app\Models\Role::class,
+        //'role' => Backpack\PermissionManager\app\Models\Role::class,
+        'role' =>App\Models\Role::class,
 
     ],
 

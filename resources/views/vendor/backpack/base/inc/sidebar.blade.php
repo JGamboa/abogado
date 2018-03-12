@@ -15,6 +15,14 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
+
+          <li>
+            @if(Session::has('empresa_razon_social'))
+              <a href="{{route('empresas.seleccionar')}}"><span style="font-size:10px;">{{ session('empresa_razon_social') }}</span></a>
+            @else
+              <a href="{{route('empresas.seleccionar')}}"><span style="font-size:10px;">Seleccionar Empresa</span></a>
+            @endif
+          </li>
           {{-- <li class="header">{{ trans('backpack::base.administration') }}</li> --}}
           <!-- ================================================ -->
           <!-- ==== Recommended place for admin menu items ==== -->
@@ -30,7 +38,6 @@
               <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/permission') }}"><i class="fa fa-key"></i> <span>Permissions</span></a></li>
             </ul>
           </li>
-
           <!-- ======================================= -->
           {{-- <li class="header">Other menus</li> --}}
         </ul>

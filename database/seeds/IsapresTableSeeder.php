@@ -36,5 +36,9 @@ class IsapresTableSeeder extends Seeder
         Isapre::create([
             'nombre' => 'Isapre Cruz Blanca S.A.',
         ]);
+
+        Isapre::create([
+            'nombre' => 'Nueva Masvida',
+        ]);
     }
 }

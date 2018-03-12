@@ -14,6 +14,7 @@ use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Models\Provincia;
 use App\Models\Sucursal;
+use App\Models\Empleado as Empleado;
 
 class EmpresaController extends AppBaseController
 {
@@ -33,7 +34,7 @@ class EmpresaController extends AppBaseController
      */
     public function index()
     {
-        $empresas = \App\Models\Empleado::misEmpresas(1);
+        $empresas = Empleado::misEmpresas(1);
 
         return view('empresas.index', ['empresas' => $empresas,
             'deletedData'=>'0',
@@ -275,9 +276,9 @@ class EmpresaController extends AppBaseController
 
     public function seleccionar(){
 
-        $empresas = \App\Models\Empleado::misEmpresas();
+        $empresas = Empleado::misEmpresas();
 
-        $booleanResult = \Auth::user()->hasRole('SUPER ADMINISTRADOR');
+        $booleanResult = \Auth::user()->isSuperAdmin();
 
         if($booleanResult){
             $empresa_id = 'id';
@@ -296,6 +297,7 @@ class EmpresaController extends AppBaseController
         session(['empresa_id' => $empresa->id]);
         session(['empresa_razon_social' => $empresa->razon_social]);
         session(['empresa_rut' => $empresa->rut]);
+        app()['cache']->forget('spatie.permission.cache');
         Flash::success('Empresa seleccionada. '. $empresa->razon_social);
         return redirect(route('empresas.index'));
     }

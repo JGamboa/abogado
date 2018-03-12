@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Models\Empleado as Empleado;
 
 class EmpleadoController extends AppBaseController
 {
@@ -33,7 +34,7 @@ class EmpleadoController extends AppBaseController
         $empleados = $this->empleadoRepository->all()->where('empresa_id', session('empresa_id'));
 
         return view('empleados.index')
-            ->with('empleados', $empleados);
+            ->with(['empleados' => $empleados ]);
     }
 
     /**
@@ -81,7 +82,34 @@ class EmpleadoController extends AppBaseController
             return redirect(route('empleados.index'));
         }
 
-        return view('empleados.show')->with('empleado', $empleado);
+        $roles = \App\Models\Role::all();
+        $permisos = \App\Models\Permission::all();
+
+        $user = \App\User::find($empleado->user->id);
+        $user_roles = $user->roles->pluck('id')->toArray();
+
+        $texto = "{";
+        foreach ($roles as $role){
+            $texto .= "\"" . $role->id . "\"" . ":[";
+
+            foreach($role->permissions as $permission){
+                $texto .= $permission->id . ",";
+            }
+
+            $texto .=  "],";
+        }
+
+        $texto = str_replace(",]", "]", $texto);
+        $texto = rtrim($texto,",");
+        $texto .= "}";
+
+
+
+        return view('empleados.show')->with(['empleado' => $empleado,
+                                                    'roles' => $roles,
+                                                    'permisos' => $permisos,
+                                                    'user_roles' => $user_roles,
+                                                    'json' => $texto]);
     }
 
     /**
@@ -205,5 +233,30 @@ class EmpleadoController extends AppBaseController
         Flash::success('Usuario asignado exitosamente.');
 
         return redirect(route('empleados.index'));
+    }
+
+    protected function permisos($id, Request $request){
+
+        $empleado = Empleado::find($id);
+
+        $data = $request->all();
+
+        $deleted = \DB::delete('DELETE ru FROM role_users ru INNER JOIN roles r ON '
+            . 'ru.role_id = r.id WHERE r.empresa_id =' . session('empresa_id')
+            . ' AND ru.user_id=' . $empleado->user_id);
+
+        if(isset($data['roles'])) {
+            foreach ($data['roles'] as $role) {
+                \DB::table('role_users')->insert([
+                    'role_id' => $role,
+                    'user_id' => $empleado->user_id
+                ]);
+            }
+        }
+
+        Flash::success('Permisos guardados exitosamente.');
+
+        return redirect(route('empleados.show', $empleado->id));
+
     }
 }

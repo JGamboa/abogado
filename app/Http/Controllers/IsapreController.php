@@ -31,7 +31,7 @@ class IsapreController extends AppBaseController
     {
 
 
-        $isapres = \App\Models\Isapre::paginate(2);
+        $isapres = \App\Models\Isapre::paginate(10);
         return view('isapres.index')->with('isapres', $isapres);
     }
 

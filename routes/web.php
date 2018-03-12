@@ -67,7 +67,7 @@ Route::resource('regiones', 'RegionController');
 
 
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth', 'has_permission']], function() {
     Route::post('empresas/session', 'EmpresaController@session')->name('empresas.session');
     Route::get('empresas/seleccionar', 'EmpresaController@seleccionar')->name('empresas.seleccionar');
     Route::get('empresas/sucursales/{empresa}', 'EmpresaController@showSucursales')->name('empresas.showSucursales');
@@ -82,6 +82,8 @@ Route::post('sucursales/search', 'SucursalController@search')->name('sucursales.
 Route::get('sucursales/deleted', 'SucursalController@deleted')->name('sucursales.deleted');
 Route::resource('sucursales', 'SucursalController');
 
+
+Route::patch('empleados/{empleado}/permisos', 'EmpleadoController@permisos')->name('empleados.permisos');
 Route::post('empleados/{empleado}/store-user', 'EmpleadoController@storeUsuario')->name('empleados.store-user');
 Route::get('empleados/{empleado}/asignar-usuario', 'EmpleadoController@asignarUsuario')->name('empleados.asignar-usuario');
 Route::resource('empleados', 'EmpleadoController');

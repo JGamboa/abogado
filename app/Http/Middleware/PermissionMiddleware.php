@@ -13,23 +13,41 @@ class PermissionMiddleware {
      */
     public function handle($request, Closure $next) {
 
-        if ($request->is('empresas')) {
-            if (!Auth::user()->can('index empresas')) {
-                abort('401');
-            }
-        }
-
-        if ($request->is('empresas/create')) {
-            if (!Auth::user()->can('create empresas')) {
-                abort('401');
-            }
+        if ($request->is('empresas/seleccionar') ||
+            $request->is('empresas/session')) {
+            return $next($request);
         }
 
         if ($request->is('empresas/*/edit')) {
-            if (!Auth::user()->can('edit empresas')) {
+            $verify = Auth::user()->can('editar empresas');
+            if (!$verify) {
+                abort('401');
+            }else{
+                return $next($request);
+            }
+        }
+
+
+        if ($request->is('empresas/create')) {
+            if (!Auth::user()->can('crear empresas')) {
                 abort('401');
             }
         }
+
+
+        if ($request->is('empresas') ||
+            $request->is('empresas/sucursales/*') ||
+            $request->is('empresas/*')
+        ) {
+
+            $verify = Auth::user()->can('ver empresas');
+            if (!$verify) {
+                abort('401');
+            }else{
+                return $next($request);
+            }
+        }
+
 
         return $next($request);
     }

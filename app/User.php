@@ -38,4 +38,17 @@ class User extends Authenticatable
             'id',
             'id','empresa_id');
     }
+
+    public function canPersonal(){
+
+    }
+
+    public function isSuperAdmin(){
+        $roles_users = \DB::table('role_users')->select('role_id')->where('role_id', 1)->where('user_id', \Auth::user()->id)->get();
+        if(count($roles_users)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

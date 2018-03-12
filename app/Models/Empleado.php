@@ -122,7 +122,7 @@ class Empleado extends Model
      */
     public static function misEmpresas($paginate = 0, $cantidad_paginacion = 10){
 
-        $booleanResult = \Auth::user()->hasRole('SUPER ADMINISTRADOR');
+        $booleanResult = \Auth::user()->isSuperAdmin();
 
         if($booleanResult){
             if($paginate == 1){
