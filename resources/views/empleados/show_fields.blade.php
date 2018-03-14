@@ -7,7 +7,7 @@
 <!-- User Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('user_id', 'User:') !!}
-    <p>{!! $empleado->user ? $empleado->user->email : '' !!}</p>
+    <p>{!! $empleado->user ? $empleado->user->email : '&nbsp;' !!}</p>
 </div>
 
 <!-- Nombres Field -->
@@ -34,11 +34,12 @@
     <p>{!! $empleado->admin  ? 'Si' : 'No'!!}</p>
 </div>
 
-
+{!! Form::model($empleado, ['route' => ['empleados.permisos', $empleado->id], 'method' => 'patch']) !!}
+@if(isset($empleado->user))
 <script>
     var user_role_permission = {!! $json !!};
 </script>
-{!! Form::model($empleado, ['route' => ['empleados.permisos', $empleado->id], 'method' => 'patch']) !!}
+
 <div class="form-group col-md-12 checklist_dependency" data-entity="user_role_permission">
     <label>Permisos del rol del usuario</label>
     <div class="row">
@@ -82,10 +83,16 @@
 
 </div>
 
+@endif
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12 text-right">
     <a href="{!! route('empleados.index') !!}" class="btn btn-default">Back</a>
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+
+    @if(isset($empleado->user))
+        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    @endif
+
 </div>
 
 {!! Form::close() !!}
@@ -116,3 +123,4 @@
         })
     </script>
 @endpush
+

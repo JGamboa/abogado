@@ -85,6 +85,10 @@ class EmpleadoController extends AppBaseController
         $roles = \App\Models\Role::all();
         $permisos = \App\Models\Permission::all();
 
+        $texto = "";
+        $user_roles = [];
+        if(isset($empleado->user->id)){
+
         $user = \App\User::find($empleado->user->id);
         $user_roles = $user->roles->pluck('id')->toArray();
 
@@ -103,6 +107,7 @@ class EmpleadoController extends AppBaseController
         $texto = rtrim($texto,",");
         $texto .= "}";
 
+        }
 
 
         return view('empleados.show')->with(['empleado' => $empleado,

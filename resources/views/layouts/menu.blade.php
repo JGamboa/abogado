@@ -47,3 +47,7 @@
     <a href="{!! route('isapres.index') !!}"><i class="fa fa-edit"></i><span>Isapres</span></a>
 </li>
 
+<li class="{{ Request::is('materias*') ? 'active' : '' }}">
+    <a href="{!! route('materias.index') !!}"><i class="fa fa-edit"></i><span>Materias</span></a>
+</li>
+

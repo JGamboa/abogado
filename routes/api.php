@@ -26,7 +26,6 @@ Route::group(['prefix' => 'v1'], function () {
 
 
     Route::resource('empresas', 'EmpresaAPIController');
-
+    Route::resource('sucursales', 'SucursalAPIController');
 });
 
-Route::resource('sucursales', 'SucursalAPIController');

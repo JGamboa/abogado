@@ -89,3 +89,5 @@ Route::get('empleados/{empleado}/asignar-usuario', 'EmpleadoController@asignarUs
 Route::resource('empleados', 'EmpleadoController');
 
 Route::resource('isapres', 'IsapreController');
+
+Route::resource('materias', 'MateriaController');
