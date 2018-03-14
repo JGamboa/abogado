@@ -30,6 +30,15 @@
 </head>
 
 <body class="skin-blue sidebar-mini">
+<script type="text/javascript">
+    /* Recover sidebar state */
+    (function () {
+        if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
+            var body = document.getElementsByTagName('body')[0];
+            body.className = body.className + ' sidebar-collapse';
+        }
+    })();
+</script>
 @if (!Auth::guest())
     <div class="wrapper">
         <!-- Main Header -->
@@ -43,7 +52,7 @@
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
                 <!-- Navbar Right Menu -->
@@ -161,6 +170,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
+    <!-- page script -->
+    <script type="text/javascript">
+        /* Store sidebar state */
+        $('.sidebar-toggle').click(function(event) {
+            event.preventDefault();
+            if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
+                sessionStorage.setItem('sidebar-toggle-collapsed', '');
+            } else {
+                sessionStorage.setItem('sidebar-toggle-collapsed', '1');
+            }
+        });
+    </script>
     @yield('scripts')
     @stack("custom-scripts")
 </body>

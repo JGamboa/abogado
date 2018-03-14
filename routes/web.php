@@ -91,3 +91,7 @@ Route::resource('empleados', 'EmpleadoController');
 Route::resource('isapres', 'IsapreController');
 
 Route::resource('materias', 'MateriaController');
+
+Route::resource('cortes', 'CorteController');
+
+Route::resource('intervinientes', 'IntervinienteController');

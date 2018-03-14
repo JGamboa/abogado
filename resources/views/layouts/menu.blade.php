@@ -51,3 +51,11 @@
     <a href="{!! route('materias.index') !!}"><i class="fa fa-edit"></i><span>Materias</span></a>
 </li>
 
+<li class="{{ Request::is('cortes*') ? 'active' : '' }}">
+    <a href="{!! route('cortes.index') !!}"><i class="fa fa-edit"></i><span>Cortes</span></a>
+</li>
+
+<li class="{{ Request::is('intervinientes*') ? 'active' : '' }}">
+    <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
+</li>
+
