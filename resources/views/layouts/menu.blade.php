@@ -45,6 +45,28 @@
                 </li>
             </ul>
         </li><!-- /.second level-->
+
+        <li class="treeview">
+            <a href="#">
+                Materias y Estados
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+
+            <ul class="treeview-menu">
+                <li class="{{ Request::is('materias*') ? 'active' : '' }}">
+                    <a href="{!! route('materias.index') !!}"><i class="fa fa-edit"></i><span>Materias</span></a>
+                </li>
+
+                <li class="{{ Request::is('estadoscasos*') ? 'active' : '' }}">
+                    <a href="{!! route('estadoscasos.index') !!}"><i class="fa fa-edit"></i><span>Estados de Casos</span></a>
+                </li>
+
+                <li class="{{ Request::is('estadosMaterias*') ? 'active' : '' }}">
+                    <a href="{!! route('estadosMaterias.index') !!}"><i class="fa fa-edit"></i><span>Estados de la Materia</span></a>
+                </li>
+
+            </ul>
+        </li><!-- /.second level-->
     </ul>
 </li>
 
@@ -75,10 +97,6 @@
     <a href="{!! route('isapres.index') !!}"><i class="fa fa-edit"></i><span>Isapres</span></a>
 </li>
 
-<li class="{{ Request::is('materias*') ? 'active' : '' }}">
-    <a href="{!! route('materias.index') !!}"><i class="fa fa-edit"></i><span>Materias</span></a>
-</li>
-
 <li class="{{ Request::is('cortes*') ? 'active' : '' }}">
     <a href="{!! route('cortes.index') !!}"><i class="fa fa-edit"></i><span>Cortes</span></a>
 </li>
@@ -86,8 +104,3 @@
 <li class="{{ Request::is('intervinientes*') ? 'active' : '' }}">
     <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
 </li>
-
-<li class="{{ Request::is('estadoscasos*') ? 'active' : '' }}">
-    <a href="{!! route('estadoscasos.index') !!}"><i class="fa fa-edit"></i><span>Estadoscasos</span></a>
-</li>
-

@@ -29,3 +29,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::resource('sucursales', 'SucursalAPIController');
 });
 
+
+
+Route::resource('estadoscasos', 'EstadoCasoAPIController');
