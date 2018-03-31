@@ -24,10 +24,10 @@ class CreateintervinientesTable extends Migration
             $table->integer('region_id')->unsigned()->required();
             $table->integer('provincia_id')->unsigned()->required();
             $table->integer('comuna_id')->unsigned()->required();
-            $table->string('oficio', 50);
+            $table->string('oficio', 50)->nullable();
             $table->string('telefonos', 100)->nullable();
             $table->string('correo_electronico', 80)->nullable();
-            $table->integer('isapre')->unsigned()->required();
+            $table->integer('isapre_id')->unsigned()->required();
             $table->text('observacion')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -35,7 +35,7 @@ class CreateintervinientesTable extends Migration
             $table->foreign('region_id')->references('id')->on('regiones');
             $table->foreign('provincia_id')->references('id')->on('provincias');
             $table->foreign('comuna_id')->references('id')->on('comunas');
-            $table->foreign('isapre')->references('id')->on('isapres');
+            $table->foreign('isapre_id')->references('id')->on('isapres');
         });
     }
 

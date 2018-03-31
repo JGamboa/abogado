@@ -3,8 +3,7 @@
         <tr>
             <th>Rut</th>
             <th>Nombres</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
+            <th>Apellidos</th>
             <th>Direccion</th>
             <th>Region</th>
             <th>Provincia</th>
@@ -22,8 +21,7 @@
         <tr>
             <td>{!! $interviniente->rut !!}</td>
             <td>{!! $interviniente->nombres !!}</td>
-            <td>{!! $interviniente->apellido_paterno !!}</td>
-            <td>{!! $interviniente->apellido_materno !!}</td>
+            <td>{!! $interviniente->apellido_paterno . " " . $interviniente->apellido_materno !!}</td>
             <td>{!! $interviniente->direccion !!}</td>
             <td>{!! $interviniente->region->nombre !!}</td>
             <td>{!! $interviniente->provincia->nombre !!}</td>

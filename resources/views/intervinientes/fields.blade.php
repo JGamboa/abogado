@@ -1,13 +1,11 @@
-<!-- Rut Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('rut', 'Rut:') !!}
-    {!! Form::text('rut', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Nombres Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('nombres', 'Nombres:') !!}
     {!! Form::text('nombres', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-6" style="height:59px;">
+
 </div>
 
 <!-- Apellido Paterno Field -->
@@ -21,6 +19,14 @@
     {!! Form::label('apellido_materno', 'Apellido Materno:') !!}
     {!! Form::text('apellido_materno', null, ['class' => 'form-control']) !!}
 </div>
+
+
+<!-- Rut Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('rut', 'Rut:') !!}
+    {!! Form::text('rut', null, ['class' => 'form-control']) !!}
+</div>
+
 
 <!-- Direccion Field -->
 <div class="form-group col-sm-6">
@@ -50,7 +56,7 @@
 
 <!-- Oficio Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('oficio', 'Oficio:') !!}
+    {!! Form::label('oficio', 'Profesión:') !!}
     {!! Form::text('oficio', null, ['class' => 'form-control']) !!}
 </div>
 

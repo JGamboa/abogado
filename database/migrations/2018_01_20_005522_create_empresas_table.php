@@ -17,7 +17,7 @@ class CreateEmpresasTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('rut', 10)->unique()->required();
             $table->string('razon_social', 150)->required();
-            $table->string('nombre_fantasia', 150);
+            $table->string('nombre_fantasia', 150)->nullable();
             $table->string('direccion', 70)->required();
             $table->integer('comunas_id')->unsigned()->required();
             $table->integer('provincias_id')->unsigned()->required();
