@@ -100,6 +100,4 @@ Route::resource('estadoscasos', 'EstadoCasoController');
 
 Route::resource('estadosMaterias', 'EstadoMateriaController');
 
-Route::resource('estadosMaterias', 'EstadoMateriaController');
-
-Route::resource('estadosMaterias', 'EstadoMateriaController');
+Route::resource('casos', 'CasoController');

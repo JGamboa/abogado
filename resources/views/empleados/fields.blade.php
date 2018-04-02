@@ -31,10 +31,8 @@
 <!-- Admin Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('admin', 'Admin:') !!}
-    <label class="checkbox-inline">
-        {!! Form::hidden('admin', '0') !!}
-        {!! Form::checkbox('admin', '1', null) !!} 1
-    </label>
+    {!! Form::hidden('admin', '0') !!}
+    {!! Form::checkbox('admin', '1', null) !!}
 </div>
 
 <!-- Submit Field -->

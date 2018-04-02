@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\Excludable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -52,7 +51,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Empleado extends Model
 {
-    use Excludable;
+
     use SoftDeletes;
 
     public $table = 'empleados';
@@ -97,7 +96,7 @@ class Empleado extends Model
     ];
 
 
-    public function getNombreCompleto(){
+    public function getNombreCompletoAttribute(){
         return $this->nombres . " " . $this->apellido_paterno . " " . $this->apellido_materno;
     }
 
@@ -146,4 +145,5 @@ class Empleado extends Model
 
         return $result;
     }
+
 }

@@ -96,9 +96,9 @@
 </div>
 
 {!! Form::close() !!}
+
 @push('custom-scripts')
     <script type="text/javascript">
-
         function checkPermisos(){
             $("input[name='permisos\\[\\]']").prop('checked', false);
             $("input[name='roles\\[\\]']").each(function() {

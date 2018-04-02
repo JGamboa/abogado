@@ -108,4 +108,15 @@ class Empresa extends Model
     {
         return $this->hasMany(\App\Models\Sucursal::class);
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * devuelve la lista de empleados de la empresa en sesion
+     */
+    public function empleados(){
+
+        return $this->hasMany(\App\Models\Empleado::class);
+
+    }
 }

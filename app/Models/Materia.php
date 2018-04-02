@@ -48,5 +48,37 @@ class Materia extends Model
         'color' => 'max:7'
     ];
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * devuelve la lista de empleados de la empresa en sesion
+     */
+    public function estadosCasos(){
+
+        return $this->belongsToMany(\App\Models\EstadoCaso::class, 'estados_materias', 'materia_id', 'estadocaso_id');
+
+    }
+
+
+    public static function jsonMateriasEstados(){
+        $materias = Materia::all();
+        $texto = "{";
+        foreach($materias as $materia){
+            $texto .= "\"" . $materia->id . "\"" . ":[";
+
+            foreach ($materia->estadosCasos as $estado){
+                $texto .= $estado->id . ",";
+            }
+
+            $texto .=  "],";
+        }
+
+        $texto = str_replace(",]", "]", $texto);
+        $texto = rtrim($texto,",");
+        $texto .= "}";
+
+        return $texto;
+    }
+
     
 }

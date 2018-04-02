@@ -104,3 +104,8 @@
 <li class="{{ Request::is('intervinientes*') ? 'active' : '' }}">
     <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
 </li>
+
+<li class="{{ Request::is('casos*') ? 'active' : '' }}">
+    <a href="{!! route('casos.index') !!}"><i class="fa fa-edit"></i><span>Casos</span></a>
+</li>
+
