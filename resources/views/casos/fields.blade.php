@@ -8,20 +8,14 @@
 
                     <table class="table table-bordered">
                         <tr>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Direcci&oacute;n</th>
+                        </tr>
+                        <tr>
                             <td id="rut_cliente"></td>
                             <td id="nombre_cliente"></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td colspan="3"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="direccion_cliente"></td>
                         </tr>
                     </table>
                 </div>
@@ -176,6 +170,9 @@
 
         $('#cliente_term').on('select2:select', function (e) {
             var data = e.params.data;
+            $('#rut_cliente').html(data.rut);
+            $('#nombre_cliente').html(data.nombres + ' ' + data.apellido_paterno + ' ' + data.apellido_materno);
+            $('#direccion_cliente').html(data.direccion);
             console.log(data);
         });
     });
