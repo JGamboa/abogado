@@ -94,6 +94,7 @@ Route::resource('materias', 'MateriaController');
 
 Route::resource('cortes', 'CorteController');
 
+Route::get('intervinientes/search', 'IntervinienteController@search')->name('intervinientes.search');
 Route::resource('intervinientes', 'IntervinienteController');
 
 Route::resource('estadoscasos', 'EstadoCasoController');

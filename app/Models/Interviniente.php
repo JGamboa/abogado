@@ -34,7 +34,8 @@ class Interviniente extends Model
     use OnSaveEmpresa;
 
     public $table = 'intervinientes';
-    
+
+    protected $appends = ["text"];
 
     protected $dates = ['deleted_at'];
 
@@ -130,5 +131,13 @@ class Interviniente extends Model
         return $this->belongsTo(\App\Models\Isapre::class);
     }
 
+
+    public function getTextAttribute(){
+        return $this->rut . " - " . $this->nombres . " " . $this->getApellidos();
+    }
+
+    public function getApellidos(){
+        return $this->apellido_paterno . " " . $this->apellido_materno;
+    }
 
 }

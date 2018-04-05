@@ -172,4 +172,41 @@ class IntervinienteController extends AppBaseController
 
         return redirect(route('intervinientes.index'));
     }
+
+
+    /**
+     * Search interviniente from database base on some specific constraints
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *  @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+        $fields = [
+            'rut',
+            'nombres',
+            'apellido_paterno',
+            'apellido_materno',
+        ];
+
+
+        $intervinientes = $this->doSearchingQuery($fields, $request->q);
+
+        $items = [];
+        foreach($intervinientes as $interviniente){
+            $items[] = $interviniente;
+        }
+
+        return Response::json($items);
+    }
+
+
+    private function doSearchingQuery($fields, $term) {
+        $query = New \App\Models\Interviniente;
+        $query->select("t.*, t.apellido_paterno as text");
+        foreach ($fields as $field) {
+            $query = $query->orWhere( $field, 'like', '%'.$term.'%');
+        }
+
+        return $query->paginate(10);
+    }
 }
