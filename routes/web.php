@@ -94,6 +94,8 @@ Route::resource('materias', 'MateriaController');
 
 Route::resource('cortes', 'CorteController');
 
+
+Route::get('intervinientes/showJson', 'IntervinienteController@showJson')->name('intervinientes.showJson');
 Route::get('intervinientes/search', 'IntervinienteController@search')->name('intervinientes.search');
 Route::resource('intervinientes', 'IntervinienteController');
 
@@ -101,4 +103,8 @@ Route::resource('estadoscasos', 'EstadoCasoController');
 
 Route::resource('estadosMaterias', 'EstadoMateriaController');
 
+Route::get('uploads/files/{hash}/{name}', 'UploadController@get_file');
+Route::get('casos/{caso}/uploaded_files', 'CasoController@uploaded_files');
+Route::post('casos/upload_files', 'CasoController@upload_files');
+Route::post('casos/editar-en-linea', 'CasoController@editInLine')->name('casos.editar-en-linea');
 Route::resource('casos', 'CasoController');

@@ -286,6 +286,13 @@ class EmpresaController extends AppBaseController
             $empresa_id = 'empresas.id';
         }
 
+        if(count($empresas) == 1){
+            $empresa = \App\Models\Empresa::find($empresas[0]->id);
+            \Auth::user()->asignarEmpresa($empresa);
+            Flash::success('Empresa seleccionada. '. $empresa->razon_social);
+            return redirect(route('home'));
+        }
+
         $empresas = $empresas->pluck('razon_social',$empresa_id);
 
         return view('empresas.seleccionar', ['empresas' => $empresas]);
@@ -294,10 +301,7 @@ class EmpresaController extends AppBaseController
     public function session(Request $request){
 
         $empresa = \App\Models\Empresa::find($request->id);
-        session(['empresa_id' => $empresa->id]);
-        session(['empresa_razon_social' => $empresa->razon_social]);
-        session(['empresa_rut' => $empresa->rut]);
-        app()['cache']->forget('spatie.permission.cache');
+        \Auth::user()->asignarEmpresa($empresa);
         Flash::success('Empresa seleccionada. '. $empresa->razon_social);
         return redirect(route('empresas.index'));
     }

@@ -8,16 +8,8 @@
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')
-       <div class="box box-primary">
-           <div class="box-body">
-               <div class="row">
-                   {!! Form::model($caso, ['route' => ['casos.update', $caso->id], 'method' => 'patch']) !!}
+       {!! Form::model($caso, ['route' => ['casos.update', $caso->id], 'method' => 'patch']) !!}
 
-                        @include('casos.fields')
-
-                   {!! Form::close() !!}
-               </div>
-           </div>
-       </div>
+            @include('casos.fields')
    </div>
 @endsection

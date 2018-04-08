@@ -51,4 +51,11 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function asignarEmpresa($empresa){
+        session(['empresa_id' => $empresa->id]);
+        session(['empresa_razon_social' => $empresa->razon_social]);
+        session(['empresa_rut' => $empresa->rut]);
+        app()['cache']->forget('spatie.permission.cache');
+    }
 }

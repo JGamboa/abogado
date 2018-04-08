@@ -193,6 +193,10 @@ class IntervinienteController extends AppBaseController
 
         $items = [];
         foreach($intervinientes as $interviniente){
+            $interviniente->isapre;
+            $interviniente->region;
+            $interviniente->comuna;
+            $interviniente->provincia;
             $items[] = $interviniente;
         }
 
@@ -202,11 +206,36 @@ class IntervinienteController extends AppBaseController
 
     private function doSearchingQuery($fields, $term) {
         $query = New \App\Models\Interviniente;
-        $query->select("t.*, t.apellido_paterno as text");
         foreach ($fields as $field) {
             $query = $query->orWhere( $field, 'like', '%'.$term.'%');
         }
 
         return $query->paginate(10);
+    }
+
+
+    /**
+     * Display the specified Interviniente.
+     * GET|HEAD /interviniente/{id}
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function showJson(Request $request)
+    {
+        /** @var Interviniente $interviniente */
+        $interviniente = $this->intervinienteRepository->findWithoutFail($request->q);
+
+        if (empty($interviniente)) {
+            return $this->sendError('Interviniente no encontrado');
+        }
+
+        $interviniente->isapre;
+        $interviniente->region;
+        $interviniente->comuna;
+        $interviniente->provincia;
+
+        return $this->sendResponse($interviniente->toArray(), 'Interviniente retrieved successfully');
     }
 }

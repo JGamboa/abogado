@@ -140,4 +140,8 @@ class Interviniente extends Model
         return $this->apellido_paterno . " " . $this->apellido_materno;
     }
 
+    public function getNombreCompletoAttribute(){
+        return $this->nombres . " " . $this->getApellidos();
+    }
+
 }

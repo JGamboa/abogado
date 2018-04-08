@@ -53,6 +53,8 @@ class Caso extends Model
      * @var array
      */
     protected $casts = [
+        'cliente' => 'object',
+        'contraparte' => 'object',
         'fecha_recurso' => 'date',
         'fecha_captacion' => 'date',
         'captador' => 'integer',
@@ -71,8 +73,8 @@ class Caso extends Model
      * @var array
      */
     public static $rules = [
-        'cliente' => 'json|required',
-        'contraparte' => 'json|required',
+        //'cliente' => 'json|required',
+        //'contraparte' => 'json|required',
         'fecha_recurso' => 'date',
         'fecha_captacion' => 'date|required',
         'captador' => 'required',
@@ -121,6 +123,25 @@ class Caso extends Model
     public function datosResponsable(){
 
         return $this->hasOne(\App\Models\Empleado::class, 'id', 'responsable_proceso');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * devuelve la lista de empleados de la empresa en sesion
+     */
+    public function uploads(){
+
+        return $this->belongsToMany(\App\Models\Upload::class, 'casos_uploads', 'caso_id', 'upload_id');
+
+    }
+
+    public function getNombreCompleto($persona){
+        return $persona->nombres . " " . $persona->apellido_paterno . " " . $persona->apellido_materno;
+    }
+
+    public function getDireccion($persona){
+        return $persona->direccion . ", " . $persona->comuna->nombre . ", " . $persona->provincia->nombre . ", " . $persona->region->nombre;
     }
 
 
