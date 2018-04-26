@@ -1,6 +1,5 @@
 
 <div class="col-md-6">
-    <div class="row">
         <section class="content-header row">
             <h1 class="pull-left">
                 Archivos
@@ -24,11 +23,7 @@
                 </ul>
             </div>
         </div>
-
-    </div>
 </div>
-
-<div class="clearfix"></div>
 
 <div class="modal fade" id="EditFileModal" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:90%;">

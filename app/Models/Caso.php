@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\AppendEmpresa;
+use App\Traits\OnSaveEmpresa;
 
 /**
  * Class Caso
  * @package App\Models
  * @version March 31, 2018, 6:05 pm CLST
  *
+ * @property integer empresa_id
  * @property json cliente
  * @property json contraparte
  * @property date fecha_recurso
@@ -26,13 +29,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Caso extends Model
 {
     use SoftDeletes;
+    use AppendEmpresa;
+    use OnSaveEmpresa;
 
     public $table = 'casos';
-    
 
     protected $dates = ['deleted_at'];
 
     public $fillable = [
+        'empresa_id',
         'cliente',
         'contraparte',
         'fecha_recurso',
@@ -53,6 +58,7 @@ class Caso extends Model
      * @var array
      */
     protected $casts = [
+        'empresa_id' => 'integer',
         'cliente' => 'object',
         'contraparte' => 'object',
         'fecha_recurso' => 'date',
@@ -142,6 +148,14 @@ class Caso extends Model
 
     public function getDireccion($persona){
         return $persona->direccion . ", " . $persona->comuna->nombre . ", " . $persona->provincia->nombre . ", " . $persona->region->nombre;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     **/
+    public function observaciones()
+    {
+        return $this->hasMany(ObservacionCaso::class);
     }
 
 

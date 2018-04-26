@@ -25,6 +25,7 @@ Route::group(['prefix' => 'v1'], function () {
     });
 
 
+    Route::resource('observacionesCasos', 'ObservacionCasoAPIController');
     Route::resource('empresas', 'EmpresaAPIController');
     Route::resource('sucursales', 'SucursalAPIController');
 });

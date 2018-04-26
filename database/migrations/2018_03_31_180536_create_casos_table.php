@@ -15,6 +15,7 @@ class CreatecasosTable extends Migration
     {
         Schema::create('casos', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('empresa_id')->unsigned();
             $table->json('cliente');
             $table->json('contraparte');
             $table->date('fecha_recurso');
@@ -29,6 +30,7 @@ class CreatecasosTable extends Migration
             $table->boolean('pyp')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->foreign('captador')->references('id')->on('empleados');
             $table->foreign('materia_id')->references('id')->on('materias');
             $table->foreign('estadocaso_id')->references('id')->on('estadoscasos');

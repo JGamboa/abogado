@@ -164,6 +164,14 @@
     @include('casos.upload')
 @endif
 
+
+@if(isset($caso))
+    @include('casos.observaciones')
+@endif
+
+
+<div class="clearfix"></div>
+
 @push('custom-scripts')
 <script type="text/javascript">
     function limpiar(){
