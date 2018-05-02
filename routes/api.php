@@ -24,12 +24,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/{provincias_id}', 'ProvinciaAPIController@loadProvincias')->name('provincias.loadProvincias');
     });
 
-
     Route::resource('observacionesCasos', 'ObservacionCasoAPIController');
     Route::resource('empresas', 'EmpresaAPIController');
     Route::resource('sucursales', 'SucursalAPIController');
 });
-
-
-
-Route::resource('estadoscasos', 'EstadoCasoAPIController');

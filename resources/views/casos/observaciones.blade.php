@@ -22,7 +22,7 @@
 
             </div>
             <div class="clearfix">
-                <p class="pull-right">ADMINISTRADOR</p>
+                <p class="pull-right">{{ isset($observacion->empleado_id) ? $observacion->empleado->nombreCompleto : 'ADMINISTRADOR' }}</p>
             </div>
         @endforeach
 
@@ -41,23 +41,23 @@
                 <h4 class="modal-title" id="myModalObservacionLabel">Observacion </h4>
             </div>
 
+
+            {!! Form::open(['route' => ['api.observacionesCasos.store'], 'method' => 'post', 'id'=>'crear-observacion-form']) !!}
             <div class="modal-body" style="padding: 0px;">
                 <div class="row" style="margin:0px;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        {!! Form::open(['class' => 'file-info-form']) !!}
-
-                            {{ Form::textarea("observacion", null, ['class' => 'field col-md-12']) }}
-
-
-                        {!! Form::close() !!}
+                        {{ Form::hidden('caso_id', $caso->id) }}
+                        {{ Form::textarea("observacion", null, ['class' => 'field col-md-12']) }}
                     </div>
                 </div><!--.row-->
             </div>
 
             <div class="modal-footer">
-                <a class="btn btn-success" id="CreateObservacion" href="">Crear</a>
+                <button class="btn btn-success" id="crearObservacion" type="button">Crear</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+
+            {!! Form::close() !!}
         </div>
     </div>
 </div>
@@ -68,3 +68,28 @@
         margin: 0 auto;
     }
 </style>
+
+
+@push('custom-scripts')
+
+<script type="text/javascript">
+
+    $("#crearObservacion").on("click", function() {
+        $.ajax({
+            url: "{{ url(route('api.observacionesCasos.store')) }}",
+            method: 'POST',
+            data: $("#crear-observacion-form").serialize(),
+            success: function( response ) {
+                if(response.success){
+                    $("#CreateObservacionModal").modal('hide');
+                    alert(response.message);
+                    location.reload();
+                }
+            }
+        });
+    });
+
+
+</script>
+
+@endpush

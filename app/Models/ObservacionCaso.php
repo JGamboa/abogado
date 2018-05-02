@@ -47,4 +47,12 @@ class ObservacionCaso extends Model
         'oficio' => 'required|max:255',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function empleado(){
+
+        return $this->belongsTo(\App\Models\Empleado::class);
+    }
+
 }

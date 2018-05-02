@@ -55,7 +55,7 @@ class ObservacionCasoAPIController extends AppBaseController
 
         $observaciones = $this->observacionCasoRepository->create($input);
 
-        return $this->sendResponse($observaciones->toArray(), 'Observacion Caso saved successfully');
+        return $this->sendResponse($observaciones->toArray(), 'Observacion guardada exitosamente');
     }
 
     /**
@@ -74,6 +74,7 @@ class ObservacionCasoAPIController extends AppBaseController
         if (empty($observaciones)) {
             return $this->sendError('Observacion not found');
         }
+
 
         return $this->sendResponse($observaciones->toArray(), 'Observacion retrieved successfully');
     }
