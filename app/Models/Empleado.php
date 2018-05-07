@@ -136,7 +136,7 @@ class Empleado extends Model
             if($paginate == 1){
                 $list = \Auth::user()->empresas()->paginate($cantidad_paginacion);
             }else{
-                $list = \Auth::user()->empresas();
+                $list = \Auth::user()->empresas;
             }
 
             $result = $list;

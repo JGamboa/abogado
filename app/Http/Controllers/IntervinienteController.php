@@ -12,6 +12,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Region as Region;
 use App\Models\Isapre as Isapre;
+use Gate;
 
 class IntervinienteController extends AppBaseController
 {
@@ -31,6 +32,10 @@ class IntervinienteController extends AppBaseController
      */
     public function index(Request $request)
     {
+        if(Gate::denies('ver intervinientes')){
+            abort(403);
+        }
+
         $this->intervinienteRepository->pushCriteria(new RequestCriteria($request));
         $intervinientes = $this->intervinienteRepository->all();
 

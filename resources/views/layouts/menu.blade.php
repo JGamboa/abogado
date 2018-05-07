@@ -78,10 +78,6 @@
     <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
 </li>
 
-<li class="{{ Request::is('profiles*') ? 'active' : '' }}">
-    <a href="{!! route('profiles.index') !!}"><i class="fa fa-edit"></i><span>Profiles</span></a>
-</li>
-
 <li class="{{ Request::is('empresas*') ? 'active' : '' }}">
     <a href="{!! route('empresas.index') !!}"><i class="fa fa-edit"></i><span>Empresas</span></a>
 </li>

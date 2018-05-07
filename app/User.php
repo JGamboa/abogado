@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Backpack\CRUD\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -31,20 +32,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function empresas(){
-        return $this->hasManyThrough('App\Models\Empresa',
-            'App\Models\Empleado',
-            'user_id',
-            'id',
-            'id','empresa_id');
-    }
+    /**
+     * The companys that belong to the user.
+     */
+    public function empresas()
+    {
 
-    public function canPersonal(){
+        return $this->belongsToMany('App\Models\Empresa', 'empleados');
 
     }
 
     public function isSuperAdmin(){
-        $roles_users = \DB::table('role_users')->select('role_id')->where('role_id', 1)->where('user_id', \Auth::user()->id)->get();
+        $roles_users = \DB::table('role_users')->select('role_id')->where('role_id', 1)->where('user_id', Auth::user()->id)->get();
         if(count($roles_users)>0){
             return true;
         }else{

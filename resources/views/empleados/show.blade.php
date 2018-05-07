@@ -8,7 +8,6 @@
     </section>
     <div class="content">
 
-        <div class="col-md-8 col-md-offset-2">
             <div class="clearfix"></div>
 
             @include('flash::message')
@@ -20,6 +19,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 @endsection

@@ -280,12 +280,6 @@ class EmpresaController extends AppBaseController
 
         $booleanResult = \Auth::user()->isSuperAdmin();
 
-        if($booleanResult){
-            $empresa_id = 'id';
-        }else{
-            $empresa_id = 'empresas.id';
-        }
-
         if(count($empresas) == 1){
             $empresa = \App\Models\Empresa::find($empresas[0]->id);
             \Auth::user()->asignarEmpresa($empresa);
@@ -293,7 +287,7 @@ class EmpresaController extends AppBaseController
             return redirect(route('home'));
         }
 
-        $empresas = $empresas->pluck('razon_social',$empresa_id);
+        $empresas = $empresas->pluck('razon_social','id');
 
         return view('empresas.seleccionar', ['empresas' => $empresas]);
     }
