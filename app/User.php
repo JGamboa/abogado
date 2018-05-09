@@ -57,4 +57,11 @@ class User extends Authenticatable
         session(['empresa_rut' => $empresa->rut]);
         app()['cache']->forget('spatie.permission.cache');
     }
+
+    /**
+    retorna la instancia de empleado del usuario indicado en la empresa seleccionada
+     */
+    public function empleado(){
+        return Empleado::where('user_id', $this->id)->where('empresa_id', session('empresa_id'))->get();
+    }
 }
