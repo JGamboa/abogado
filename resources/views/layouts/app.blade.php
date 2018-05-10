@@ -45,9 +45,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="#" class="logo">
-                <b>InfyOm</b>
-            </a>
+            <a class="logo"><img width="100" src="https://image.ibb.co/eauMYy/Logo_Wings_nuevo.jpg" alt="Logo_Wings_nuevo" border="0"></a>
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
