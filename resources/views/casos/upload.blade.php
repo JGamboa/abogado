@@ -27,7 +27,7 @@
 
 <div class="modal fade" id="EditFileModal" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width:90%;">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 1000px;">
             <div class="modal-header">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
