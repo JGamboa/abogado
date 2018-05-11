@@ -70,23 +70,32 @@
     </ul>
 </li>
 
+<li class="treeview{{ Request::is('empresas*') || Request::is('sucursales*') || Request::is('empleados*') ? ' active' : '' }}">
+    <a href="#">
+        <i class="fa fa-folder"></i>  <span>Empresa</span>
+    </a>
+
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('empresas*') ? 'active' : '' }}">
+            <a href="{!! route('empresas.index') !!}"><i class="fa fa-edit"></i><span>Empresas</span></a>
+        </li>
+
+        <li class="{{ Request::is('sucursales*') ? 'active' : '' }}">
+            <a href="{!! route('sucursales.index') !!}"><i class="fa fa-edit"></i><span>Sucursales</span></a>
+        </li>
+
+        <li class="{{ Request::is('empleados*') ? 'active' : '' }}">
+            <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
+        </li>
+    </ul>
+</li>
+
 
 <li class="{{ Request::is('generator_builder') ? 'active' : '' }}">
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>
 <li class="{{ Request::is('admin') ? 'active' : '' }}">
     <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
-</li>
-
-<li class="{{ Request::is('empresas*') ? 'active' : '' }}">
-    <a href="{!! route('empresas.index') !!}"><i class="fa fa-edit"></i><span>Empresas</span></a>
-</li>
-<li class="{{ Request::is('sucursales*') ? 'active' : '' }}">
-    <a href="{!! route('sucursales.index') !!}"><i class="fa fa-edit"></i><span>Sucursales</span></a>
-</li>
-
-<li class="{{ Request::is('empleados*') ? 'active' : '' }}">
-    <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
 </li>
 
 <li class="{{ Request::is('isapres*') ? 'active' : '' }}">

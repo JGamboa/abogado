@@ -8,6 +8,7 @@ use App\Repositories\CasoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Empresa;
@@ -175,6 +176,8 @@ class CasoController extends AppBaseController
             return redirect(route('casos.index'));
         }
 
+        $this->authorize('update', $caso);
+
         $caso = $this->casoRepository->update($request->all(), $id);
 
         Flash::success('Caso updated successfully.');
@@ -215,6 +218,12 @@ class CasoController extends AppBaseController
     public function upload_files() {
 
         $input = Input::all();
+
+        $caso = $this->casoRepository->findWithoutFail($input['caso_id']);
+
+        if(!Auth::user()->can('update',$caso)){
+            return $this->sendError('No tiene permiso para subir archivos');
+        }
 
         if(Input::hasFile('file')) {
 
@@ -322,6 +331,8 @@ class CasoController extends AppBaseController
                 "status" => "Not Found"
             ], 400);
         }
+
+        $this->authorize('update', $caso);
 
         $caso = $this->casoRepository->update([$input->name => $input->value], $input->pk);
 

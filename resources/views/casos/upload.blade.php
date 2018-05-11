@@ -97,6 +97,9 @@
                         console.log(file);
                         loadUploadedFiles();
                     });
+                    this.on("error", function(response, error) {
+                        alert(error.message);
+                    });
                 }
             });
 

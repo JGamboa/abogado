@@ -7,6 +7,7 @@ use Backpack\CRUD\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Empleado;
 
 class User extends Authenticatable
 {
@@ -37,9 +38,7 @@ class User extends Authenticatable
      */
     public function empresas()
     {
-
         return $this->belongsToMany('App\Models\Empresa', 'empleados');
-
     }
 
     public function isSuperAdmin(){
@@ -62,6 +61,6 @@ class User extends Authenticatable
     retorna la instancia de empleado del usuario indicado en la empresa seleccionada
      */
     public function empleado(){
-        return Empleado::where('user_id', $this->id)->where('empresa_id', session('empresa_id'))->get();
+        return $this->hasOne('App\Models\Empleado')->where('empleados.empresa_id', session('empresa_id'));
     }
 }
