@@ -82,7 +82,7 @@ class PermissionMiddleware {
 
         /****************************** CASOS *******************************/
 
-        if($route == "casos.index" || $route == "casos.show"){
+        if($route == "casos.index" || $route == "casos.show" || $route == "casos.edit"){
             if (!Auth::user()->can('ver casos')) {
                 abort('401');
             }
@@ -94,7 +94,7 @@ class PermissionMiddleware {
             }
         }
 
-        if($route == "casos.edit" || $route == "casos.editar-en-linea"){
+        if($route == "casos.editar-en-linea" || $route == "casos.update"){
             if (!Auth::user()->can('editar casos')) {
                 abort('401');
             }
