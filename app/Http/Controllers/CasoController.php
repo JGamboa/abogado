@@ -40,10 +40,11 @@ class CasoController extends AppBaseController
      */
     public function index(Request $request)
     {
+
         $this->casoRepository->pushCriteria(new RequestCriteria($request));
         $estados = EstadoCaso::all();
         $cortes = Corte::all();
-        $casos = $this->casoRepository->all();
+        $casos = $this->casoRepository->paginate(10);
 
         return view('casos.index')
             ->with(['casos'=> $casos,
@@ -339,5 +340,49 @@ class CasoController extends AppBaseController
         return response()->json([
             "success" => true,
         ], 200);
+    }
+
+
+    /**
+     * Search city from database base on some specific constraints
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *  @return \Illuminate\Http\Response
+     */
+    public function search(Request $request) {
+
+
+        $constraints = [
+            'casos.contraparte->nombres' => $request['nombres'],
+            'casos.contraparte->apellido_paterno' => $request['apellidopaterno'],
+            'casos.contraparte->apellido_materno' => $request['apellidomaterno'],
+        ];
+
+        $estados = EstadoCaso::all();
+        $cortes = Corte::all();
+
+        $casos = $this->doSearchingQuery($constraints);
+        return view('casos.index', [
+            'casos' => $casos,
+            'estados' => $estados,
+            'cortes' => $cortes,
+            'searchingVals' => $constraints]);
+    }
+
+    private function doSearchingQuery($constraints) {
+        $query = New \App\Models\Caso;
+        $fields = array_keys($constraints);
+        $index = 0;
+        foreach ($constraints as $constraint) {
+
+            if ($constraint != null) {
+                $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
+            }
+
+
+            $index++;
+        }
+
+        return $query->paginate(10);
     }
 }

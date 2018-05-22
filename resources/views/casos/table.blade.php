@@ -49,6 +49,17 @@
     </tbody>
 </table>
 
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to {{count($casos)}} of {{count($casos)}} entries</div>
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+            {{ $casos->appends(Illuminate\Support\Facades\Input::except('page','_token'))->links() }}
+        </div>
+    </div>
+</div>
+
 @push('custom-scripts')
     <script src="{{ URL::asset('js/editstrap.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/editstrap.css') }}">

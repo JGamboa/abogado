@@ -20,6 +20,9 @@ class CasoRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'contraparte->nombre'=>'like',
+        'contraparte->apellido_paterno'=>'like',
+        'contraparte->apellido_materno'=>'like',
         'cliente',
         'contraparte',
         'fecha_recurso',
