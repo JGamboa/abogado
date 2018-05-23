@@ -356,6 +356,9 @@ class CasoController extends AppBaseController
             'casos.contraparte->nombres' => $request['nombres'],
             'casos.contraparte->apellido_paterno' => $request['apellidopaterno'],
             'casos.contraparte->apellido_materno' => $request['apellidomaterno'],
+            'casos.cliente->nombres' => $request['nombres'],
+            'casos.cliente->apellido_paterno' => $request['apellidopaterno'],
+            'casos.cliente->apellido_materno' => $request['apellidomaterno'],
         ];
 
         $estados = EstadoCaso::all();
@@ -370,19 +373,38 @@ class CasoController extends AppBaseController
     }
 
     private function doSearchingQuery($constraints) {
-        $query = New \App\Models\Caso;
+        $casos = New \App\Models\Caso;
+
+        /*$query = $query->where([
+            ['casos.contraparte->nombres', 'like', $constraints['casos.contraparte->nombres']],
+            ['casos.contraparte->apellido_paterno', 'like', $constraints['casos.contraparte->apellido_paterno']],
+            ['casos.contraparte->apellido_materno', 'like', $constraints['casos.contraparte->apellido_materno']]
+            ])
+        ->orWhere([
+            ['casos.cliente->nombres', 'like', $constraints['casos.contraparte->nombres']],
+            ['casos.cliente->apellido_paterno', 'like', $constraints['casos.contraparte->apellido_paterno']],
+            ['casos.cliente->apellido_materno', 'like', $constraints['casos.contraparte->apellido_materno']]
+        ]);
+        dd($query->toSql());*/
+
         $fields = array_keys($constraints);
         $index = 0;
+
         foreach ($constraints as $constraint) {
 
             if ($constraint != null) {
-                $query = $query->where( $fields[$index], 'like', '%'.$constraint.'%');
+                if($index <= 2){
+                    $array_contraparte[] = [$fields[$index], 'like', '%'.$constraint.'%'];
+                }else{
+                    $array_cliente[] = [$fields[$index], 'like', '%'.$constraint.'%'];
+                }
             }
-
 
             $index++;
         }
 
-        return $query->paginate(10);
+        $casos = $casos->where($array_contraparte)->orWhere($array_cliente);
+
+        return $casos->paginate(10);
     }
 }

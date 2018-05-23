@@ -85,11 +85,11 @@ class Interviniente extends Model
      * @var array
      */
     public static $rules = [
-        'rut' => 'max:10|cl_rut',
-        'nombres' => 'max:100',
+        'rut' => 'max:10|cl_rut|required',
+        'nombres' => 'max:100|required',
         'apellido_paterno' => 'max:70',
         'apellido_materno' => 'max:70',
-        'direccion' => 'max:70',
+        'direccion' => 'max:70|required',
         'region_id' => 'required',
         'provincia_id' => 'required',
         'comuna_id' => 'required',
