@@ -18,10 +18,14 @@
         <form method="GET" action="{{ route('casos.search') }}">
             @component('layouts.search', ['title' => 'Buscar'])
                 @component('layouts.two-cols-search-row',
-                    ['items' => ['NOMBRES', 'APELLIDO PATERNO', 'APELLIDO MATERNO'],
-                    'oldVals' => [isset($searchingVals) ? $searchingVals['casos.contraparte->nombres'] : '',
+                    ['items' => ['NOMBRES', 'RUT', 'APELLIDO PATERNO', 'APELLIDO MATERNO'],
+                    'oldVals' => [
+                                  isset($searchingVals) ? $searchingVals['casos.contraparte->nombres'] : '',
+                                  isset($searchingVals) ? $searchingVals['casos.contraparte->rut'] : '',
                                   isset($searchingVals) ? $searchingVals['casos.contraparte->apellido_paterno'] : '',
-                                  isset($searchingVals) ? $searchingVals['casos.contraparte->apellido_materno'] : '']])
+                                  isset($searchingVals) ? $searchingVals['casos.contraparte->apellido_materno'] : ''
+                                 ]
+                    ])
                 @endcomponent
             @endcomponent
         </form>

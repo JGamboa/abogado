@@ -351,12 +351,13 @@ class CasoController extends AppBaseController
      */
     public function search(Request $request) {
 
-
         $constraints = [
             'casos.contraparte->nombres' => $request['nombres'],
+            'casos.contraparte->rut' => $request['rut'],
             'casos.contraparte->apellido_paterno' => $request['apellidopaterno'],
             'casos.contraparte->apellido_materno' => $request['apellidomaterno'],
             'casos.cliente->nombres' => $request['nombres'],
+            'casos.cliente->rut' => $request['rut'],
             'casos.cliente->apellido_paterno' => $request['apellidopaterno'],
             'casos.cliente->apellido_materno' => $request['apellidomaterno'],
         ];
@@ -365,6 +366,7 @@ class CasoController extends AppBaseController
         $cortes = Corte::all();
 
         $casos = $this->doSearchingQuery($constraints);
+        
         return view('casos.index', [
             'casos' => $casos,
             'estados' => $estados,
