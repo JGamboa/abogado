@@ -1,3 +1,6 @@
+<li class="{{ Request::is('home') ? 'active' : '' }}">
+    <a href="{!! route('home') !!}"><i class="fa fa-user"></i><span>Inicio</span></a>
+</li>
 
 <li class="treeview">
 
@@ -94,6 +97,7 @@
 <li class="{{ Request::is('generator_builder') ? 'active' : '' }}">
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>
+
 <li class="{{ Request::is('admin') ? 'active' : '' }}">
     <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
 </li>
