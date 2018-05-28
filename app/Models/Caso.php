@@ -162,5 +162,29 @@ class Caso extends Model
         return $this->hasMany(ObservacionCaso::class);
     }
 
+    public static function getCasosPorPeriodo($year, $month){
+        $caso = new Caso();
+
+        return $caso->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)->get();
+    }
+
+    public static function getCasosEnPreparacion($year = null, $month = null){
+        $caso = new Caso();
+
+        if($year !== null){
+            $caso = $caso->whereYear('created_at', $year);
+        }
+
+        if($month !== null){
+            $caso = $caso->whereMonth('created_at', $month);
+        }
+
+        $caso = $caso->where('estadocaso_id', 1);
+
+        return $caso->get();
+
+    }
+
 
 }

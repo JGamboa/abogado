@@ -144,4 +144,10 @@ class Interviniente extends Model
         return $this->nombres . " " . $this->getApellidos();
     }
 
+    public static function getCreadosPorPeriodo($year, $month){
+        $interviniente = new Interviniente();
+        return $interviniente->whereYear('created_at', $year)
+                           ->whereMonth('created_at', $month)->get();
+    }
+
 }

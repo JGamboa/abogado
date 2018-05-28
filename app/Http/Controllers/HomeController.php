@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Interviniente as Interviniente;
+use App\Models\Caso as Caso;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $casos = Caso::getCasosPorPeriodo('2018', '05');
+        $casos_preparacion = Caso::getCasosEnPreparacion('2018' ,'05');
+        $intervinientes = Interviniente::getCreadosPorPeriodo('2018', '05');
+        return view('home')->with(['intervinientes'=> $intervinientes,
+                                        'casos' => $casos,
+                                        'casos_preparacion' => $casos_preparacion]);
     }
 }
