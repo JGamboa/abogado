@@ -15,6 +15,7 @@ use Response;
 use App\Models\Provincia;
 use App\Models\Sucursal;
 use App\Models\Empleado as Empleado;
+use Spatie\Permission\Models\Role;
 
 class EmpresaController extends AppBaseController
 {
@@ -73,6 +74,9 @@ class EmpresaController extends AppBaseController
             'direccion' => $empresa->direccion,
             'tipo' => 1,
         ]);
+
+        $role = Role::create(['name' => 'SECRETARIA', 'empresa_id' => $empresa->id]);
+        $role = Role::create(['name' => 'CAPTADOR', 'empresa_id' => $empresa->id]);
 
         Flash::success('Empresa saved successfully.');
 

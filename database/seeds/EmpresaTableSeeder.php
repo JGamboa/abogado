@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\Empresa;
 use App\Models\Sucursal;
+use Spatie\Permission\Models\Role;
 
 class EmpresaTableSeeder extends Seeder
 {
@@ -32,6 +33,9 @@ class EmpresaTableSeeder extends Seeder
                 'provincias_id' => 14,
                 'tipo' => 1
             ]);
+
+            $role = Role::create(['name' => 'SECRETARIA', 'empresa_id' => $empresa->id]);
+            $role = Role::create(['name' => 'CAPTADOR', 'empresa_id' => $empresa->id]);
         }
 
     }

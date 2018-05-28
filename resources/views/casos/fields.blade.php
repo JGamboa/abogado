@@ -84,29 +84,48 @@
             {!! Form::hidden('cliente_id', isset($caso->cliente) ? $caso->cliente->id : null, ['id'=>'cliente_id'] ) !!}
             {!! Form::hidden('contraparte_id', isset($caso->contraparte) ? $caso->contraparte->id : null, ['id'=>'contraparte_id'] ) !!}
 
-            <!-- Fecha Recurso Field -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('fecha_recurso', 'Fecha Recurso:') !!}
-                {!! Form::date('fecha_recurso', isset($caso->fecha_recurso) ? $caso->fecha_recurso : null, ['class' => 'form-control']) !!}
-            </div>
+            @role('CAPTADOR')
+            @else
+                <!-- Fecha Recurso Field -->
+                <div class="form-group col-sm-6">
+                    {!! Form::label('fecha_recurso', 'Fecha Recurso:') !!}
+                    {!! Form::date('fecha_recurso', isset($caso->fecha_recurso) ? $caso->fecha_recurso : null, ['class' => 'form-control']) !!}
+                </div>
+            @endrole
 
-            <!-- Fecha Captacion Field -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('fecha_captacion', 'Fecha Captacion:') !!}
-                {!! Form::date('fecha_captacion', isset($caso->fecha_captacion) ? $caso->fecha_captacion : null, ['class' => 'form-control']) !!}
-            </div>
+            @role('CAPTADOR')
+                <!-- Captador Field -->
+                {!! Form::hidden('captador', \Illuminate\Support\Facades\Auth::user()->empleado->id) !!}
 
-            <!-- Captador Field -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('captador', 'Captador:') !!}
-                {!! Form::select('captador', $empleados, isset($caso->captador) ? $caso->captador : null, ['class' => 'form-control', 'placeholder'=>'Seleccionar Empleado']) !!}
-            </div>
+                <!-- Fecha captacion Field -->
+                {!! Form::hidden('fecha_captacion', Carbon\Carbon::now()) !!}
+            @else
 
-            <!-- Rol Field -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('rol', 'Rol:') !!}
-                {!! Form::text('rol', null, ['class' => 'form-control']) !!}
-            </div>
+                <!-- Fecha Captacion Field -->
+                <div class="form-group col-sm-6">
+                    {!! Form::label('fecha_captacion', 'Fecha Captacion:') !!}
+                    {!! Form::date('fecha_captacion', isset($caso->fecha_captacion) ? $caso->fecha_captacion : null, ['class' => 'form-control']) !!}
+                </div>
+
+
+                <!-- Captador Field -->
+                <div class="form-group col-sm-6">
+                    {!! Form::label('captador', 'Captador:') !!}
+                    {!! Form::select('captador', $empleados, isset($caso->captador) ? $caso->captador : null, ['class' => 'form-control', 'placeholder'=>'Seleccionar Empleado']) !!}
+                </div>
+
+                <!-- Rol Field -->
+                <div class="form-group col-sm-3">
+                    {!! Form::label('rol', 'Rol:') !!}
+                    {!! Form::text('rol', null, ['class' => 'form-control']) !!}
+                </div>
+
+                <!-- Año Rol Field -->
+                <div class="form-group col-sm-3">
+                    {!! Form::label('anio_rol', 'Año Rol:') !!}
+                    {!! Form::text('anio_rol', null, ['class' => 'form-control']) !!}
+                </div>
+            @endrole
 
             <!-- Materia Id Field -->
             <div class="form-group col-sm-6">
@@ -136,11 +155,14 @@
                 {!! Form::text('tribunal', null, ['class' => 'form-control']) !!}
             </div>
 
+            @role('CAPTADOR')
+            @else
             <!-- Responsable Proceso Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('responsable_proceso', 'Responsable Proceso:') !!}
                 {!! Form::select('responsable_proceso', $empleados, isset($caso->responsable_proceso) ? $caso->responsable_proceso : null, ['class' => 'form-control', 'placeholder'=>'Seleccionar Empleado']) !!}
             </div>
+            @endrole
 
             <!-- Pyp Field -->
             <div class="form-group col-sm-6">

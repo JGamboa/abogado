@@ -85,6 +85,11 @@ class CasoController extends AppBaseController
     {
         $input = $request->all();
 
+        if(Auth::user()->hasRole('CAPTADOR')){
+            $input['captador'] = Auth::user()->empleado->id;
+            $input['fecha_captacion'] =  Carbon::now();;
+        }
+
         $cliente = Interviniente::find($request->cliente_id);
         $cliente->isapre;
         $cliente->region;

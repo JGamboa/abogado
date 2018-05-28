@@ -19,6 +19,7 @@ use App\Traits\OnSaveEmpresa;
  * @property date fecha_captacion
  * @property integer captador
  * @property string rol
+ * @property string anio_rol
  * @property integer materia_id
  * @property integer estadocaso_id
  * @property integer corte_id
@@ -44,6 +45,7 @@ class Caso extends Model
         'fecha_captacion',
         'captador',
         'rol',
+        'anio_rol',
         'materia_id',
         'estadocaso_id',
         'corte_id',
@@ -65,6 +67,7 @@ class Caso extends Model
         'fecha_captacion' => 'date',
         'captador' => 'integer',
         'rol' => 'string',
+        'anio_rol' => 'integer',
         'materia_id' => 'integer',
         'estadocaso_id' => 'integer',
         'corte_id' => 'integer',
@@ -81,10 +84,11 @@ class Caso extends Model
     public static $rules = [
         //'cliente' => 'json|required',
         //'contraparte' => 'json|required',
-        'fecha_recurso' => 'date',
+        'fecha_recurso' => 'date|nullable',
         'fecha_captacion' => 'date|required',
         'captador' => 'required',
-        'rol' => 'required|max:50',
+        'rol' => 'max:50|nullable',
+        'anio_rol' =>'integer|nullable',
         'materia_id' => 'required',
         'corte_id' => 'required',
         'tribunal' => 'required|max:30',

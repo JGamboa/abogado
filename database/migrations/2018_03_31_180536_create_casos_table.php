@@ -18,10 +18,10 @@ class CreatecasosTable extends Migration
             $table->integer('empresa_id')->unsigned();
             $table->json('cliente');
             $table->json('contraparte');
-            $table->date('fecha_recurso');
+            $table->date('fecha_recurso')->nullable();
             $table->date('fecha_captacion');
             $table->integer('captador')->unsigned()->required();
-            $table->string('rol', 15);
+            $table->string('rol', 15)->nullable();
             $table->integer('materia_id')->unsigned()->required();
             $table->integer('estadocaso_id')->unsigned()->required();
             $table->integer('corte_id')->unsigned()->required();
