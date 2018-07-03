@@ -16,6 +16,7 @@ use App\Models\Provincia;
 use App\Models\Sucursal;
 use App\Models\Empleado as Empleado;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class EmpresaController extends AppBaseController
 {
@@ -286,9 +287,15 @@ class EmpresaController extends AppBaseController
 
         if(count($empresas) == 1){
             $empresa = \App\Models\Empresa::find($empresas[0]->id);
-            \Auth::user()->asignarEmpresa($empresa);
+            Auth::user()->asignarEmpresa($empresa);
             Flash::success('Empresa seleccionada. '. $empresa->razon_social);
-            return redirect(route('home'));
+
+            if(Auth::user()->hasRole('CAPTADOR')){
+                return redirect(route('casos.create'));
+            }else{
+                return redirect(route('home'));
+            }
+
         }
 
         $empresas = $empresas->pluck('razon_social','id');

@@ -93,6 +93,8 @@ Route::resource('estadoscasos', 'EstadoCasoController');
 
 Route::resource('estadosMaterias', 'EstadoMateriaController');
 
+
+Route::get('casos/reporte', 'CasoController@reporte')->name('casos.reporte');
 Route::get('casos/search', 'CasoController@search')->name('casos.search');
 Route::get('uploads/files/{hash}/{name}', 'UploadController@get_file')->name('casos.ver-archivos');
 Route::get('casos/{caso}/uploaded_files', 'CasoController@uploaded_files')->name('casos.listar-archivos');

@@ -114,7 +114,18 @@
     <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
 </li>
 
-<li class="{{ Request::is('casos*') ? 'active' : '' }}">
-    <a href="{!! route('casos.index') !!}"><i class="fa fa-edit"></i><span>Casos</span></a>
+<li class="treeview {{ Request::is('casos*') ? 'active' : '' }}">
+    <a href="#"><i class="fa fa-edit"></i><span>Casos</span></a>
+
+
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('casos*') ? 'active' : '' }}">
+            <a href="{!! route('casos.index') !!}"><i class="fa fa-edit"></i><span>Inicio</span></a>
+        </li>
+
+        <li class="{{ Request::is('casos*') ? 'active' : '' }}">
+            <a href="{!! route('casos.reporte') !!}"><i class="fa fa-edit"></i><span>Reportes</span></a>
+        </li>
+    </ul>
 </li>
 

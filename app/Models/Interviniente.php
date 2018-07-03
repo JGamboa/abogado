@@ -85,7 +85,7 @@ class Interviniente extends Model
      * @var array
      */
     public static $rules = [
-        'rut' => 'max:10|cl_rut|required',
+        'rut' => 'max:12|cl_rut|required',
         'nombres' => 'max:100|required',
         'apellido_paterno' => 'max:70',
         'apellido_materno' => 'max:70',

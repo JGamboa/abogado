@@ -73,6 +73,8 @@ class IntervinienteController extends AppBaseController
     {
         $input = $request->all();
 
+        $input['rut'] = str_replace(".", "", $input['rut']);
+
         $interviniente = $this->intervinienteRepository->create($input);
 
         Flash::success('Interviniente saved successfully.');

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AppendEmpresa;
 use App\Traits\OnSaveEmpresa;
 
+use PHPExcel;
+use PHPExcel_IOFactory;
+
 /**
  * Class Caso
  * @package App\Models
@@ -184,6 +187,155 @@ class Caso extends Model
 
         return $caso->get();
 
+    }
+
+    public function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
+    public function getPYP(){
+       return $this->pyp == 1 ? 'OK' : 'PENDIENTE';
+    }
+
+    public static function buscar($request){
+        $casos = new Caso();
+
+        $array_cliente = [];
+        $array_contraparte = [];
+        $i = 0;
+
+        if($request->filled('rol')){
+            $casos = $casos->where('rol', $request->rol);
+        }
+
+        if($request->filled('anio_rol')){
+            $casos = $casos->where('anio_rol', $request->anio_rol);
+        }
+
+        if($request->filled('captador')){
+            $casos = $casos->where('captador', $request->captador);
+        }
+
+        if($request->filled('responsable_proceso')){
+            $casos = $casos->where('responsable_proceso', $request->responsable_proceso);
+        }
+
+        if($request->filled('corte_id')){
+            $casos = $casos->where('corte_id', $request->corte_id);
+        }
+
+        if($request->filled(['fecha_creacion_desde', 'fecha_creacion_hasta'])){
+            $casos = $casos->whereBetween('created_at', [$request->fecha_creacion_desde, $request->fecha_creacion_hasta]);
+        }
+
+        if($request->filled(['fecha_recurso_desde', 'fecha_recurso_hasta'])){
+            $casos = $casos->whereBetween('fecha_recurso', [$request->fecha_recurso_desde, $request->fecha_recurso_hasta]);
+        }
+
+        if($request->filled(['fecha_captacion_desde', 'fecha_captacion_hasta'])){
+            $casos = $casos->whereBetween('fecha_captacion', [$request->fecha_captacion_desde, $request->fecha_captacion_hasta]);
+        }
+
+        if($request->filled('rut')){
+            $array_contraparte[] = ['contraparte->rut', 'like', '%' . $request->rut . '%'];
+            $array_cliente[] = ['cliente->rut', 'like', '%' . $request->rut . '%'];
+            $i++;
+        }
+
+        if($request->filled('nombres')){
+            $array_contraparte[] = ['contraparte->nombres', 'like', '%' . $request->nombres . '%'];
+            $array_cliente[] = ['cliente->nombres', 'like', '%' . $request->nombres . '%'];
+            $i++;
+        }
+
+        if($request->filled('apellidopaterno')){
+            $array_contraparte[] = ['contraparte->apellidopaterno', 'like', '%' . $request->apellidopaterno . '%'];
+            $array_cliente[] = ['cliente->apellidopaterno', 'like', '%' . $request->apellidopaterno . '%'];
+            $i++;
+        }
+
+        if($request->filled('apellidomaterno')){
+            $array_contraparte[] = ['contraparte->apellidomaterno', 'like', '%' . $request->apellidomaterno . '%'];
+            $array_cliente[] = ['cliente->apellidomaterno', 'like', '%' . $request->apellidomaterno . '%'];
+            $i++;
+        }
+
+        if($i > 0){
+            $casos->where(function($query)  use ($array_contraparte, $array_cliente){
+                $query->where($array_contraparte)->orWhere($array_cliente);
+            });
+        }
+
+        return $casos->get();
+    }
+
+    public static function exportarExcel($casos){
+
+        $objPHPExcel = new PHPExcel();
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'NRO CASO')
+            ->setCellValue('B1', 'RUT CLIENTE')
+            ->setCellValue('C1', 'NOMBRE CLIENTE')
+            ->setCellValue('D1', 'APELLIDO PATERNO CLIENTE')
+            ->setCellValue('E1', 'APELLIDO MATERNO CLIENTE')
+            ->setCellValue('F1', 'RUT CONTRAPARTE')
+            ->setCellValue('G1', 'NOMBRE CONTRAPARTE')
+            ->setCellValue('H1', 'APELLIDO PATERNO CONTRAPARTE')
+            ->setCellValue('I1', 'APELLIDO MATERNO CONTRAPARTE')
+            ->setCellValue('J1', 'FECHA RECURSO')
+            ->setCellValue('K1', 'FECHA CAPTACION')
+            ->setCellValue('L1', 'CAPTADOR')
+            ->setCellValue('M1', 'ROL')
+            ->setCellValue('N1', 'MATERIA')
+            ->setCellValue('O1', 'ESTADO')
+            ->setCellValue('P1', 'CORTE')
+            ->setCellValue('Q1', 'TRIBUNAL')
+            ->setCellValue('R1', 'RESPONSABLE')
+            ->setCellValue('S1', 'PYP');
+
+
+        $row = 2;
+        foreach ($casos as $caso)
+        {
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $row, $caso->id);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $row, $caso->cliente->rut);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $row, $caso->cliente->nombres);
+            $objPHPExcel->getActiveSheet()->setCellValue('D' . $row, $caso->cliente->apellido_paterno);
+            $objPHPExcel->getActiveSheet()->setCellValue('E' . $row, $caso->cliente->apellido_materno);
+            $objPHPExcel->getActiveSheet()->setCellValue('F' . $row, $caso->contraparte->rut);
+            $objPHPExcel->getActiveSheet()->setCellValue('G' . $row, $caso->contraparte->nombres);
+            $objPHPExcel->getActiveSheet()->setCellValue('H' . $row, $caso->contraparte->apellido_paterno);
+            $objPHPExcel->getActiveSheet()->setCellValue('I' . $row, $caso->contraparte->apellido_materno);
+            $objPHPExcel->getActiveSheet()->setCellValue('J' . $row, $caso->fecha_recurso->format('d-m-Y'));
+            $objPHPExcel->getActiveSheet()->setCellValue('K' . $row, $caso->fecha_captacion->format('d-m-Y'));
+            $objPHPExcel->getActiveSheet()->setCellValue('L' . $row, $caso->datosCaptador->nombreCompleto);
+            $objPHPExcel->getActiveSheet()->setCellValue('M' . $row, $caso->rol . "-" . $caso->anio_rol);
+            $objPHPExcel->getActiveSheet()->setCellValue('N' . $row, $caso->materia->nombre);
+            $objPHPExcel->getActiveSheet()->setCellValue('O' . $row, $caso->estadocaso->nombre);
+            $objPHPExcel->getActiveSheet()->setCellValue('P' . $row, $caso->corte->nombre);
+            $objPHPExcel->getActiveSheet()->setCellValue('Q' . $row, $caso->tribunal);
+            $objPHPExcel->getActiveSheet()->setCellValue('R' . $row, $caso->datosResponsable->nombreCompleto);
+            $objPHPExcel->getActiveSheet()->setCellValue('S' . $row, $caso->getPYP());
+
+            /*
+            $objPHPExcel->getActiveSheet()->setCellValue('U' . $row, $caso->Pav_Ag);
+            $objPHPExcel->getActiveSheet()->setCellValue('V' . $row, $caso->Pav_Dp);
+            $objPHPExcel->getActiveSheet()->setCellValue('W' . $row, $caso->HNA);
+            $objPHPExcel->getActiveSheet()->setCellValue('X' . $row, $caso->BGM);
+            $objPHPExcel->getActiveSheet()->setCellValue('Y' . $row, $caso->key_symbols);
+            $objPHPExcel->getActiveSheet()->setCellValue('AB' . $row, $caso->EyeC);
+            */
+            $row++;
+        }
+
+        $filename = "Casos_". date("Y-m-d-H-i-s").".xls";
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$filename.'"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+        exit();
     }
 
 

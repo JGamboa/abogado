@@ -356,13 +356,16 @@ class CasoController extends AppBaseController
      */
     public function search(Request $request) {
 
+        $rut = $request['rut'];
+        $rut = str_replace(".", "", $rut);
+
         $constraints = [
             'casos.contraparte->nombres' => $request['nombres'],
-            'casos.contraparte->rut' => $request['rut'],
+            'casos.contraparte->rut' => $rut,
             'casos.contraparte->apellido_paterno' => $request['apellidopaterno'],
             'casos.contraparte->apellido_materno' => $request['apellidomaterno'],
             'casos.cliente->nombres' => $request['nombres'],
-            'casos.cliente->rut' => $request['rut'],
+            'casos.cliente->rut' => $rut,
             'casos.cliente->apellido_paterno' => $request['apellidopaterno'],
             'casos.cliente->apellido_materno' => $request['apellidomaterno'],
         ];
@@ -413,5 +416,23 @@ class CasoController extends AppBaseController
         $casos = $casos->where($array_contraparte)->orWhere($array_cliente);
 
         return $casos->paginate(10);
+    }
+
+    public function reporte(Request $request){
+
+        $empresa = Empresa::find(session('empresa_id'));
+        $empleados = $empresa->empleados->pluck('nombreCompleto', 'id');
+        $cortes = Corte::all()->pluck('nombre', 'id');
+
+        $casos = Caso::buscar($request);
+
+        if($request->filled('exportar')){
+            if($request->exportar == "excel"){
+                Caso::exportarExcel($casos);
+            }
+        }
+
+        return view('casos.reporte')->with(['casos'=>$casos, 'cortes'=>$cortes, 'empleados'=>$empleados]);
+
     }
 }
