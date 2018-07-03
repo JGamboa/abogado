@@ -22,6 +22,7 @@
 
             </div>
             <div class="clearfix">
+                <p class="pull-left">{{ $observacion->created_at->format('d/m/Y h:i:s') }}</p>
                 <p class="pull-right">{{ isset($observacion->empleado_id) ? $observacion->empleado->nombreCompleto : 'ADMINISTRADOR' }}</p>
             </div>
         @endforeach
