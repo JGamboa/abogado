@@ -16,7 +16,7 @@
             <div class="dz-message"><i class="fa fa-cloud-upload"></i><br>Drop files here to upload</div>
         </form>
 
-        <div class="box box-primary" style="margin-top:20px;">
+        <div class="box box-primary">
             <div class="box-body">
                 <ul class="files_container">
 
