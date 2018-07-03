@@ -14,18 +14,37 @@
         </h1>
     </section>
 
-        @foreach($caso->observaciones as $observacion)
-            <div class="box box-primary" style="margin-top:20px;">
-                <div class="box-body">
-                   <p> {{ $observacion->observacion }} </p>
-                </div>
+    @foreach($caso->observaciones as $observacion)
 
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="post-heading">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ isset($observacion->empleado_id) ? $observacion->empleado->nombreCompleto : 'ADMINISTRADOR' }}</h4></a>
+                                    <a href="#" class="anchor-time">{{ $observacion->created_at->format('d/m/Y h:i:s') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                        </div>
+                    </div>
+                </section>
+                <section class="post-body">
+                    <p>{{ $observacion->observacion }}</p>
+                </section>
             </div>
-            <div class="clearfix">
-                <p class="pull-left">{{ $observacion->created_at->format('d/m/Y h:i:s') }}</p>
-                <p class="pull-right">{{ isset($observacion->empleado_id) ? $observacion->empleado->nombreCompleto : 'ADMINISTRADOR' }}</p>
-            </div>
-        @endforeach
+        </div>
+
+    @endforeach
 
 
 </div>
@@ -67,6 +86,39 @@
     .modal-content {
         width: 500px;
         margin: 0 auto;
+    }
+
+    /*-- Bootstrap Override Style --*/
+
+
+    /*-- Content Style --*/
+    .post-footer-option li{
+        float:left;
+        margin-right:50px;
+        padding-bottom:15px;
+    }
+
+    .post-footer-option li a{
+        color:#AFB4BD;
+        font-weight:500;
+        font-size:1.3rem;
+    }
+
+    .photo-profile{
+        border:1px solid #DDD;
+    }
+
+    .anchor-username h4{
+        font-weight:bold;
+    }
+
+    .anchor-time{
+        color:#ADB2BB;
+        font-size:1.2rem;
+    }
+
+    .post-footer-comment-wrapper{
+        background-color:#F6F7F8;
     }
 </style>
 
