@@ -252,7 +252,7 @@ class CasoController extends AppBaseController
 
                 $upload = Upload::create([
                     "name" => $filename,
-                    "path" => $folder.DIRECTORY_SEPARATOR.$date_append.$filename,
+                    "path" => $date_append.$filename,
                     "extension" => pathinfo($filename, PATHINFO_EXTENSION),
                     "caption" => "",
                     "hash" => "",
@@ -434,5 +434,25 @@ class CasoController extends AppBaseController
 
         return view('casos.reporte')->with(['casos'=>$casos, 'cortes'=>$cortes, 'empleados'=>$empleados]);
 
+    }
+
+    public function delete_file()
+    {
+        $file_id = Input::get('file_id');
+
+        $upload = Upload::find($file_id);
+        if(isset($upload->id)) {
+            // Update Caption
+            $upload->delete();
+
+            return response()->json([
+                'status' => "success"
+            ]);
+        } else {
+            return response()->json([
+                'status' => "failure",
+                'message' => "Upload not found"
+            ]);
+        }
     }
 }

@@ -2,9 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Caso
-        </h1>
+        <h1>Caso {{ $caso->id }}</h1>
    </section>
    <div class="content">
        @include('adminlte-templates::common.errors')

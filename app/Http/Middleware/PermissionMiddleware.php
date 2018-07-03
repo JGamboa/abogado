@@ -17,6 +17,22 @@ class PermissionMiddleware {
 
         $route = Route::currentRouteName();
 
+        /****************************** GENERADOR *******************************/
+
+        if($route == "generator.builder"){
+            if (!Auth::user()->can('generador de modelo')) {
+                abort('401');
+            }
+        }
+
+        if($route == "generator.crear"){
+            if (!Auth::user()->can('crear modelo')) {
+                abort('401');
+            }
+        }
+
+        /****************************** GENERADOR *******************************/
+
         /****************************** EMPRESAS *******************************/
 
         if($route == "empresas.index" || $route == "empresas.show"){

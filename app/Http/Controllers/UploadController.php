@@ -190,9 +190,11 @@ class UploadController extends AppBaseController
         }
 
             $path = $upload->path;
+            $folder = storage_path('uploads');
 
-            if(!File::exists($path))
+            if(!File::exists($folder.DIRECTORY_SEPARATOR.$path))
                 abort(404);
+
 
             // Check if thumbnail
             $size = Input::get('s');
@@ -211,12 +213,11 @@ class UploadController extends AppBaseController
                 }*/
             }
 
-            $file = File::get($path);
-            $type = File::mimeType($path);
-            //$response->header("Content-Type", "application/vnd.google-earth.kmz");
+            $file = File::get($folder.DIRECTORY_SEPARATOR.$path);
+            $type = File::mimeType($folder.DIRECTORY_SEPARATOR.$path);
             $download = Input::get('download');
             if(isset($download)) {
-                return response()->download($path, $upload->name);
+                return response()->download($folder.DIRECTORY_SEPARATOR.$path, $upload->name);
             } else {
                 $response = FacadeResponse::make($file, 200);
                 $response->header("Content-Type", $type);

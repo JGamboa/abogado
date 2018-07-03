@@ -69,9 +69,9 @@
                 </div><!--.row-->
             </div>
             <div class="modal-footer">
-                <a class="btn btn-success" id="downFileBtn" href="">Download</a>
-                <button type="button" class="btn btn-danger" id="delFileBtn">Delete</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-success" id="downFileBtn" href="">Descargar</a>
+                <button type="button" class="btn btn-danger" id="delFileBtn">Borrar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -156,9 +156,9 @@
 
 
             $("#EditFileModal #delFileBtn").on("click", function() {
-                if(confirm("Delete image "+$(".file-info-form input[name=filename]").val()+" ?")) {
+                if(confirm("Borrar imagen "+$(".file-info-form input[name=filename]").val()+" ?")) {
                     $.ajax({
-                        url: "{{ url(config('laraadmin.adminRoute') . '/uploads_delete_file') }}",
+                        url: bsurl + '{{   '/casos/delete_file' }}',
                         method: 'POST',
                         data: $("form.file-info-form").serialize(),
                         success: function( data ) {
@@ -207,7 +207,7 @@
                         break;
                 }
             }
-            return '<li><a class="fm_file_sel" data-toggle="tooltip" data-placement="top" title="'+upload.name+'" upload=\''+JSON.stringify(upload)+'\'>'+image+'</a></li>';
+            return '<li><a class="fm_file_sel" data-toggle="tooltip" data-placement="top" title="'+upload.name+'" upload=\''+JSON.stringify(upload)+'\'> '+image+upload.name+'</a></li>';
         }
     </script>
 @endpush

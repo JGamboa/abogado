@@ -24,6 +24,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $permission = Permission::create(['name'=> 'borrar casos']);
         $permission = Permission::create(['name'=> 'comentar casos']);
         $permission = Permission::create(['name'=> 'subir archivos casos']);
+        $permission = Permission::create(['name'=> 'borrar archivos casos']);
         $permission = Permission::create(['name'=> 'ver archivos casos']);
         $permission = Permission::create(['name'=> 'ver reporte casos']);
 

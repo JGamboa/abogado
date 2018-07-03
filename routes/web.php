@@ -31,11 +31,11 @@ Route::get('/home', 'HomeController@index');
 */
 Route::group(['middleware' => ['auth', 'has_permission']], function() {
 
-Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
+Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('generator.builder');
 
 Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
 
-Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate');
+Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate')->name('generator.create');
 
 
 Route::resource('pais', 'PaisController');
@@ -94,6 +94,7 @@ Route::resource('estadoscasos', 'EstadoCasoController');
 Route::resource('estadosMaterias', 'EstadoMateriaController');
 
 
+Route::post('casos/delete_file', 'CasoController@delete_file')->name('casos.borrar-archivo');
 Route::get('casos/reporte', 'CasoController@reporte')->name('casos.reporte');
 Route::get('casos/search', 'CasoController@search')->name('casos.search');
 Route::get('uploads/files/{hash}/{name}', 'UploadController@get_file')->name('casos.ver-archivos');
