@@ -119,6 +119,12 @@ class PermissionMiddleware {
             }
         }
 
+        if($route == "casos.reporte"){
+            if (!Auth::user()->can('ver reporte casos')) {
+                abort('401');
+            }
+        }
+
         if($route == "api.observacionesCasos.create"){
             if (!Auth::user()->can('comentar casos')) {
                 abort('401');

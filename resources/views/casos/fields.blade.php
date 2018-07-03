@@ -217,6 +217,19 @@
     $( document ).ready(function() {
         limpiar();
 
+        @if(!isset($caso))
+        $('#corte_id').change(function(){
+
+            if($('#tribunal').val() == ""){
+                var combo = document.getElementById("corte_id");
+                var selected = combo.options[combo.selectedIndex].text;
+                $('#tribunal').val(selected);
+            }
+
+        });
+
+        @endif
+
         $('#materia_id').change(function(){
             checkEstadoMateria(this.value);
         });

@@ -2,6 +2,7 @@
 <table class="table table-responsive" id="casos-table" style="font-size: 12px;">
     <thead>
         <tr>
+            <th>Nro</th>
             <th>Cliente</th>
             <th>Contraparte</th>
             <th>Fecha Recurso</th>
@@ -21,6 +22,7 @@
     @foreach($casos as $caso)
 
         <tr>
+            <td><a target="_blank" href="{!! route('casos.show', [$caso->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a></td>
             <td>{!! isset($caso->cliente->nombres) ? $caso->getNombreCompleto($caso->cliente) : null !!}</td>
             <td>{!! isset($caso->contraparte->nombres) ? $caso->getNombreCompleto($caso->contraparte) : null !!}</td>
             <td>{!! $caso->fecha_recurso->format('d-m-Y') !!}</td>
