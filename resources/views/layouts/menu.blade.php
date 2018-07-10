@@ -37,6 +37,8 @@
     </ul>
 </li>
 
+
+@if(\Auth::user()->isSuperAdmin())
 <li class="treeview">
     <a href="#">
         <i class="fa fa-folder"></i>  <span>Generales</span>
@@ -124,7 +126,7 @@
     </ul>
 </li>
 
-@if(\Auth::user()->isSuperAdmin())
+
 <li class="{{ Request::is('generator_builder') ? 'active' : '' }}">
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>
