@@ -18,6 +18,25 @@
 </li>
 
 
+<li class="{{ Request::is('intervinientes*') ? 'active' : '' }}">
+    <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
+</li>
+
+<li class="treeview {{ Request::is('casos*') ? 'active' : '' }}">
+    <a href="#"><i class="fa fa-edit"></i><span>Casos</span></a>
+
+
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('casos*') ? 'active' : '' }}">
+            <a href="{!! route('casos.index') !!}"><i class="fa fa-edit"></i><span>Inicio</span></a>
+        </li>
+
+        <li class="{{ Request::is('casos*') ? 'active' : '' }}">
+            <a href="{!! route('casos.reporte') !!}"><i class="fa fa-edit"></i><span>Reportes</span></a>
+        </li>
+    </ul>
+</li>
+
 <li class="treeview">
     <a href="#">
         <i class="fa fa-folder"></i>  <span>Generales</span>
@@ -70,6 +89,14 @@
 
             </ul>
         </li><!-- /.second level-->
+
+        <li class="{{ Request::is('isapres*') ? 'active' : '' }}">
+            <a href="{!! route('isapres.index') !!}"><i class="fa fa-edit"></i><span>Isapres</span></a>
+        </li>
+
+        <li class="{{ Request::is('cortes*') ? 'active' : '' }}">
+            <a href="{!! route('cortes.index') !!}"><i class="fa fa-edit"></i><span>Cortes</span></a>
+        </li>
     </ul>
 </li>
 
@@ -90,42 +117,15 @@
         <li class="{{ Request::is('empleados*') ? 'active' : '' }}">
             <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
         </li>
+
+        <li class="{{ Request::is('admin') ? 'active' : '' }}">
+            <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
+        </li>
     </ul>
 </li>
 
 
 <li class="{{ Request::is('generator_builder') ? 'active' : '' }}">
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
-</li>
-
-<li class="{{ Request::is('admin') ? 'active' : '' }}">
-    <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
-</li>
-
-<li class="{{ Request::is('isapres*') ? 'active' : '' }}">
-    <a href="{!! route('isapres.index') !!}"><i class="fa fa-edit"></i><span>Isapres</span></a>
-</li>
-
-<li class="{{ Request::is('cortes*') ? 'active' : '' }}">
-    <a href="{!! route('cortes.index') !!}"><i class="fa fa-edit"></i><span>Cortes</span></a>
-</li>
-
-<li class="{{ Request::is('intervinientes*') ? 'active' : '' }}">
-    <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
-</li>
-
-<li class="treeview {{ Request::is('casos*') ? 'active' : '' }}">
-    <a href="#"><i class="fa fa-edit"></i><span>Casos</span></a>
-
-
-    <ul class="treeview-menu">
-        <li class="{{ Request::is('casos*') ? 'active' : '' }}">
-            <a href="{!! route('casos.index') !!}"><i class="fa fa-edit"></i><span>Inicio</span></a>
-        </li>
-
-        <li class="{{ Request::is('casos*') ? 'active' : '' }}">
-            <a href="{!! route('casos.reporte') !!}"><i class="fa fa-edit"></i><span>Reportes</span></a>
-        </li>
-    </ul>
 </li>
 
