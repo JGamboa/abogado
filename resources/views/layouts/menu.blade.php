@@ -124,8 +124,8 @@
     </ul>
 </li>
 
-
+@if(\Auth::user()->isSuperAdmin())
 <li class="{{ Request::is('generator_builder') ? 'active' : '' }}">
     <a href="generator_builder"><i class="fa fa-user"></i><span>Generator</span></a>
 </li>
-
+@endif
