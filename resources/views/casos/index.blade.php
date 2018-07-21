@@ -15,23 +15,72 @@
 
         <div class="clearfix"></div>
 
-        <form method="GET" action="{{ route('casos.search') }}">
-            @component('layouts.search', ['title' => 'Buscar'])
-                @component('layouts.two-cols-search-row',
-                    ['items' => ['NOMBRES', 'RUT', 'APELLIDO PATERNO', 'APELLIDO MATERNO'],
-                    'oldVals' => [
-                                  isset($searchingVals) ? $searchingVals['casos.contraparte->nombres'] : '',
-                                  isset($searchingVals) ? $searchingVals['casos.contraparte->rut'] : '',
-                                  isset($searchingVals) ? $searchingVals['casos.contraparte->apellido_paterno'] : '',
-                                  isset($searchingVals) ? $searchingVals['casos.contraparte->apellido_materno'] : ''
-                                 ]
-                    ])
-                @endcomponent
-            @endcomponent
-        </form>
+        {!! Form::open(['route' => 'casos.index', 'method'=>'get']) !!}
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Filtros</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('nombres', 'Nombres:') !!}
+                    {!! Form::text('nombres', null, ['class' => 'form-control', 'placeholder'=>'Nombres']) !!}
+                </div>
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('apellidomaterno', 'Apellido Paterno:') !!}
+                    {!! Form::text('apellidopaterno', null, ['class' => 'form-control', 'placeholder'=>'Apellido Paterno']) !!}
+                </div>
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('apellidomaterno', 'Apellido Materno:') !!}
+                    {!! Form::text('apellidomaterno', null, ['class' => 'form-control', 'placeholder'=>'Apellido Materno']) !!}
+                </div>
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('rut', 'Rut:') !!}
+                    {!! Form::text('rut', null, ['class' => 'form-control', 'placeholder'=>'Rut']) !!}
+                </div>
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('rol', 'Rol:') !!}
+                    {!! Form::text('rol', null, ['class' => 'form-control', 'placeholder'=>'Rol']) !!}
+                </div>
+
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('anio_rol', 'Año Rol:') !!}
+                    {!! Form::text('anio_rol', null, ['class' => 'form-control', 'placeholder'=>'Año Rol']) !!}
+                </div>
+
+                <div class="col-md-4 form-group">
+                    {!! Form::label('corte_id', 'Corte:') !!}
+                    {!! Form::select('corte_id', $cortes, null, ['id'=>'corte_id','class' => 'form-control', 'placeholder'=>'Seleccionar Corte']) !!}
+                </div>
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    Buscar
+                </button>
+            </div>
+
+
+        </div>
+
+        {!! Form::close() !!}
 
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body" style="overflow:auto">
 
                     @include('casos.table')
             </div>

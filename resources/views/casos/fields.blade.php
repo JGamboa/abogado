@@ -166,9 +166,15 @@
 
             <!-- Pyp Field -->
             <div class="form-group col-sm-6">
-                {!! Form::label('pyp', 'Pyp:') !!}
+                {!! Form::label('pyp', 'AC:') !!}
                 {!! Form::checkbox('pyp', '1', null) !!}
             </div>
+
+                <!-- Pyp Field -->
+                <div class="form-group col-sm-6">
+                    {!! Form::label('autorizacion_documentos', 'AD:') !!}
+                    {!! Form::checkbox('autorizacion_documentos', '1', null) !!}
+                </div>
 
             <!-- Submit Field -->
             <div class="form-group col-sm-12">

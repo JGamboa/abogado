@@ -138,8 +138,14 @@
 
             <!-- Pyp Field -->
             <div class="form-group col-sm-6">
-                {!! Form::label('pyp', 'Pyp:') !!}
+                {!! Form::label('pyp', 'AC:') !!}
                 {!! Form::text('pyp', isset($caso->pyp) ? $caso->getPYP() : null, ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
+            <!-- autorizacion_documentos Field -->
+            <div class="form-group col-sm-6">
+                {!! Form::label('autorizacion_documentos', 'AD:') !!}
+                {!! Form::text('autorizacion_documentos', $caso->getAutorizacionDocumentos(), ['class' => 'form-control', 'disabled']) !!}
             </div>
 
         </div>

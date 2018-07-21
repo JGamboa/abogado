@@ -43,8 +43,8 @@ class CasoController extends AppBaseController
 
         $this->casoRepository->pushCriteria(new RequestCriteria($request));
         $estados = EstadoCaso::all();
-        $cortes = Corte::all();
-        $casos = $this->casoRepository->paginate(10);
+        $cortes = Corte::all()->pluck('nombre', 'id');
+        $casos = Caso::buscar($request)->paginate(10);
 
         return view('casos.index')
             ->with(['casos'=> $casos,
@@ -424,7 +424,7 @@ class CasoController extends AppBaseController
         $empleados = $empresa->empleados->pluck('nombreCompleto', 'id');
         $cortes = Corte::all()->pluck('nombre', 'id');
 
-        $casos = Caso::buscar($request);
+        $casos = Caso::buscar($request)->get();
 
         if($request->filled('exportar')){
             if($request->exportar == "excel"){

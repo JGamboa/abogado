@@ -29,6 +29,7 @@ use PHPExcel_IOFactory;
  * @property string tribunal
  * @property integer responsable_proceso
  * @property boolean pyp
+ * @property boolean autorizacion_documentos
  */
 class Caso extends Model
 {
@@ -54,7 +55,8 @@ class Caso extends Model
         'corte_id',
         'tribunal',
         'responsable_proceso',
-        'pyp'
+        'pyp',
+        'autorizacion_documentos',
     ];
 
     /**
@@ -76,7 +78,8 @@ class Caso extends Model
         'corte_id' => 'integer',
         'tribunal' => 'string',
         'responsable_proceso' => 'integer',
-        'pyp' => 'boolean'
+        'pyp' => 'boolean',
+        'autorizacion_documentos' => 'boolean',
     ];
 
     /**
@@ -95,7 +98,8 @@ class Caso extends Model
         'materia_id' => 'required',
         'corte_id' => 'required',
         'tribunal' => 'required|max:30',
-        'pyp' => 'boolean'
+        'pyp' => 'boolean',
+        'autorizacion_documentos' => 'boolean',
     ];
 
     /**
@@ -197,6 +201,10 @@ class Caso extends Model
        return $this->pyp == 1 ? 'OK' : 'PENDIENTE';
     }
 
+    public function getAutorizacionDocumentos(){
+        return $this->autorizacion_documentos == 1 ? 'OK' : 'PENDIENTE';
+    }
+
     public static function buscar($request){
         $casos = new Caso();
 
@@ -266,7 +274,7 @@ class Caso extends Model
             });
         }
 
-        return $casos->get();
+        return $casos;
     }
 
     public static function exportarExcel($casos){
@@ -292,7 +300,8 @@ class Caso extends Model
             ->setCellValue('P1', 'CORTE')
             ->setCellValue('Q1', 'TRIBUNAL')
             ->setCellValue('R1', 'RESPONSABLE')
-            ->setCellValue('S1', 'PYP');
+            ->setCellValue('S1', 'AC')
+            ->setCellValue('T1', 'AD');;
 
 
         $row = 2;
@@ -317,6 +326,7 @@ class Caso extends Model
             $objPHPExcel->getActiveSheet()->setCellValue('Q' . $row, $caso->tribunal);
             $objPHPExcel->getActiveSheet()->setCellValue('R' . $row, $caso->datosResponsable->nombreCompleto);
             $objPHPExcel->getActiveSheet()->setCellValue('S' . $row, $caso->getPYP());
+            $objPHPExcel->getActiveSheet()->setCellValue('T' . $row, $caso->getAutorizacionDocumentos());
 
             /*
             $objPHPExcel->getActiveSheet()->setCellValue('U' . $row, $caso->Pav_Ag);

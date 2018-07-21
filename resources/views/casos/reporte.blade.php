@@ -147,7 +147,8 @@
                     <th>Corte</th>
                     <th>Tribunal</th>
                     <th>Responsable Proceso</th>
-                    <th>Pyp</th>
+                    <th>AC</th>
+                    <th>AD</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -169,7 +170,7 @@
                         </td>
                         <td>{!! $caso->datosResponsable->nombreCompleto !!}</td>
                         <td>{!! $caso->pyp == 1 ? 'OK' : '<button type="button" class="btn btn-primary btn-xs" style="background-color:red">PENDIENTE</button>' !!}</td>
-
+                        <td>{!! $caso->autorizacion_documentos == 1 ? 'OK' : '<button type="button" class="btn btn-primary btn-xs" style="background-color:red">PENDIENTE</button>' !!}</td>
                     </tr>
                 @endforeach
                 </tbody>
