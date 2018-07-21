@@ -75,12 +75,30 @@
 
                        <!-- Submit Field -->
                        <div class="form-group col-sm-12">
-                           {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                           {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
                            <a href="{!! route('empresas.index') !!}" class="btn btn-default">Cancel</a>
                        </div>
 
                        @include('partials.localidades')
 
+
+                   {!! Form::close() !!}
+               </div>
+           </div>
+       </div>
+
+       <div class="box box-primary">
+           <div class="box-body">
+               <div class="row">
+                   {!! Form::model($empresa, ['route' => ['empresas.subir-logotipo'], 'method' => 'patch', 'files' => true]) !!}
+                    <div class="form-group col-sm-12">
+                        {!! Form::file('logotipo') !!}
+                    </div>
+                   <!-- Submit Field -->
+                   <div class="form-group col-sm-12">
+                       {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                       <a href="{!! route('empresas.index') !!}" class="btn btn-default">Cancel</a>
+                   </div>
 
                    {!! Form::close() !!}
                </div>

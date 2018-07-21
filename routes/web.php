@@ -58,6 +58,7 @@ Route::get('regiones/deleted', 'RegionController@deleted')->name('regiones.delet
 Route::resource('regiones', 'RegionController');
 
 
+Route::patch('empresas/subirLogotipo', 'EmpresaController@subirLogotipo')->name('empresas.subir-logotipo');
 Route::post('empresas/session', 'EmpresaController@session')->name('empresas.session');
 Route::get('empresas/seleccionar', 'EmpresaController@seleccionar')->name('empresas.seleccionar');
 Route::get('empresas/sucursales/{empresa}', 'EmpresaController@showSucursales')->name('empresas.showSucursales');

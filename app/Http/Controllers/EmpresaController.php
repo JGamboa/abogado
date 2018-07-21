@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\DataTables\EmpresaDataTable;
 use App\Http\Requests;
@@ -309,6 +310,30 @@ class EmpresaController extends AppBaseController
         \Auth::user()->asignarEmpresa($empresa);
         Flash::success('Empresa seleccionada. '. $empresa->razon_social);
         return redirect(route('empresas.index'));
+    }
+
+    public function subirLogotipo(Request $request){
+        $request->validate([
+            'logotipo' => 'required|image',
+        ]);
+
+        $empresa = $this->empresaRepository->findWithoutFail(session('empresa_id'));
+
+        if (empty($empresa)) {
+            Flash::error('Empresa no encontrada');
+
+            return redirect(route('empresas.index'));
+        }
+
+        $path = $request->file('logotipo')->store($empresa->id, ['disk' => 'public']);
+
+        $empresa->logotipo = $path;
+        $empresa->update();
+        Flash::success('Logotipo Actualizado');
+
+        return redirect(route('empresas.index'));
+
+
     }
 
 }

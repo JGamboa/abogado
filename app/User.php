@@ -7,6 +7,7 @@ use Backpack\CRUD\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Empresa;
 use App\Models\Empleado;
 
 class User extends Authenticatable
@@ -41,7 +42,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Empresa', 'empleados');
     }
 
-    public function isSuperAdmin(){
+    /**
+     * @return The empresa in session
+     */
+    public function empresaSession()
+    {
+            return Empresa::find(session('empresa_id'));
+    }
+
+    public function isSuperAdmin()
+    {
         $roles_users = \DB::table('role_users')->select('role_id')->where('role_id', 1)->where('user_id', Auth::user()->id)->get();
         if(count($roles_users)>0){
             return true;
@@ -50,7 +60,8 @@ class User extends Authenticatable
         }
     }
 
-    public function asignarEmpresa($empresa){
+    public function asignarEmpresa($empresa)
+    {
         session(['empresa_id' => $empresa->id]);
         session(['empresa_razon_social' => $empresa->razon_social]);
         session(['empresa_rut' => $empresa->rut]);
@@ -60,7 +71,8 @@ class User extends Authenticatable
     /**
     retorna la instancia de empleado del usuario indicado en la empresa seleccionada
      */
-    public function empleado(){
+    public function empleado()
+    {
         return $this->hasOne('App\Models\Empleado')->where('empleados.empresa_id', session('empresa_id'));
     }
 }

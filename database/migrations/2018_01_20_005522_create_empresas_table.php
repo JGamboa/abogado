@@ -21,7 +21,7 @@ class CreateEmpresasTable extends Migration
             $table->string('direccion', 70)->required();
             $table->integer('comunas_id')->unsigned()->required();
             $table->integer('provincias_id')->unsigned()->required();
-            $table->string('logotipo', 45)->nullable();
+            $table->string('logotipo', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('comunas_id')->references('id')->on('comunas');

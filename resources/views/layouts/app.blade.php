@@ -45,7 +45,11 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a class="logo"><img width="100" src="https://image.ibb.co/eauMYy/Logo_Wings_nuevo.jpg" alt="Logo_Wings_nuevo" border="0"></a>
+            @if(null !==(session('empresa_id')))
+                <a class="logo"><img width="150" src="{{ asset('storage/' . \Auth::user()->empresaSession()->logotipo) }}" alt="Logo_Wings_nuevo" border="0"></a>
+            @else
+                <a class="logo"><img width="100" src="https://image.ibb.co/eauMYy/Logo_Wings_nuevo.jpg" alt="Logo_Wings_nuevo" border="0"></a>
+            @endif
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
