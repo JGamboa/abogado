@@ -111,7 +111,7 @@
                    @if($empresa->logotipo !== null)
                         <img src="{{ asset('storage/' . $empresa->logotipo) }}" width="500">
                     @endif
-                   
+
                    {!! Form::close() !!}
                </div>
            </div>

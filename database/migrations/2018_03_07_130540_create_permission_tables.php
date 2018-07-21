@@ -16,7 +16,7 @@ class CreatePermissionTables extends Migration
 
         Schema::create($config['roles'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('empresa_id')->unsigned()->nullable();
 
             $table->timestamps();
@@ -24,6 +24,9 @@ class CreatePermissionTables extends Migration
             $table->foreign('empresa_id')
                 ->references('id')
                 ->on('empresas');
+
+            $table->unique(['name', 'empresa_id']);
+
         });
 
         Schema::create($config['permissions'], function (Blueprint $table) {

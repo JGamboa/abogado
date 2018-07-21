@@ -65,6 +65,12 @@ class PermissionMiddleware {
             }
         }
 
+        if($route == "empresas.subir-logotipo"){
+            if (!Auth::user()->can('subir logotipo empresas')) {
+                abort('401');
+            }
+        }
+
         /****************************** EMPRESAS *******************************/
 
         /****************************** SUCURSALES *******************************/

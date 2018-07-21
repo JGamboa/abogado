@@ -17,13 +17,17 @@ class RoleCrudController extends CrudController
 
         $this->crud->setColumns([
             [
-                'name'  => 'name',
-                'label' => trans('backpack::permissionmanager.name'),
-                'type'  => 'text',
+                'label' => 'Empresa',
+                'type' => 'select',
+                'name'  => 'empresa',
+                'entity' => 'empresa',
+                'attribute' => 'razon_social',
+                'model' => 'App\Models\Empresa',
+
             ],
             [
-                'name'  => 'empresa_id',
-                'label' => 'Empresa',
+                'name'  => 'name',
+                'label' => trans('backpack::permissionmanager.name'),
                 'type'  => 'text',
             ],
             [
@@ -50,6 +54,7 @@ class RoleCrudController extends CrudController
             'type'  => 'hidden',
             'value' => session('empresa_id'),
         ]);
+
         $this->crud->addField([
             'label'     => ucfirst(trans('backpack::permissionmanager.permission_plural')),
             'type'      => 'checklist',

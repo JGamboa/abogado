@@ -17,6 +17,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $permission = Permission::create(['name'=> 'ver empresas']);
         $permission = Permission::create(['name'=> 'editar empresas']);
         $permission = Permission::create(['name'=> 'borrar empresas']);
+        $permission = Permission::create(['name'=> 'subir logotipo empresas']);
 
         $permission = Permission::create(['name'=> 'crear casos']);
         $permission = Permission::create(['name'=> 'ver casos']);
