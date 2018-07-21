@@ -70,7 +70,7 @@
                        <!-- Logotipo Field -->
                        <div class="form-group col-sm-6">
                            {!! Form::label('logotipo', 'Logotipo:') !!}
-                           {!! Form::text('logotipo', null, ['class' => 'form-control']) !!}
+                           {!! Form::text('logotipo', null, ['class' => 'form-control', 'disabled']) !!}
                        </div>
 
                        <!-- Submit Field -->
@@ -87,6 +87,14 @@
            </div>
        </div>
 
+       <div class="row">
+           <section class="content-header form-group">
+               <h1>
+                   Subir Logotipo
+               </h1>
+           </section>
+       </div>
+
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
@@ -100,6 +108,10 @@
                        <a href="{!! route('empresas.index') !!}" class="btn btn-default">Cancel</a>
                    </div>
 
+                   @if($empresa->logotipo !== null)
+                        <img src="{{ asset('storage/' . $empresa->logotipo) }}" width="500">
+                    @endif
+                   
                    {!! Form::close() !!}
                </div>
            </div>
