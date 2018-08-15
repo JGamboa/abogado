@@ -17,6 +17,10 @@ use App\Models\EstadoCaso;
 use App\Models\Corte;
 use App\Models\Interviniente;
 use App\Models\Caso;
+use App\Models\Region;
+use App\Models\Comuna;
+use App\Models\Provincia;
+use App\Models\Isapre;
 use Illuminate\Support\Facades\Input;
 use File;
 use Carbon\Carbon;
@@ -66,12 +70,21 @@ class CasoController extends AppBaseController
         $cortes = Corte::all()->pluck('nombre', 'id');
         $texto = Materia::jsonMateriasEstados();
 
+        $regiones = Region::pluck('nombre', 'id')->all();
+        $provincias = Provincia::pluck('nombre', 'id')->all();
+        $comunas = Comuna::pluck('nombre', 'id')->all();
+        $isapres =  Isapre::pluck('nombre', 'id')->all();
+
 
         return view('casos.create', ['empleados' => $empleados,
                                             'materias' => $materias,
                                             'estados' => $estados,
                                             'cortes' => $cortes,
-                                            'json' => $texto]);
+                                            'json' => $texto,
+                                            'regiones'=>$regiones,
+                                            'comunas'=>$comunas,
+                                            'provincias' =>$provincias,
+                                            'isapres'=>$isapres]);
     }
 
     /**

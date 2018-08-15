@@ -245,4 +245,23 @@ class IntervinienteController extends AppBaseController
 
         return $this->sendResponse($interviniente->toArray(), 'Interviniente retrieved successfully');
     }
+
+    /**
+     * Store a newly created Empresa in storage.
+     * POST /empresas
+     *
+     * @param CreateEmpresaAPIRequest $request
+     *
+     * @return Response
+     */
+    public function storeAjax(CreateIntervinienteRequest $request)
+    {
+        $input = $request->all();
+
+        $input['rut'] = str_replace(".", "", $input['rut']);
+
+        $interviniente = $this->intervinienteRepository->create($input);
+
+        return $this->sendResponse($interviniente->toArray(), 'Interviente creado exitosamente');
+    }
 }

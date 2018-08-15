@@ -11,11 +11,30 @@
     <div class="content">
 
         <div class="clearfix"></div>
-        @include('adminlte-templates::common.errors')
+
+        <div class="box box-default collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Interviniente</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="box-body" style="display:none;">
+                <div class="row">
+                    {!! Form::open(['route' => 'intervinientes.store', 'id'=>'crearInterviniente-form']) !!}
+
+                    @include('intervinientes.fields')
+
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+
         {!! Form::open(['route' => 'casos.store']) !!}
 
             @include('casos.fields')
-
 
     </div>
 @endsection

@@ -1,4 +1,5 @@
 <script src="{{ URL::asset('js/dropzone.min.js') }}"></script>
+
 <div class="box box-primary">
     <div class="box-body">
         <div class="row">
@@ -202,6 +203,44 @@
 
 @push('custom-scripts')
 <script type="text/javascript">
+
+    $("#crearInterviniente-form").submit(function(e){
+        e.preventDefault();
+
+        $.ajax({
+
+            type: 'POST',
+            url: '{{ route("intervinientes.storeAjax") }}',
+            data: $('#crearInterviniente-form').serialize(),
+            dataType: 'json',
+            success: function (data) {
+
+                if(data.success){
+                    $("#nombres").val("");
+                    $("#apellido_paterno").val("");
+                    $("#apellido_materno").val("");
+                    $("#direccion").val("");
+                    $("#rut").val("");
+                    $("#oficio").val("");
+                    $("#telefonos").val("");
+                    $("#correo_electronico").val("");
+                    $("#isapre_id").val("1");
+                    $("#observacion").val("");
+                    $("#region_id").val("");
+                    $("#provincia_id").val("");
+                    $("#comuna_id").val("");
+                    alert(data.message);
+                }
+
+
+            },
+            error: function (data) {
+                alert('No fue posible crear el interviniente');
+            }
+        });
+    });
+
+
     function limpiar(){
         $("#estadocaso_id option").hide();
         $('#estadocaso_id option[value=""]').show();

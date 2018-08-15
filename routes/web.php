@@ -88,6 +88,7 @@ Route::resource('cortes', 'CorteController');
 
 Route::get('intervinientes/showJson', 'IntervinienteController@showJson')->name('intervinientes.showJson');
 Route::get('intervinientes/search', 'IntervinienteController@search')->name('intervinientes.search');
+Route::post('intervinientes/storeAjax', 'IntervinienteController@storeAjax')->name('intervinientes.storeAjax');
 Route::resource('intervinientes', 'IntervinienteController');
 
 Route::resource('estadoscasos', 'EstadoCasoController');
