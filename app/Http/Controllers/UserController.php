@@ -29,7 +29,7 @@ class UserController extends AppBaseController
 
             $user = Auth::user();
 
-            if($user->avatar == "default.jpg"){
+            if($user->avatar != "default.jpg"){
                unlink(storage_path('app/public/avatars'. $user->avatar));
             }
 
