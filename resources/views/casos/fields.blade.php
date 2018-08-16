@@ -1,5 +1,3 @@
-<script src="{{ URL::asset('js/dropzone.min.js') }}"></script>
-
 <div class="box box-primary">
     <div class="box-body">
         <div class="row">

@@ -12,6 +12,10 @@
 
         <div class="clearfix"></div>
 
+        @include('flash::message')
+
+        <div class="clearfix"></div>
+
         <div class="box box-default collapsed-box">
             <div class="box-header with-border">
                 <h3 class="box-title">Interviniente</h3>

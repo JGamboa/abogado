@@ -16,6 +16,9 @@
 
     @foreach($caso->observaciones as $observacion)
 
+        @php
+         $adm = \App\User::find(1);
+        @endphp
         <div class="panel panel-default">
             <div class="panel-body">
                 <section class="post-heading">
@@ -24,7 +27,7 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#">
-                                        <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                        <img class="media-object photo-profile" src="{{ isset($observacion->empleado_id) ?  asset('storage/avatars/' . $observacion->empleado()->user()->avatar) : asset('storage/avatars/' . $adm->avatar) }}" width="40" height="40" alt="...">
                                     </a>
                                 </div>
                                 <div class="media-body">

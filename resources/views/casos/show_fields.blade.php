@@ -151,3 +151,14 @@
         </div>
     </div>
 </div>
+
+@if(isset($caso))
+    @include('casos.upload')
+@endif
+
+
+@if(isset($caso))
+    @include('casos.observaciones')
+@endif
+
+<div class="clearfix"></div>

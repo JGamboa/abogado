@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <!-- Main content -->
     <section class="content">
         <div class="clearfix"></div>
@@ -26,7 +25,5 @@
             @include('sucursales.table')
         </div>
     </section>
-    <!-- /.content -->
-    </div>
 @endsection
 

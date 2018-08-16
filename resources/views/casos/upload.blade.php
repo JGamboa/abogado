@@ -79,6 +79,7 @@
 
 
 @push('custom-scripts')
+    <script src="{{ URL::asset('js/dropzone.min.js') }}"></script>
     <script>
         var bsurl = '<?php echo ENV('APP_URL');?>';
         var fm_dropzone_main = null;
