@@ -28,6 +28,11 @@ class UserController extends AppBaseController
             Image::make($avatar)->resize(300, 300)->save( $folder . '/avatars/' . $filename );
 
             $user = Auth::user();
+
+            if($user->avatar == "default.jpg"){
+               unlink(storage_path('app/public/avatars'. $user->avatar));
+            }
+
             $user->avatar = $filename;
             $user->save();
         }
