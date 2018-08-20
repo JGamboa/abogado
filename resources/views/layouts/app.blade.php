@@ -46,7 +46,7 @@
 
             <!-- Logo -->
             @if(null !==(session('empresa_id')) and null !== \Auth::user()->empresaSession()->logotipo )
-                <a class="logo"><img width="150" src="{{ asset('storage/' . \Auth::user()->empresaSession()->logotipo) }}" alt="Logo_Wings_nuevo" border="0"></a>
+                <a class="logo"><img width="120" src="{{ asset('storage/' . \Auth::user()->empresaSession()->logotipo) }}" alt="Logo_Wings_nuevo" border="0"></a>
             @else
                 <a class="logo"><img width="100" src="https://image.ibb.co/eauMYy/Logo_Wings_nuevo.jpg" alt="Logo_Wings_nuevo" border="0"></a>
             @endif
