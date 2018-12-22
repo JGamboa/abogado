@@ -30,9 +30,6 @@ class CreatePermissionTables extends Migration
             $table->integer('empresa_id')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('empresa_id')
-                ->references('id')
-                ->on('empresas');
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {

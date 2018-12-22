@@ -16,9 +16,6 @@
 
     @foreach($caso->observaciones as $observacion)
 
-        @php
-         $adm = \App\User::find(1);
-        @endphp
         <div class="panel panel-default">
             <div class="panel-body">
                 <section class="post-heading">
@@ -27,15 +24,15 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#">
-                                        <img class="media-object photo-profile" src="{{ isset($observacion->empleado_id) ?  asset('storage/avatars/' . $observacion->empleado()->user()->avatar) : asset('storage/avatars/' . $adm->avatar) }}" width="40" height="40" alt="...">
+                                        <img class="media-object photo-profile" src="{{ asset('storage/avatars/' . $observacion->user()->avatar) }}" width="40" height="40" alt="...">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ isset($observacion->empleado_id) ? $observacion->empleado->nombreCompleto : 'ADMINISTRADOR' }}</h4></a>
+                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ isset($observacion->empleado()->nombreCompleto) ? $observacion->empleado()->nombreCompleto : $observacion->user()->name }}</h4></a>
                                     <a href="#" class="anchor-time">{{ $observacion->created_at->format('d/m/Y h:i:s') }}</a>
                                 </div>
                             </div>
-                        </div>
+                        </div>d
                         <div class="col-md-1">
                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
                         </div>

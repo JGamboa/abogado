@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateEmpleadoRequest;
 use App\Http\Requests\UpdateEmpleadoRequest;
+use App\Notifications\UserCreated;
 use App\Repositories\EmpleadoRepository;
 use App\Http\Controllers\AppBaseController;
 use App\User;
@@ -199,9 +200,7 @@ class EmpleadoController extends AppBaseController
 
             if(empty($empleado)){
                 Flash::error('Empleado no encontrado');
-
                 return redirect(route('empleados.index'));
-
             }
 
             return view('empleados.asignar_usuario')->with('empleado', $empleado);
@@ -228,8 +227,6 @@ class EmpleadoController extends AppBaseController
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-
-
         $data = $request->all();
 
         $user = \App\User::create([
@@ -237,6 +234,8 @@ class EmpleadoController extends AppBaseController
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $user->notify(New UserCreated());
 
         $empleado = $this->empleadoRepository->update(['user_id'=> $user->id], $id);
         Flash::success('Usuario asignado exitosamente.');

@@ -30,6 +30,8 @@ use PHPExcel_IOFactory;
  * @property integer responsable_proceso
  * @property boolean pyp
  * @property boolean autorizacion_documentos
+ * @property-read Corte corte
+ * @property-read Empleado datosResponsable
  */
 class Caso extends Model
 {

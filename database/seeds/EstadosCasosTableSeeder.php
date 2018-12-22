@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\EstadoCaso;
+use Carbon\Carbon;
 
 class EstadosCasosTableSeeder extends Seeder
 {
@@ -13,113 +14,37 @@ class EstadosCasosTableSeeder extends Seeder
     public function run()
     {
 
-        EstadoCaso::create([
-            'nombre' => 'En preparación',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Presentada',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Notificada',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Comparendo',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Diligencias ',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Sentencia',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Apelación',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Queja',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Cumplimiento',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Archivada',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Audiencias',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Acuerdo',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Nulidad',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'RUJ',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Apelación',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Otro',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Interpuesto',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'ONI',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Acogida C/C',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Acogida S/C',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Apelación CS',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Para Pago',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Cobrada',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Interpuesta',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'A la espera de designación Liq',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Incautación',
-        ]);
-
-        EstadoCaso::create([
-            'nombre' => 'Remate',
-        ]);
+        EstadoCaso::insert(
+        [
+            ['nombre' => 'En preparación', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Presentada', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Notificada', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Comparendo', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Diligencias ', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Sentencia', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Apelación', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Queja', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Cumplimiento', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Archivada', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Audiencias', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Acuerdo', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Nulidad', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'RUJ', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Apelación', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Otro', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Interpuesto', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'ONI', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Acogida C/C', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Acogida S/C', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Apelación CS', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Para Pago', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Cobrada', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Interpuesta', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'A la espera de designación Liq', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Incautación', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Remate', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]
+        ]
+        );
 
     }
 }

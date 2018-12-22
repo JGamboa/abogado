@@ -52,4 +52,9 @@ class ObservacionCaso extends Model
         return Empleado::where('user_id', $this->user_id)->first();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class);
+    }
+
 }

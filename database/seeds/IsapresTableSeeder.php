@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Isapre;
+use Carbon\Carbon;
 
 class IsapresTableSeeder extends Seeder
 {
@@ -12,33 +13,16 @@ class IsapresTableSeeder extends Seeder
      */
     public function run()
     {
-
-        Isapre::create([
-            'nombre' => 'Sin Isapre',
-        ]);
-
-        Isapre::create([
-            'nombre' => 'Banmédica',
-        ]);
-
-        Isapre::create([
-            'nombre' => 'Consalud',
-        ]);
-
-        Isapre::create([
-            'nombre' => 'VidaTres',
-        ]);
-
-        Isapre::create([
-            'nombre' => 'Colmena',
-        ]);
-
-        Isapre::create([
-            'nombre' => 'Isapre Cruz Blanca S.A.',
-        ]);
-
-        Isapre::create([
-            'nombre' => 'Nueva Masvida',
-        ]);
+        Isapre::insert(
+        [
+            ['nombre' => 'Sin Isapre', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Banmédica', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Consalud', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'VidaTres', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Colmena', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Isapre Cruz Blanca S.A.', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+            ['nombre' => 'Nueva Masvida', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]
+        ]
+        );
     }
 }

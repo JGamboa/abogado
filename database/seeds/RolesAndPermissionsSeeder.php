@@ -2,6 +2,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Carbon\Carbon;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -11,60 +12,59 @@ class RolesAndPermissionsSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         // create roles
-        $role = Role::create(['name' => 'SUPER ADMINISTRADOR']);
+        $role = Role::create(['name' => 'SUPER ADMINISTRADOR', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]);
+        Permission::insert([
+           ['name'=> 'crear empresas', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver empresas', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar empresas', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar empresas', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'subir logotipo empresas', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear empresas']);
-        $permission = Permission::create(['name'=> 'ver empresas']);
-        $permission = Permission::create(['name'=> 'editar empresas']);
-        $permission = Permission::create(['name'=> 'borrar empresas']);
-        $permission = Permission::create(['name'=> 'subir logotipo empresas']);
+           ['name'=> 'crear casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'comentar casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'subir archivos casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar archivos casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver archivos casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver reporte casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear casos']);
-        $permission = Permission::create(['name'=> 'ver casos']);
-        $permission = Permission::create(['name'=> 'editar casos']);
-        $permission = Permission::create(['name'=> 'borrar casos']);
-        $permission = Permission::create(['name'=> 'comentar casos']);
-        $permission = Permission::create(['name'=> 'subir archivos casos']);
-        $permission = Permission::create(['name'=> 'borrar archivos casos']);
-        $permission = Permission::create(['name'=> 'ver archivos casos']);
-        $permission = Permission::create(['name'=> 'ver reporte casos']);
+           ['name'=> 'crear intervinientes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver intervinientes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar intervinientes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar intervinientes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear intervinientes']);
-        $permission = Permission::create(['name'=> 'ver intervinientes']);
-        $permission = Permission::create(['name'=> 'editar intervinientes']);
-        $permission = Permission::create(['name'=> 'borrar intervinientes']);
+           ['name'=> 'crear isapres', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver isapres', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar isapres', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar isapres', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear isapres']);
-        $permission = Permission::create(['name'=> 'ver isapres']);
-        $permission = Permission::create(['name'=> 'editar isapres']);
-        $permission = Permission::create(['name'=> 'borrar isapres']);
+           ['name'=> 'crear cortes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver cortes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar cortes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar cortes', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear cortes']);
-        $permission = Permission::create(['name'=> 'ver cortes']);
-        $permission = Permission::create(['name'=> 'editar cortes']);
-        $permission = Permission::create(['name'=> 'borrar cortes']);
+           ['name'=> 'crear materias', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver materias', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar materias', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar materias', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear materias']);
-        $permission = Permission::create(['name'=> 'ver materias']);
-        $permission = Permission::create(['name'=> 'editar materias']);
-        $permission = Permission::create(['name'=> 'borrar materias']);
+           ['name'=> 'crear sucursales', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver sucursales', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar sucursales', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar sucursales', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear sucursales']);
-        $permission = Permission::create(['name'=> 'ver sucursales']);
-        $permission = Permission::create(['name'=> 'editar sucursales']);
-        $permission = Permission::create(['name'=> 'borrar sucursales']);
+           ['name'=> 'crear estados casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver estados casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar estados casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar estados casos', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
 
-        $permission = Permission::create(['name'=> 'crear estados casos']);
-        $permission = Permission::create(['name'=> 'ver estados casos']);
-        $permission = Permission::create(['name'=> 'editar estados casos']);
-        $permission = Permission::create(['name'=> 'borrar estados casos']);
-
-        $permission = Permission::create(['name'=> 'crear localidades']);
-        $permission = Permission::create(['name'=> 'ver localidades']);
-        $permission = Permission::create(['name'=> 'editar localidades']);
-        $permission = Permission::create(['name'=> 'borrar localidades']);
-
-
+           ['name'=> 'crear localidades', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'ver localidades', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'editar localidades', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()],
+           ['name'=> 'borrar localidades', 'guard_name'=> 'web', 'created_at'=>Carbon::now(), 'updated_at'=>Carbon::now()]
+        ]);
     }
 }
 

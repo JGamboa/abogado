@@ -37,7 +37,6 @@ Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuil
 
 Route::post('generator_builder/generate', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generate')->name('generator.create');
 
-
 Route::resource('pais', 'PaisController');
 
 Route::get('comunas/{comuna}/restore', 'ComunaController@restore')->name('comunas.restore');

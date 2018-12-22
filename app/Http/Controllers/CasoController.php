@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCasoRequest;
 use App\Http\Requests\UpdateCasoRequest;
+use App\Notifications\ResponsableCasoAsignado;
 use App\Repositories\CasoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -96,6 +97,7 @@ class CasoController extends AppBaseController
      */
     public function store(CreateCasoRequest $request)
     {
+        /* @var $caso Caso */
         $input = $request->all();
 
         if(Auth::user()->hasRole('CAPTADOR')){
@@ -118,6 +120,10 @@ class CasoController extends AppBaseController
         $input['contraparte'] = $contraparte;
 
         $caso = $this->casoRepository->create($input);
+
+        if(isset($caso->datosResponsable->user)){
+            $caso->datosResponsable->user->notify(new ResponsableCasoAsignado($caso));
+        }
 
         Flash::success('Caso guardado exitosamente.');
 
@@ -197,7 +203,11 @@ class CasoController extends AppBaseController
 
         $this->authorize('update', $caso);
 
-        $caso = $this->casoRepository->update($request->all(), $id);
+        $caso_updated = $this->casoRepository->update($request->all(), $id);
+
+        if ($caso->responsable_proceso != $request->input('responsable_proceso') && $request->filled('responsable_proceso')){
+            $caso_updated->datosResponsable->user->notify(new ResponsableCasoAsignado($caso));
+        }
 
         Flash::success('Caso updated successfully.');
 
@@ -322,7 +332,7 @@ class CasoController extends AppBaseController
             $u->hash = $upload->hash;
             $u->public = $upload->public;
             $u->caption = $upload->caption;
-            $u->user = isset($upload->user->nombres) ? $upload->user->nombres : '';
+            $u->user = isset($upload->empleado->nombres) ? $upload->empleado->nombres : '';
 
             $uploads2[] = $u;
         }

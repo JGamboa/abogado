@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AppendEmpresa;
@@ -63,6 +64,7 @@ use App\Traits\OnSaveEmpresa;
  * @property string apellido_paterno
  * @property string apellido_materno
  * @property boolean admin
+ * @property-read User user
  */
 class Empleado extends Model
 {
