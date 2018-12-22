@@ -45,6 +45,14 @@
     </a>
 
     <ul class="treeview-menu">
+        <li class="{{ Request::is('usuarios') ? 'active' : '' }}">
+            <a href="{!! route('usuarios.index') !!}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
+        </li>
+
+        <li class="{{ Request::is('roles*') ? 'active' : '' }}">
+            <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Administración de Roles</span></a>
+        </li>
+
         <li class="treeview">
             <a href="#">
                 Localidades
@@ -118,10 +126,6 @@
 
         <li class="{{ Request::is('empleados*') ? 'active' : '' }}">
             <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
-        </li>
-
-        <li class="{{ Request::is('admin') ? 'active' : '' }}">
-            <a href="{{ url(config('backpack.base.route_prefix', 'admin')) }}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
         </li>
     </ul>
 </li>

@@ -20,8 +20,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string razon_social
  * @property string nombre_fantasia
  * @property string direccion
- * @property integer comunas_id
- * @property integer provincias_id
+ * @property integer region_id
+ * @property integer comuna_id
+ * @property integer provincia_id
  * @property string logotipo
  */
 class Empresa extends Model
@@ -41,8 +42,9 @@ class Empresa extends Model
         'razon_social',
         'nombre_fantasia',
         'direccion',
-        'comunas_id',
-        'provincias_id',
+        'region_id',
+        'comuna_id',
+        'provincia_id',
         'logotipo'
     ];
 
@@ -57,8 +59,9 @@ class Empresa extends Model
         'razon_social' => 'string',
         'nombre_fantasia' => 'string',
         'direccion' => 'string',
-        'comunas_id' => 'integer',
-        'provincias_id' => 'integer',
+        'region_id' => 'integer',
+        'comuna_id' => 'integer',
+        'provincia_id' => 'integer',
         'logotipo' => 'string'
     ];
 
@@ -72,8 +75,9 @@ class Empresa extends Model
         'razon_social' => 'required|max:150',
         'nombre_fantasia' => 'max:150',
         'direccion' => 'required|max:70',
-        'comunas_id' => 'required',
-        'provincias_id' => 'required',
+        'region_id' => 'required',
+        'comuna_id' => 'required',
+        'provincia_id' => 'required',
         'logotipo' => 'max:45'
     ];
 
@@ -82,7 +86,7 @@ class Empresa extends Model
      **/
     public function comuna()
     {
-        return $this->belongsTo(\App\Models\Comuna::class, 'comunas_id');
+        return $this->belongsTo(\App\Models\Comuna::class);
     }
 
     /**
@@ -90,7 +94,7 @@ class Empresa extends Model
      **/
     public function provincia()
     {
-        return $this->belongsTo(\App\Models\Provincia::class, 'provincias_id');
+        return $this->belongsTo(\App\Models\Provincia::class);
     }
 
     /**
@@ -98,7 +102,7 @@ class Empresa extends Model
      **/
     public function region()
     {
-        return $this->belongsTo(\App\Models\Region::class, $this->provincia()->regiones_id);
+        return $this->belongsTo(\App\Models\Region::class);
     }
 
     /**

@@ -6,11 +6,13 @@ use App\Http\Requests\CreateEmpleadoRequest;
 use App\Http\Requests\UpdateEmpleadoRequest;
 use App\Repositories\EmpleadoRepository;
 use App\Http\Controllers\AppBaseController;
+use App\User;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Empleado as Empleado;
+use App\Models\Role;
 
 class EmpleadoController extends AppBaseController
 {
@@ -44,7 +46,8 @@ class EmpleadoController extends AppBaseController
      */
     public function create()
     {
-        return view('empleados.create');
+        $usuarios = \App\User::pluck('name', 'id')->all();
+        return view('empleados.create')->with(['usuarios' => $usuarios]);
     }
 
     /**
@@ -126,6 +129,7 @@ class EmpleadoController extends AppBaseController
      */
     public function edit($id)
     {
+        $usuarios = \App\User::pluck('name', 'id')->all();
         $empleado = $this->empleadoRepository->findWithoutFail($id);
 
         if (empty($empleado)) {
@@ -134,7 +138,7 @@ class EmpleadoController extends AppBaseController
             return redirect(route('empleados.index'));
         }
 
-        return view('empleados.edit')->with('empleado', $empleado);
+        return view('empleados.edit')->with(['empleado' => $empleado, 'usuarios' => $usuarios]);
     }
 
     /**
@@ -242,22 +246,12 @@ class EmpleadoController extends AppBaseController
 
     protected function permisos($id, Request $request){
 
+        /* @var $empleado Empleado */
         $empleado = Empleado::find($id);
+        $usuario = User::find($empleado->user_id);
 
-        $data = $request->all();
-
-        $deleted = \DB::delete('DELETE ru FROM role_users ru INNER JOIN roles r ON '
-            . 'ru.role_id = r.id WHERE r.empresa_id =' . session('empresa_id')
-            . ' AND ru.user_id=' . $empleado->user_id);
-
-        if(isset($data['roles'])) {
-            foreach ($data['roles'] as $role) {
-                \DB::table('role_users')->insert([
-                    'role_id' => $role,
-                    'user_id' => $empleado->user_id
-                ]);
-            }
-        }
+        $roles = Role::find($request->input('roles', []));
+        $usuario->syncRoles($roles);
 
         Flash::success('Permisos guardados exitosamente.');
 

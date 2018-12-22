@@ -107,5 +107,7 @@ Route::resource('casos', 'CasoController');
 
 Route::get('profile', 'UserController@profile')->name('user.profile');
 Route::post('profile', 'UserController@update_avatar')->name('user.actualizar-avatar');
+Route::resource('usuarios', 'UserController');
+Route::resource('roles', 'RoleController');
 
 });

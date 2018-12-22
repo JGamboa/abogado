@@ -24,20 +24,20 @@
 
 <!-- Regiones Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('regiones_id', 'Región:') !!}
-    {!! Form::select('regiones_id', $regiones, '', ['class' => 'form-control js-regiones', 'placeholder'=>'Seleccionar Región']) !!}
+    {!! Form::label('region_id', 'Región:') !!}
+    {!! Form::select('region_id', $regiones, '', ['class' => 'form-control js-regiones', 'placeholder'=>'Seleccionar Región']) !!}
 </div>
 
 <!-- Provincias Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('provincias_id', 'Provincias Id:') !!}
-    {!! Form::select('provincias_id', ['0'=>'Seleccionar Provincia'], '', ['class' => 'form-control js-provincias']) !!}
+    {!! Form::label('provincia_id', 'Provincias Id:') !!}
+    {!! Form::select('provincia_id', ['0'=>'Seleccionar Provincia'], '', ['class' => 'form-control js-provincias']) !!}
 </div>
 
 <!-- Comunas Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('comunas_id', 'Comunas Id:') !!}
-    {!! Form::select('comunas_id', ['0'=>'Seleccionar Comuna'], '', ['class' => 'form-control js-comunas']) !!}
+    {!! Form::label('comuna_id', 'Comunas Id:') !!}
+    {!! Form::select('comuna_id', ['0'=>'Seleccionar Comuna'], '', ['class' => 'form-control js-comunas']) !!}
 </div>
 
 <!-- Logotipo Field -->

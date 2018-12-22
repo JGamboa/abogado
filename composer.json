@@ -6,7 +6,6 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "backpack/permissionmanager": "^2.1",
         "barryvdh/laravel-snappy": "^0.4.0",
         "doctrine/dbal": "~2.3",
         "dompdf/dompdf": "~0.6.1",
@@ -25,6 +24,7 @@
         "laravelcollective/html": "^5.5.0",
         "mpdf/mpdf": "~5.7.3",
         "phpoffice/phpexcel": "^1.8",
+        "spatie/laravel-permission": "^2.29",
         "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {

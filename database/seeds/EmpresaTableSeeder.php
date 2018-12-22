@@ -21,16 +21,18 @@ class EmpresaTableSeeder extends Seeder
                 'razon_social' => 'ASESORIA DISENO E INGENIERIA SPA',
                 'nombre_fantasia' => 'ADICHILE SPA',
                 'direccion' => '1 NORTE 461 OF 703',
-                'comunas_id' => 47,
-                'provincias_id' => 14
+                'region_id' => 5,
+                'comuna_id' => 47,
+                'provincia_id' => 14
             ]);
 
             $sucursal = Sucursal::create([
                 'empresa_id' => $empresa->id,
                 'nombre' => 'CASA MATRIZ',
                 'direccion' => '1 NORTE 461 OF 703',
-                'comunas_id' => 47,
-                'provincias_id' => 14,
+                'region_id' => 5,
+                'comuna_id' => 47,
+                'provincia_id' => 14,
                 'tipo' => 1
             ]);
 

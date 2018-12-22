@@ -3,17 +3,16 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Backpack\CRUD\CrudTrait; // <------------------------------- this one
 use Spatie\Permission\Traits\HasRoles;// <---------------------- and this one
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Empresa;
 use App\Models\Empleado;
+use DB;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use CrudTrait; // <----- this
     use HasRoles; // <------ and this
 
     /**
@@ -47,12 +46,19 @@ class User extends Authenticatable
      */
     public function empresaSession()
     {
-            return Empresa::find(session('empresa_id'));
+        return Empresa::find(session('empresa_id'));
     }
 
-    public function isSuperAdmin()
-    {
-        $roles_users = \DB::table('role_users')->select('role_id')->where('role_id', 1)->where('user_id', Auth::user()->id)->get();
+    public function isSuperAdmin(){
+        $tableNames = config('permission.table_names');
+        $columnNames = config('permission.column_names');
+
+        $roles_users = DB::table($tableNames['model_has_roles'])
+            ->select('role_id')
+            ->where('role_id', 1)
+            ->where($columnNames['model_morph_key'], Auth::user()->id)
+            ->get();
+
         if(count($roles_users)>0){
             return true;
         }else{

@@ -19,13 +19,15 @@ class CreateEmpresasTable extends Migration
             $table->string('razon_social', 150)->required();
             $table->string('nombre_fantasia', 150)->nullable();
             $table->string('direccion', 70)->required();
-            $table->integer('comunas_id')->unsigned()->required();
-            $table->integer('provincias_id')->unsigned()->required();
+            $table->integer('region_id')->unsigned()->required();
+            $table->integer('comuna_id')->unsigned()->required();
+            $table->integer('provincia_id')->unsigned()->required();
             $table->string('logotipo', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('comunas_id')->references('id')->on('comunas');
-            $table->foreign('provincias_id')->references('id')->on('provincias');
+            $table->foreign('region_id')->references('id')->on('regiones');
+            $table->foreign('comuna_id')->references('id')->on('comunas');
+            $table->foreign('provincia_id')->references('id')->on('provincias');
         });
     }
 

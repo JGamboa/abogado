@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Eloquent as Model;
+use Empleado;
 
 /**
  * Class ObservacionCaso
@@ -11,7 +12,7 @@ use Eloquent as Model;
  * @version April 26, 2018, 3:44 pm CLST
  *
  * @property integer caso_id
- * @property integer empleado_id
+ * @property integer user_id
  * @property string observacion
  */
 class ObservacionCaso extends Model
@@ -21,7 +22,7 @@ class ObservacionCaso extends Model
 
     public $fillable = [
         'caso_id',
-        'empleado_id',
+        'user_id',
         'observacion'
     ];
 
@@ -32,7 +33,7 @@ class ObservacionCaso extends Model
      */
     protected $casts = [
         'caso_id' => 'integer',
-        'empleado_id' => 'integer',
+        'user_id' => 'integer',
         'observacion' => 'string'
     ];
 
@@ -43,16 +44,12 @@ class ObservacionCaso extends Model
      */
     public static $rules = [
         'caso_id' => 'exists:casos',
-        'empleado_id' => 'exists:empleados',
-        'oficio' => 'required|max:255',
+        'user_id' => 'exists:users',
+        'observacion' => 'required|max:255',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
-     */
     public function empleado(){
-
-        return $this->belongsTo(\App\Models\Empleado::class);
+        return Empleado::where('user_id', $this->user_id)->first();
     }
 
 }

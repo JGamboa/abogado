@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\AppendEmpresa;
+use App\Traits\OnSaveEmpresa;
 
 /**
  * @SWG\Definition(
@@ -49,10 +51,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
+
+/**
+ * Class Empleado
+ * @package App\Models
+ * @version March 31, 2018, 4:22 pm CLST
+ *
+ * @property integer empresa_id
+ * @property integer user_id
+ * @property string nombres
+ * @property string apellido_paterno
+ * @property string apellido_materno
+ * @property boolean admin
+ */
 class Empleado extends Model
 {
 
-    use SoftDeletes;
+    use SoftDeletes, AppendEmpresa, OnSaveEmpresa;
 
     public $table = 'empleados';
     
@@ -89,7 +104,6 @@ class Empleado extends Model
      * @var array
      */
     public static $rules = [
-        'empresa_id' => 'required',
         'nombres' => 'required|max:100',
         'apellido_paterno' => 'required|max:70',
         'apellido_materno' => 'required|max:70'

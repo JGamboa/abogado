@@ -77,8 +77,9 @@ class Sucursal extends Model
         'empresa_id',
         'nombre',
         'direccion',
-        'comunas_id',
-        'provincias_id',
+        'region_id',
+        'comuna_id',
+        'provincia_id',
         'tipo'
     ];
 
@@ -91,8 +92,9 @@ class Sucursal extends Model
         'empresa_id' => 'integer',
         'nombre' => 'string',
         'direccion' => 'string',
-        'comunas_id' => 'integer',
-        'provincias_id' => 'integer',
+        'region_id' => 'integer',
+        'comuna_id' => 'integer',
+        'provincia_id' => 'integer',
         'tipo' => 'integer'
     ];
 
@@ -105,17 +107,26 @@ class Sucursal extends Model
         'empresa_id' => 'required',
         'nombre' => 'required|max:40',
         'direccion' => 'required|max:70',
-        'comunas_id' => 'required',
-        'provincias_id' => 'required',
+        'region_id' => 'required',
+        'comuna_id' => 'required',
+        'provincia_id' => 'required',
         'tipo' => 'required'
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
+    public function region()
+    {
+        return $this->belongsTo(\App\Models\Region::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public function comuna()
     {
-        return $this->belongsTo(\App\Models\Comuna::class, 'comunas_id');
+        return $this->belongsTo(\App\Models\Comuna::class);
     }
 
     /**
@@ -123,7 +134,7 @@ class Sucursal extends Model
      **/
     public function provincia()
     {
-        return $this->belongsTo(\App\Models\Provincia::class, 'provincias_id');
+        return $this->belongsTo(\App\Models\Provincia::class);
     }
 
     function getTipoTexto(){

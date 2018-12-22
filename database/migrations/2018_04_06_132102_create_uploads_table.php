@@ -16,17 +16,17 @@ class CreateuploadsTable extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('empresa_id')->unsigned()->required();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('name', 250);
             $table->string('path', 250)->nullable();
             $table->string('extension', 20)->nullable();
             $table->string('caption', 250)->nullable();
-            $table->integer('empleado_id')->unsigned()->nullable();
             $table->string('hash', 250)->nullable();
             $table->boolean('isPublic')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('empresa_id')->references('id')->on('empresas');
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

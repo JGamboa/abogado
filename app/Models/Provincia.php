@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version December 26, 2017, 8:01 am UTC
  *
- * @property integer regiones_id
+ * @property integer region_id
  * @property string nombre
  */
 class Provincia extends Model
@@ -24,7 +24,7 @@ class Provincia extends Model
 
 
     public $fillable = [
-        'regiones_id',
+        'region_id',
         'nombre'
     ];
 
@@ -34,7 +34,7 @@ class Provincia extends Model
      * @var array
      */
     protected $casts = [
-        'regiones_id' => 'integer',
+        'region_id' => 'integer',
         'nombre' => 'string'
     ];
 
@@ -44,7 +44,7 @@ class Provincia extends Model
      * @var array
      */
     public static $rules = [
-        'regiones_id' => 'required|exists:regiones,id',
+        'region_id' => 'required|exists:regiones,id',
         'nombre' => 'required|max:60'
     ];
 

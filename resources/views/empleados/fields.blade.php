@@ -1,13 +1,7 @@
-<!-- Empresa Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('empresa_id', 'Empresa Id:') !!}
-    {!! Form::text('empresa_id', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- User Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::text('user_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('user_id', 'Usuario:') !!}
+    {!! Form::select('user_id', $usuarios, isset($empleado->user_id) ? $empleado->user_id : '', ['class' => 'form-control ', 'placeholder'=>'Seleccionar Usuario']) !!}
 </div>
 
 <!-- Nombres Field -->

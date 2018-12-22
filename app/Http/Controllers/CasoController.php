@@ -270,7 +270,7 @@ class CasoController extends AppBaseController
                     "caption" => "",
                     "hash" => "",
                     "isPublic" => $public,
-                    "empleado_id" => null,
+                    "user_id" => Auth::user()->id,
                 ]);
                 // apply unique random hash to file
                 while(true) {

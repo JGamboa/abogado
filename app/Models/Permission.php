@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
-use Backpack\PermissionManager\app\Models\Permission as BackpackPermission;
-
-class Permission extends BackpackPermission
+class Permission extends SpatiePermission
 {
 
-
 }
+

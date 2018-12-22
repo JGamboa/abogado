@@ -2,20 +2,19 @@
 namespace App\Models;
 
 use App\Traits\AppendEmpresa;
-use Backpack\PermissionManager\app\Models\Role as BackpackRole;
+use App\Traits\OnSaveEmpresa;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-class Role extends BackpackRole
+class Role extends SpatieRole
 {
-
-    use AppendEmpresa;
-    protected $fillable = ['name', 'empresa_id', 'updated_at', 'created_at'];
-
+    use AppendEmpresa, OnSaveEmpresa;
+    protected $fillable = ['name', 'guard_name', 'empresa_id', 'updated_at', 'created_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function empresa()
+    public function cliente()
     {
-        return $this->belongsTo(\App\Models\Empresa::class);
+        return $this->belongsTo(Empresa::class);
     }
 }

@@ -18,7 +18,7 @@
             <td>{!! $empleado->nombres !!}</td>
             <td>{!! $empleado->apellido_paterno !!}</td>
             <td>{!! $empleado->apellido_materno !!}</td>
-            <td>{!! $empleado->admin !!}</td>
+            <td>{!! $empleado->admin == true ? '<i class="glyphicon glyphicon-check"></i>' : '' !!}</td>
             <td>
                 {!! Form::open(['route' => ['empleados.destroy', $empleado->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -39,30 +39,30 @@
 
                        <!-- Regiones Id Field -->
                        <div class="form-group col-sm-6">
-                           {!! Form::label('regiones_id', 'Región:') !!}
-                           <select class="form-control js-regiones" name="regiones_id">
+                           {!! Form::label('region_id', 'Región:') !!}
+                           <select class="form-control js-regiones" name="region_id">
                                @foreach ($regiones as $region)
-                                   <option value="{{$region->id}}" {{$region->id == $empresa->provincia->regiones_id ? 'selected' : ''}}>{{$region->nombre}}</option>
+                                   <option value="{{$region->id}}" {{$region->id == $empresa->region_id ? 'selected' : ''}}>{{$region->nombre}}</option>
                                @endforeach
                            </select>
                        </div>
 
                        <!-- Provincias Id Field -->
                        <div class="form-group col-sm-6">
-                           {!! Form::label('provincias_id', 'Provincias Id:') !!}
-                           <select class="form-control js-provincias" name="provincias_id">
+                           {!! Form::label('provincia_id', 'Provincia Id:') !!}
+                           <select class="form-control js-provincias" name="provincia_id">
                                @foreach ($provincias as $provincia)
-                                   <option value="{{$provincia->id}}" {{$provincia->id == $empresa->provincias_id ? 'selected' : ''}}>{{$provincia->nombre}}</option>
+                                   <option value="{{$provincia->id}}" {{$provincia->id == $empresa->provincia_id ? 'selected' : ''}}>{{$provincia->nombre}}</option>
                                @endforeach
                            </select>
                        </div>
 
                        <!-- Comunas Id Field -->
                        <div class="form-group col-sm-6">
-                           {!! Form::label('comunas_id', 'Comunas Id:') !!}
-                           <select class="form-control js-comunas" name="comunas_id">
+                           {!! Form::label('comuna_id', 'Comunas Id:') !!}
+                           <select class="form-control js-comunas" name="comuna_id">
                                @foreach ($comunas as $comuna)
-                                   <option value="{{$comuna->id}}" {{$comuna->id == $empresa->comunas_id ? 'selected' : ''}}>{{$comuna->nombre}}</option>
+                                   <option value="{{$comuna->id}}" {{$comuna->id == $empresa->comuna_id ? 'selected' : ''}}>{{$comuna->nombre}}</option>
                                @endforeach
                            </select>
                        </div>

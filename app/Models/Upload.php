@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\OnSaveEmpresa;
+use Empleado;
 
 /**
  * Class Upload
@@ -16,7 +17,7 @@ use App\Traits\OnSaveEmpresa;
  * @property string path
  * @property string extension
  * @property string caption
- * @property integer empleado_id
+ * @property integer user_id
  * @property string hash
  * @property boolean isPublic
  */
@@ -36,7 +37,7 @@ class Upload extends Model
         'path',
         'extension',
         'caption',
-        'empleado_id',
+        'user_id',
         'hash',
         'isPublic'
     ];
@@ -51,7 +52,7 @@ class Upload extends Model
         'path' => 'string',
         'extension' => 'string',
         'caption' => 'string',
-        'empleado_id' => 'integer',
+        'user_id' => 'integer',
         'hash' => 'string',
         'isPublic' => 'boolean'
     ];
@@ -73,9 +74,14 @@ class Upload extends Model
     /**
      * Get the user that owns upload.
      */
+    public function empleado()
+    {
+        return Empleado::where('user_id', $this->user_id)->first();
+    }
+
     public function user()
     {
-        return $this->belongsTo('App\Models\Empleado');
+        return $this->belongsTo(\App\User::class);
     }
     
 }
