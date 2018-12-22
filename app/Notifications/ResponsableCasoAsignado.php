@@ -48,7 +48,8 @@ class ResponsableCasoAsignado extends Notification
             ->greeting("Hola {$notifiable->name},")
             ->line("Has sido asignado como responsable de un caso {$this->caso->anio_rol}-{$this->caso->rol} en {$this->caso->corte->nombre}")
             ->line("Datos intervinientes")
-            ->line("Cliente: {$this->caso->getNombreCompleto($this->caso->cliente)}");
+            ->line("Cliente: {$this->caso->getNombreCompleto($this->caso->cliente)}")
+            ->line("Contraparte: {$this->caso->getNombreCompleto($this->caso->contraparte)}");
     }
 
     /**
