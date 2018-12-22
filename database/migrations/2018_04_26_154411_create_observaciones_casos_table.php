@@ -15,11 +15,11 @@ class CreateObservacionesCasosTable extends Migration
         Schema::create('observaciones_casos', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('caso_id')->unsigned();
-            $table->integer('empleado_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('observacion', 255);
             $table->timestamps();
             $table->foreign('caso_id')->references('id')->on('casos');
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('user_id')->references('id')->on('usuarios');
         });
     }
 

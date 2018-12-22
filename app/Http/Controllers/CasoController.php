@@ -332,7 +332,7 @@ class CasoController extends AppBaseController
             $u->hash = $upload->hash;
             $u->public = $upload->public;
             $u->caption = $upload->caption;
-            $u->user = isset($upload->empleado->nombres) ? $upload->empleado->nombres : '';
+            $u->user = isset($upload->empleado()->nombres) ? $upload->empleado()->nombres : '';
 
             $uploads2[] = $u;
         }

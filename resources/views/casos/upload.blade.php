@@ -81,7 +81,7 @@
 @push('custom-scripts')
     <script src="{{ URL::asset('js/dropzone.min.js') }}"></script>
     <script>
-        var bsurl = '<?php echo ENV('APP_URL');?>';
+        var bsurl = '<?php echo config('app.url');?>';
         var fm_dropzone_main = null;
         var cntFiles = null;
         $(function () {

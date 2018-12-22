@@ -94,13 +94,13 @@
             <!-- Rol Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('rol', 'Rol:') !!}
-                {!! Form::text('rol', null, ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::text('rol', isset($caso->rol) ? $caso->rol : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Año Rol Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('anio_rol', 'Año Rol:') !!}
-                {!! Form::text('anio_rol', null, ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::text('anio_rol', isset($caso->anio_rol) ? $caso->anio_rol : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
 

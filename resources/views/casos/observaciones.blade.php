@@ -24,11 +24,11 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="#">
-                                        <img class="media-object photo-profile" src="{{ asset('storage/avatars/' . $observacion->user()->avatar) }}" width="40" height="40" alt="...">
+                                        <img class="media-object photo-profile" src="{{ asset('storage/avatars/' . $observacion->user->avatar) }}" width="40" height="40" alt="...">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ isset($observacion->empleado()->nombreCompleto) ? $observacion->empleado()->nombreCompleto : $observacion->user()->name }}</h4></a>
+                                    <a href="#" class="anchor-username"><h4 class="media-heading">{{ isset($observacion->empleado()->nombreCompleto) ? $observacion->empleado()->nombreCompleto : $observacion->user->name }}</h4></a>
                                     <a href="#" class="anchor-time">{{ $observacion->created_at->format('d/m/Y h:i:s') }}</a>
                                 </div>
                             </div>

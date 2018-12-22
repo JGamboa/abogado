@@ -5,7 +5,6 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\OnSaveEmpresa;
-use Empleado;
 
 /**
  * Class Upload
@@ -76,7 +75,7 @@ class Upload extends Model
      */
     public function empleado()
     {
-        return Empleado::where('user_id', $this->user_id)->first();
+        return \App\Models\Empleado::where('user_id', $this->user_id)->first();
     }
 
     public function user()
