@@ -4,7 +4,6 @@ namespace App\Models;
 
 
 use Eloquent as Model;
-use Empleado;
 
 /**
  * Class ObservacionCaso
@@ -49,7 +48,7 @@ class ObservacionCaso extends Model
     ];
 
     public function empleado(){
-        return Empleado::where('user_id', $this->user_id)->first();
+        return \App\Models\Empleado::where('user_id', $this->user_id)->first();
     }
 
     public function user()

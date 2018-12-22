@@ -44,7 +44,7 @@ class UserCreated extends Notification
         $token = Password::broker()->createToken($notifiable);
         $app = config('app.name');
         $url = config('app.url');
-        $resetUrl = "http://{$url}/password/reset/{$token}";
+        $resetUrl = "{$url}/password/reset/{$token}";
 
         return (new MailMessage())
             ->subject("Invitacion a {$app}")
