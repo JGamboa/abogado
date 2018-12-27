@@ -74,14 +74,14 @@
             <!-- Fecha Recurso Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('fecha_recurso', 'Fecha Recurso:') !!}
-                {!! Form::text('fecha_recurso', isset($caso->fecha_recurso) ? $caso->fecha_recurso : null, ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::text('fecha_recurso', isset($caso->fecha_recurso) ? $caso->fecha_recurso->format('d/m/Y') : null, ['class' => 'form-control', 'disabled']) !!}
             </div>
 
 
             <!-- Fecha Captacion Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('fecha_captacion', 'Fecha Captacion:') !!}
-                {!! Form::text('fecha_captacion', isset($caso->fecha_captacion) ? $caso->fecha_captacion : null, ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::text('fecha_captacion', isset($caso->fecha_captacion) ? $caso->fecha_captacion->format('d/m/Y') : null, ['class' => 'form-control', 'disabled']) !!}
             </div>
 
 

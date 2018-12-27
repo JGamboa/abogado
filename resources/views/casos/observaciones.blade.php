@@ -32,7 +32,7 @@
                                     <a href="#" class="anchor-time">{{ $observacion->created_at->format('d/m/Y h:i:s') }}</a>
                                 </div>
                             </div>
-                        </div>d
+                        </div>
                         <div class="col-md-1">
                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
                         </div>

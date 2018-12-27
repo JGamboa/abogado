@@ -36,6 +36,7 @@ class CreateintervinientesTable extends Migration
             $table->foreign('provincia_id')->references('id')->on('provincias');
             $table->foreign('comuna_id')->references('id')->on('comunas');
             $table->foreign('isapre_id')->references('id')->on('isapres');
+            $table->unique(['empresa_id', 'rut']);
         });
     }
 

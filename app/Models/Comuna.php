@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property integer provincia_id
  * @property string nombre
+ * @property-read Provincia provincia
  */
 class Comuna extends Model
 {
@@ -47,6 +48,14 @@ class Comuna extends Model
         'provincia_id' => 'required|exists:provincias,id',
         'nombre' => 'required|max:60|unique:comunas,nombre'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function provincia()
+    {
+        return $this->belongsTo(\App\Models\Provincia::class);
+    }
 
     
 }

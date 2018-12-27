@@ -8,16 +8,19 @@ use App\DataTables\EmpresaDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateEmpresaRequest;
 use App\Http\Requests\UpdateEmpresaRequest;
+use App\Models\Region;
+use App\Models\Provincia;
 use App\Models\Comuna;
 use App\Repositories\EmpresaRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\AppBaseController as AppBaseController;
+use Prettus\Validator\Exceptions\ValidatorException;
 use Response;
-use App\Models\Provincia;
 use App\Models\Sucursal;
 use App\Models\Empleado as Empleado;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends AppBaseController
 {
@@ -52,7 +55,7 @@ class EmpresaController extends AppBaseController
      */
     public function create()
     {
-        $regiones = \DB::table('regiones')->whereNull('deleted_at')->pluck('nombre', 'id')->all();
+        $regiones = DB::table('regiones')->whereNull('deleted_at')->pluck('nombre', 'id')->all();
         return view('empresas.create', ['regiones'=>$regiones]);
     }
 
@@ -67,20 +70,25 @@ class EmpresaController extends AppBaseController
     {
         $input = $request->all();
 
-        $empresa = $this->empresaRepository->create($input);
-
-        $empresa->sucursales()->create([
-            'provincias_id' => $empresa->provincias_id,
-            'comunas_id' => $empresa->comunas_id,
-            'nombre' => 'Casa Matriz',
-            'direccion' => $empresa->direccion,
-            'tipo' => 1,
-        ]);
-
-        $role = Role::create(['name' => 'SECRETARIA', 'empresa_id' => $empresa->id]);
-        $role = Role::create(['name' => 'CAPTADOR', 'empresa_id' => $empresa->id]);
-
-        Flash::success('Empresa saved successfully.');
+        try {
+            DB::beginTransaction();
+            $empresa = $this->empresaRepository->create($input);
+            $empresa->sucursales()->create([
+                'region_id' => $empresa->region_id,
+                'provincia_id' => $empresa->provincia_id,
+                'comuna_id' => $empresa->comuna_id,
+                'nombre' => 'Casa Matriz',
+                'direccion' => $empresa->direccion,
+                'tipo' => 1,
+            ]);
+            $role = Role::create(['name' => 'SECRETARIA', 'empresa_id' => $empresa->id]);
+            $role = Role::create(['name' => 'CAPTADOR', 'empresa_id' => $empresa->id]);
+            Flash::success('Empresa creada exitosamente.');
+            DB::commit();
+        } catch (\PDOException $e) {
+            Flash::error('Error al crear empresa.');
+            DB::rollback();
+        }
 
         return redirect(route('empresas.index'));
     }
@@ -145,9 +153,9 @@ class EmpresaController extends AppBaseController
             return redirect(route('empresas.index'));
         }
 
-        $regiones = \App\Models\Region::all();
-        $provincias = \App\Models\Provincia::all();
-        $comunas = \App\Models\Comuna::all();
+        $regiones = Region::all();
+        $provincias = Provincia::all();
+        $comunas = Comuna::all();
         return view('empresas.edit')->with(['regiones'=>$regiones,
                                                     'empresa'=>$empresa,
                                                     'comunas'=>$comunas,

@@ -5,7 +5,11 @@
     <!-- Main content -->
     <section class="content">
         <div class="clearfix"></div>
+
         @include('flash::message')
+        @include('adminlte-templates::common.errors')
+
+        <div class="clearfix"></div>
         <div class="box">
             <div class="box-header">
                 <div class="row">

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version January 4, 2018, 3:14 pm UTC
  *
+ * @property integer id
  * @property integer pais_id
  * @property string nombre
  * @property string ISO_3166_2_CL

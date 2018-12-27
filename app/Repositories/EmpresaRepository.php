@@ -24,8 +24,9 @@ class EmpresaRepository extends BaseRepository
         'razon_social',
         'nombre_fantasia',
         'direccion',
-        'comunas_id',
-        'provincias_id',
+        'region_id',
+        'comuna_id',
+        'provincia_id',
         'logotipo'
     ];
 

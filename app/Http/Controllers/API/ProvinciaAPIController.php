@@ -40,13 +40,13 @@ class ProvinciaAPIController extends AppBaseController
         return $this->sendResponse($provincias->toArray(), 'Ciudades retrieved successfully');
     }
 
-    public function loadComunas($provincias_id) {
-        $comunas = \App\Models\Comuna::where('provincias_id', '=', $provincias_id)->get(['id', 'nombre']);
+    public function loadComunas($provincia_id) {
+        $comunas = \App\Models\Comuna::where('provincia_id', '=', $provincia_id)->get(['id', 'nombre']);
         return response()->json($comunas);
     }
 
-    public function loadProvincias($regiones_id){
-        $regiones = \App\Models\Provincia::where('regiones_id', '=', $regiones_id)->get(['id', 'nombre']);
+    public function loadProvincias($region_id){
+        $regiones = \App\Models\Provincia::where('region_id', '=', $region_id)->get(['id', 'nombre']);
         return response()->json($regiones);
     }
 }

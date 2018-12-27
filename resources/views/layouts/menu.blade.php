@@ -18,8 +18,20 @@
 </li>
 
 
-<li class="{{ Request::is('intervinientes*') ? 'active' : '' }}">
-    <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Intervinientes</span></a>
+<li class="treeview{{ Request::is('intervinientes*') ? ' active' : '' }}">
+    <a href="#">
+        <i class="fa fa-folder"></i>  <span>Intervinientes</span>
+    </a>
+
+    <ul class="treeview-menu">
+        <li class="{{ Request::is('intervinientes') ? 'active' : '' }}">
+            <a href="{!! route('intervinientes.index') !!}"><i class="fa fa-edit"></i><span>Listar</span></a>
+        </li>
+
+        <li class="{{ Request::is('intervinientes/importar') ? 'active' : '' }}">
+            <a href="{!! route('intervinientes.importarForm') !!}"><i class="fa fa-edit"></i><span>Importar</span></a>
+        </li>
+    </ul>
 </li>
 
 <li class="treeview {{ Request::is('casos*') ? 'active' : '' }}">
@@ -45,14 +57,6 @@
     </a>
 
     <ul class="treeview-menu">
-        <li class="{{ Request::is('usuarios') ? 'active' : '' }}">
-            <a href="{!! route('usuarios.index') !!}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
-        </li>
-
-        <li class="{{ Request::is('roles*') ? 'active' : '' }}">
-            <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Administración de Roles</span></a>
-        </li>
-
         <li class="treeview">
             <a href="#">
                 Localidades
@@ -126,6 +130,14 @@
 
         <li class="{{ Request::is('empleados*') ? 'active' : '' }}">
             <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
+        </li>
+
+        <li class="{{ Request::is('usuarios') ? 'active' : '' }}">
+            <a href="{!! route('usuarios.index') !!}"><i class="fa fa-user-plus"></i><span>Administración de Usuarios</span></a>
+        </li>
+
+        <li class="{{ Request::is('roles*') ? 'active' : '' }}">
+            <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Administración de Roles</span></a>
         </li>
     </ul>
 </li>

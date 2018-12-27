@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateIntervinienteRequest;
 use App\Http\Requests\UpdateIntervinienteRequest;
+use App\Imports\IntervinienteImport;
 use App\Repositories\IntervinienteRepository;
-use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\AppBaseController as AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Validation\ValidationException;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Models\Region as Region;
 use App\Models\Isapre as Isapre;
 use Gate;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IntervinienteController extends AppBaseController
 {
@@ -51,7 +54,7 @@ class IntervinienteController extends AppBaseController
     public function create()
     {
 
-        $regiones = \App\Models\Region::pluck('nombre', 'id')->all();
+        $regiones = Region::pluck('nombre', 'id')->all();
         $provincias = \App\Models\Provincia::pluck('nombre', 'id')->all();
         $comunas = \App\Models\Comuna::pluck('nombre', 'id')->all();
         $isapres =  Isapre::pluck('nombre', 'id')->all();
@@ -247,10 +250,10 @@ class IntervinienteController extends AppBaseController
     }
 
     /**
-     * Store a newly created Empresa in storage.
-     * POST /empresas
+     * Store a newly created Interviniente in storage.
+     * POST /storeAjax
      *
-     * @param CreateEmpresaAPIRequest $request
+     * @param CreateIntervinienteRequest $request
      *
      * @return Response
      */
@@ -263,5 +266,28 @@ class IntervinienteController extends AppBaseController
         $interviniente = $this->intervinienteRepository->create($input);
 
         return $this->sendResponse($interviniente->toArray(), 'Interviente creado exitosamente');
+    }
+
+    public function importarForm()
+    {
+        return view('intervinientes.importar');
+    }
+
+    public function importar(Request $request)
+    {
+        try {
+             Excel::import(new IntervinienteImport, $request->file('excel'));
+             return back();
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            dd($failures);
+            foreach ($failures as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+            }
+        } catch (ValidationException $e){
+            dd($e);
+        }
     }
 }

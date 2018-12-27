@@ -23,8 +23,9 @@ class SucursalRepository extends BaseRepository
         'empresas_id',
         'nombre',
         'direccion',
-        'comunas_id',
-        'provincias_id',
+        'region_id',
+        'comuna_id',
+        'provincia_id',
         'tipo'
     ];
 

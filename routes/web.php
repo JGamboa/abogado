@@ -84,7 +84,8 @@ Route::resource('materias', 'MateriaController');
 
 Route::resource('cortes', 'CorteController');
 
-
+Route::get('intervinientes/importar', 'IntervinienteController@importarForm')->name('intervinientes.importarForm');
+Route::post('intervinientes/importar', 'IntervinienteController@importar')->name('intervinientes.importarPost');
 Route::get('intervinientes/showJson', 'IntervinienteController@showJson')->name('intervinientes.showJson');
 Route::get('intervinientes/search', 'IntervinienteController@search')->name('intervinientes.search');
 Route::post('intervinientes/storeAjax', 'IntervinienteController@storeAjax')->name('intervinientes.storeAjax');

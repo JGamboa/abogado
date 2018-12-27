@@ -11,6 +11,7 @@
         <div class="clearfix"></div>
 
         @include('flash::message')
+        @include('adminlte-templates::common.errors')
 
         <div class="clearfix"></div>
         <div class="box box-primary">

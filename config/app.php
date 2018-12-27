@@ -187,9 +187,7 @@ return [
         \InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
-
         Intervention\Image\ImageServiceProvider::class
-
         /* CAMBIOS INFYOM */
 
     ],
