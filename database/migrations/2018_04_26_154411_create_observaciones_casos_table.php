@@ -19,7 +19,7 @@ class CreateObservacionesCasosTable extends Migration
             $table->string('observacion', 255);
             $table->timestamps();
             $table->foreign('caso_id')->references('id')->on('casos');
-            $table->foreign('user_id')->references('id')->on('usuarios');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
