@@ -17,14 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
+Route::group(['middleware' => ['auth:api']], function() {
+    Route::group(['prefix' => 'v1'], function () {
+        Route::group(['prefix' => 'provincias'], function () {
+            Route::get('/comunas/{provincias_id}', 'ProvinciaAPIController@loadComunas')->name('provincias.loadComunas');
+            Route::get('/{provincias_id}', 'ProvinciaAPIController@loadProvincias')->name('provincias.loadProvincias');
+        });
 
-Route::group(['prefix' => 'v1'], function () {
-    Route::group(['prefix' => 'provincias'], function () {
-        Route::get('/comunas/{provincias_id}', 'ProvinciaAPIController@loadComunas')->name('provincias.loadComunas');
-        Route::get('/{provincias_id}', 'ProvinciaAPIController@loadProvincias')->name('provincias.loadProvincias');
+
+        Route::resource('observacionesCasos', 'ObservacionCasoAPIController');
+        //Route::resource('empresas', 'EmpresaAPIController');
+        //Route::resource('sucursales', 'SucursalAPIController');
     });
-
-    Route::resource('observacionesCasos', 'ObservacionCasoAPIController');
-    //Route::resource('empresas', 'EmpresaAPIController');
-    //Route::resource('sucursales', 'SucursalAPIController');
 });
+
