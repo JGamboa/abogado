@@ -105,8 +105,8 @@ Route::post('casos/upload_files', 'CasoController@upload_files')->name('casos.su
 Route::post('casos/editar-en-linea', 'CasoController@editInLine')->name('casos.editar-en-linea');
 Route::resource('casos', 'CasoController');
 
-Route::get('profile', 'UserController@profile')->name('user.profile');
-Route::post('profile', 'UserController@update_avatar')->name('user.actualizar-avatar');
+Route::get('profile', 'UserController@profile')->name('users.profile');
+Route::post('profile', 'UserController@update_avatar')->name('users.actualizar-avatar');
 Route::resource('usuarios', 'UserController');
 Route::resource('roles', 'RoleController');
 
