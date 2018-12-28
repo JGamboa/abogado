@@ -323,8 +323,10 @@ class CasoController extends AppBaseController
         $caso = Caso::find($caso_id);
 
         $uploads = $caso->uploads;
+
         $uploads2 = array();
         foreach ($uploads as $upload) {
+            $empleado = $upload->empleado();
             $u = (object) array();
             $u->id = $upload->id;
             $u->name = $upload->name;
@@ -332,7 +334,7 @@ class CasoController extends AppBaseController
             $u->hash = $upload->hash;
             $u->public = $upload->public;
             $u->caption = $upload->caption;
-            $u->user = isset($upload->empleado()->nombres) ? $upload->empleado()->nombres : '';
+            $u->user = $empleado !== null ? $empleado->nombres : isset($upload->user) ? $upload->user->name : '';
 
             $uploads2[] = $u;
         }
