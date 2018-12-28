@@ -6,6 +6,7 @@ use App\Models\ObservacionCaso;
 use App\Repositories\ObservacionCasoRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Auth;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -52,6 +53,7 @@ class ObservacionCasoAPIController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
 
         $observaciones = $this->observacionCasoRepository->create($input);
 
