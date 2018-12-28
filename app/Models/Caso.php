@@ -168,7 +168,7 @@ class Caso extends Model
      **/
     public function observaciones()
     {
-        return $this->hasMany(ObservacionCaso::class);
+        return $this->hasMany(ObservacionCaso::class)->orderBy('created_at', 'desc');
     }
 
     public static function getCasosPorPeriodo($year, $month){

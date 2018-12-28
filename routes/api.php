@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
-Route::group(['middleware' => ['api']], function() {
+Route::group(['middleware' => ['auth']], function() {
     Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'provincias'], function () {
             Route::get('/comunas/{provincias_id}', 'ProvinciaAPIController@loadComunas')->name('provincias.loadComunas');
