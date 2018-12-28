@@ -40,7 +40,7 @@ class IntervinienteController extends AppBaseController
         }
 
         $this->intervinienteRepository->pushCriteria(new RequestCriteria($request));
-        $intervinientes = $this->intervinienteRepository->all();
+        $intervinientes = $this->intervinienteRepository->paginate(10);
 
         return view('intervinientes.index')
             ->with('intervinientes', $intervinientes);

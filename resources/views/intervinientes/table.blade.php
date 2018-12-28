@@ -44,3 +44,14 @@
     @endforeach
     </tbody>
 </table>
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Mostrando 1 a {{count($intervinientes)}} de {{count($intervinientes)}} entries</div>
+    </div>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+            {{ $intervinientes->appends(Illuminate\Support\Facades\Input::except('page','_token'))->links() }}
+        </div>
+    </div>
+</div>
