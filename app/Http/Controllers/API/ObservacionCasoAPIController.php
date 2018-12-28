@@ -53,7 +53,7 @@ class ObservacionCasoAPIController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['user_id'] = Auth::user()->id;
+        $input['user_id'] = Auth::id();
 
         $observaciones = $this->observacionCasoRepository->create($input);
 
