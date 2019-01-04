@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Corte;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Permission;
@@ -60,5 +61,21 @@ class RoleController extends Controller
         }
 
         return redirect()->route('roles.index');
+    }
+
+    public function destroy($id){
+        $corte = Corte::find($id);
+
+        if (empty($corte)) {
+            Flash::error('Rol no encontrado');
+
+            return redirect(route('roles.index'));
+        }
+
+        $corte->delete();
+
+        Flash::success('Rol eliminado exitosamente.');
+
+        return redirect(route('roles.index'));
     }
 }
