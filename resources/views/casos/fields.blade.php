@@ -165,13 +165,13 @@
 
             <!-- Pyp Field -->
             <div class="form-group col-sm-6">
-                {!! Form::label('pyp', 'AC:') !!}
+                {!! Form::label('pyp', 'DOCUMENTOS FIRMADOS:') !!}
                 {!! Form::checkbox('pyp', '1', null) !!}
             </div>
 
                 <!-- Pyp Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('autorizacion_documentos', 'AD:') !!}
+                    {!! Form::label('autorizacion_documentos', 'AUTORIZACION NOTARIAL:') !!}
                     {!! Form::checkbox('autorizacion_documentos', '1', null) !!}
                 </div>
 
