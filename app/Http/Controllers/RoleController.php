@@ -21,7 +21,7 @@ class RoleController extends Controller
         $this->validate($request, ['name' => 'required|unique:roles',
             'guard_name' => 'required|min:1']);
 
-        if( Role::create($request->only(['name', 'guard_name'])) ) {
+        if( Role::create($request->only(['name', 'guard_name', 'empresa_id'])) ) {
             flash('Rol Añadido');
         }else{
             flash()->error('Error al añadir Rol');
