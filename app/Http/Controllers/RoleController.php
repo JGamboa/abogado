@@ -6,6 +6,7 @@ use App\Models\Corte;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Permission;
+use Flash;
 
 class RoleController extends Controller
 {
