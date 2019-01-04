@@ -23,6 +23,7 @@
                     <h4 class="modal-title" id="roleModalLabel">Role</h4>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="empresa_id" value="{{session('empresa_id')}}">
                     <!-- name Form Input -->
                     <div class="form-group @if ($errors->has('name')) has-error @endif">
                         {!! Form::label('name', 'Nombre Rol') !!}
