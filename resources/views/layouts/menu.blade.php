@@ -20,7 +20,7 @@
 
 <li class="treeview{{ Request::is('intervinientes*') ? ' active' : '' }}">
     <a href="#">
-        <i class="fa fa-folder"></i>  <span>Intervinientes</span>
+        <i class="fa fa-folder"></i>  <span>Clientes</span>
     </a>
 
     <ul class="treeview-menu">

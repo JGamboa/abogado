@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Interviniente
+            Cliente
         </h1>
     </section>
     <div class="content">
