@@ -15,8 +15,8 @@
             <th>Corte</th>
             <th>Tribunal</th>
             <th>Responsable Proceso</th>
-            <th>AC</th>
-            <th>AD</th>
+            <th>DOCUMENTOS FIRMADOS</th>
+            <th>AUTORIZACION NOTARIAL</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
