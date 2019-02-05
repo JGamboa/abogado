@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCasoRequest;
 use App\Http\Requests\UpdateCasoRequest;
+use App\Notifications\CaptadorCasoAsignado;
 use App\Notifications\ResponsableCasoAsignado;
 use App\Repositories\CasoRepository;
 use App\Http\Controllers\AppBaseController;
@@ -125,6 +126,10 @@ class CasoController extends AppBaseController
             $caso->datosResponsable->user->notify(new ResponsableCasoAsignado($caso));
         }
 
+        if(isset($caso->datosCaptador->user)){
+            $caso->datosCaptador->user->notify(new CaptadorCasoAsignado($caso));
+        }
+
         Flash::success('Caso guardado exitosamente.');
 
         return redirect(route('casos.index'));
@@ -207,6 +212,10 @@ class CasoController extends AppBaseController
 
         if ($caso->responsable_proceso != $request->input('responsable_proceso') && $request->filled('responsable_proceso')){
             $caso_updated->datosResponsable->user->notify(new ResponsableCasoAsignado($caso));
+        }
+
+        if ($caso->captador != $request->input('captador') && $request->filled('captador')){
+            $caso_updated->datosCaptador->user->notify(new CaptadorCasoAsignado($caso));
         }
 
         Flash::success('Caso updated successfully.');
@@ -399,7 +408,7 @@ class CasoController extends AppBaseController
         $cortes = Corte::all();
 
         $casos = $this->doSearchingQuery($constraints);
-        
+
         return view('casos.index', [
             'casos' => $casos,
             'estados' => $estados,
