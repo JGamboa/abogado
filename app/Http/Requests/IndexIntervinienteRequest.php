@@ -25,7 +25,7 @@ class IndexIntervinienteRequest extends FormRequest
     public function getValidatorInstance()
     {
         $data = $this->all();
-        
+
         if(isset($data['rut'])){
             $data['rut'] = str_replace(".", "", $data['rut']);
             $this->getInputSource()->replace($data);

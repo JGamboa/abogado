@@ -158,7 +158,7 @@ class Interviniente extends Model
         }
 
         if($request->filled('nombres')){
-            $intervinientes = $intervinientes->where('rut', 'like',  '%' . $request->nombres . '%');
+            $intervinientes = $intervinientes->where('nombres', 'like',  '%' . $request->nombres . '%');
         }
 
         if($request->filled('apellido_paterno')){
