@@ -46,7 +46,7 @@ class CasoController extends AppBaseController
     public function index(Request $request)
     {
 
-        $this->casoRepository->pushCriteria(new RequestCriteria($request));
+        //$this->casoRepository->pushCriteria(new RequestCriteria($request));
         $estados = EstadoCaso::all();
         $cortes = Corte::all()->pluck('nombre', 'id');
         $casos = Caso::buscar($request)->paginate(10);

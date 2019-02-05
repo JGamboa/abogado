@@ -166,12 +166,14 @@
             <!-- Pyp Field -->
             <div class="form-group col-sm-6">
                 {!! Form::label('pyp', 'DOCUMENTOS FIRMADOS:') !!}
+                {!! Form::hidden('pyp', 0) !!}
                 {!! Form::checkbox('pyp', '1', null) !!}
             </div>
 
                 <!-- Pyp Field -->
                 <div class="form-group col-sm-6">
                     {!! Form::label('autorizacion_documentos', 'AUTORIZACION NOTARIAL:') !!}
+                    {!! Form::hidden('autorizacion_documentos', 0) !!}
                     {!! Form::checkbox('autorizacion_documentos', '1', null) !!}
                 </div>
 

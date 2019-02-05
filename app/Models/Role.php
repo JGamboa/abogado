@@ -14,7 +14,7 @@ class Role extends SpatieRole
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function cliente()
+    public function empresa()
     {
         return $this->belongsTo(Empresa::class);
     }
@@ -32,5 +32,16 @@ class Role extends SpatieRole
         }
 
         return static::query()->create($attributes);
+    }
+
+    /**
+     * A role may belong to various tenants.
+     */
+    public function tenants(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            config('permission.models.tenant'),
+            config('permission.table_names.role_tenant_user')
+        );
     }
 }

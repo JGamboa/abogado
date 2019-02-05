@@ -26,7 +26,8 @@
         "mpdf/mpdf": "~5.7.3",
         "phpoffice/phpexcel": "^1.8",
         "spatie/laravel-permission": "^2.29",
-        "yajra/laravel-datatables": "^1.0"
+        "yajra/laravel-datatables": "^1.0",
+        "aws/aws-sdk-php": "~3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

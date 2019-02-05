@@ -259,19 +259,19 @@ class Caso extends Model
         }
 
         if($request->filled('apellidopaterno')){
-            $array_contraparte[] = ['contraparte->apellidopaterno', 'like', '%' . $request->apellidopaterno . '%'];
-            $array_cliente[] = ['cliente->apellidopaterno', 'like', '%' . $request->apellidopaterno . '%'];
+            $array_contraparte[] = ['contraparte->apellido_paterno', 'like', '%' . $request->apellidopaterno . '%'];
+            $array_cliente[] = ['cliente->apellido_paterno', 'like', '%' . $request->apellidopaterno . '%'];
             $i++;
         }
 
         if($request->filled('apellidomaterno')){
-            $array_contraparte[] = ['contraparte->apellidomaterno', 'like', '%' . $request->apellidomaterno . '%'];
-            $array_cliente[] = ['cliente->apellidomaterno', 'like', '%' . $request->apellidomaterno . '%'];
+            $array_contraparte[] = ['contraparte->apellido_materno', 'like', '%' . $request->apellidomaterno . '%'];
+            $array_cliente[] = ['cliente->apellido_materno', 'like', '%' . $request->apellidomaterno . '%'];
             $i++;
         }
 
         if($i > 0){
-            $casos->where(function($query)  use ($array_contraparte, $array_cliente){
+            $casos = $casos->where(function($query)  use ($array_contraparte, $array_cliente){
                 $query->where($array_contraparte)->orWhere($array_cliente);
             });
         }
