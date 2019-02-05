@@ -45,4 +45,16 @@ class CreateIntervinienteRequest extends FormRequest
             'isapre_id' => 'required',
         ];
     }
+
+    public function getValidatorInstance()
+    {
+        $data = $this->all();
+        $data['rut'] = str_replace(".", "", $data['rut']);
+        $this->getInputSource()->replace($data);
+
+        /*modify data before send to validator*/
+
+        return parent::getValidatorInstance();
+    }
+
 }

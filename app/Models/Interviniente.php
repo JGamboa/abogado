@@ -150,4 +150,26 @@ class Interviniente extends Model
                            ->whereMonth('created_at', $month)->get();
     }
 
+    public static function buscar($request){
+        $intervinientes = new Interviniente();
+
+        if($request->filled('rut')){
+            $intervinientes = $intervinientes->where('rut', $request->rut);
+        }
+
+        if($request->filled('nombres')){
+            $intervinientes = $intervinientes->where('rut', 'like',  '%' . $request->nombres . '%');
+        }
+
+        if($request->filled('apellido_paterno')){
+            $intervinientes = $intervinientes->where('apellido_paterno', 'like',  '%' . $request->apellido_paterno . '%');
+        }
+
+        if($request->filled('apellido_materno')){
+            $intervinientes = $intervinientes->where('apellido_materno', 'like',  '%' . $request->apellido_materno . '%');
+        }
+
+        return $intervinientes;
+    }
+
 }

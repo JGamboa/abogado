@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateIntervinienteRequest;
+use App\Http\Requests\IndexIntervinienteRequest;
 use App\Http\Requests\UpdateIntervinienteRequest;
 use App\Imports\IntervinienteImport;
+use App\Models\Interviniente;
 use App\Repositories\IntervinienteRepository;
 use App\Http\Controllers\AppBaseController as AppBaseController;
 use Illuminate\Http\Request;
@@ -33,14 +35,14 @@ class IntervinienteController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(IndexIntervinienteRequest $request)
     {
         if(Gate::denies('ver intervinientes')){
             abort(403);
         }
 
         $this->intervinienteRepository->pushCriteria(new RequestCriteria($request));
-        $intervinientes = $this->intervinienteRepository->paginate(10);
+        $intervinientes = Interviniente::buscar($request)->paginate(10);
 
         return view('intervinientes.index')
             ->with('intervinientes', $intervinientes);
@@ -75,8 +77,6 @@ class IntervinienteController extends AppBaseController
     public function store(CreateIntervinienteRequest $request)
     {
         $input = $request->all();
-
-        $input['rut'] = str_replace(".", "", $input['rut']);
 
         $interviniente = $this->intervinienteRepository->create($input);
 
